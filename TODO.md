@@ -1,0 +1,11 @@
+For v0.1
+- [x] Use XML file from iroffer dinoex
+- [x] Show filelist
+- [x] Translatable (through a php config file)
+- [x] Use bot database from a json file
+- [ ] Download the XML file into cache
+- [ ] Cache can be refreshed
+- [ ] A Search input (to search on one BOT)
+- [ ] A Search input (to search on all BOTs)
+- [ ] View to show Bookmarks from JSON?
+- [ ] ADD/REMOVE Bookmarks from JSON?
