@@ -1,0 +1,9 @@
+html, #trmain:hover {
+	/* change that to change the background color */
+	background-color: #FFFFFF;
+}
+
+tr:hover {
+	/* change that if you want to change the color of when the mouse hover the text*/
+	background-color: #FFFF99;
+}
