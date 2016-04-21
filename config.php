@@ -1,5 +1,10 @@
 <?php
 
+/*
+Title of the page
+*/
+	$title = 'XDCC';
+
 	/*
 	language available:
 		- en
@@ -7,17 +12,17 @@
 	*/
 	$language = 'en';
 
-	$title = 'XDCC';
-	
+
+
 	/*Do you want to show the Bookmark block:
 		- true
 		- false
 	*/
 	$bookmark = false;
-	
+
 	/*For admin.php page*/
 	$user="user";
-	$password="";
+	$password="user";
 
 /************************************************************\
  *      _                                                   *
@@ -38,6 +43,9 @@
 		"Size" => "Size",
 		"Downloads" => "Downloads",
 		"Paste_windows" => "Paste this in your irc client:",
+		"User" => "User",
+		"Password" => "Password",
+		"Powered" => "Powered by",
 	),
 	"fr" => array(
 		"choose_bot" => "Choisissez un bot dans la liste de gauche",
@@ -46,6 +54,9 @@
 		"Size" => "Taille",
 		"Downloads" => "Téléchargements",
 		"Paste_windows" => "Copie cela dans ton logiciel IRC :",
+		"User" => "Utilisateur",
+		"Password" => "Mot de passe",
+		"Powered" => "Utilise",
 	),
  );
 ?>
