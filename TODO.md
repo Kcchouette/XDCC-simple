@@ -3,6 +3,7 @@ For v0.1
 - [x] Show filelist
 - [x] Translatable (through a php config file)
 - [x] Use bot database from a json file
+- [ ] Add or remove bot easily through an ADMIN page
 - [ ] Adding IRC link
 - [ ] Download the XML file into cache
 - [ ] Cache can be refreshed
