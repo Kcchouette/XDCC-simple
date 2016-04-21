@@ -57,9 +57,7 @@
 
         echo '<table>';
 
-        $xml=simplexml_load_file(searchBotList(getBotList(), $_GET["bot"]));
-
-        print_r($xml);
+        $xml = simplexml_load_file(searchBotList(getBotList(), $_GET["bot"]));
 
         if (!$xml->packlist->pack)
         echo '<tr>Fail to load XML file, or the XML file is empty</tr>';
