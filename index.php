@@ -10,7 +10,7 @@
     <title><?php require 'config.php'; echo $title; ?></title>
 
 	<link href="main.css" rel="stylesheet">
-	
+
     <!-- OMGCSS core CSS -->
     <link href="https://fabienwang.github.io/omgcss/dist/css/omg.css" rel="stylesheet">
 
@@ -19,7 +19,7 @@
   <body>
 
 	<center><h1><?php require_once 'config.php'; echo $title; ?></h1></center>
-  
+
     <section class="omgcontainer90 omggrid omg3columns">
       <div class="omgblock">
         <div class="omgborder">
@@ -33,7 +33,7 @@
 			?>
 			</p>
 		</div>
-		<?php 
+		<?php
 		require_once 'config.php';
 		if ($bookmark) {
 			echo "
@@ -45,7 +45,7 @@
       </div>
       <div class="omgblock omgblockof2">
         <h3>Bot: <?php echo htmlspecialchars($_GET["bot"]); ?></h3>
-        <p><div class="omgcenter"><?php 
+        <p><div class="omgcenter"><?php
 		if (!isset($_GET["bot"]))
 		{
 			require_once 'config.php';
@@ -54,21 +54,23 @@
 		else
 		{
 			require_once 'xdcc.php';
-			
+
 			echo '<table>';
 
-			$xml=simplexml_load_file(searchBot(getBotList(), $_GET["bot"]));
+    $xml=simplexml_load_file(searchBotList(getBotList(), $_GET["bot"]));
+
+    print_r($xml);
 
 			if (!$xml->packlist->pack)
 				echo '<tr>Fail to load XML file, or the XML file is empty</tr>';
-			else {	
+			else {
 				echo '<tr id="trmain">';
 					echo '<th>' . $lang[$language]["Pack"] . '</th>';
 					echo '<th>' . $lang[$language]["File"] . '</th>';
 					echo '<th>' . $lang[$language]["Size"] . '</th>';
 					echo '<th>' . $lang[$language]["Downloads"] . '</th>';
 				echo '</tr>';
-				
+
 				foreach($xml->packlist->pack as $p) {
 				echo '<tr>';
 					echo '<td>' . $p->packnr . '</td>';
@@ -79,7 +81,7 @@
 					echo '<td>' . $p->packgets . '</td>';
 				echo '</tr>';
 				}
-					
+
 				}
 
 			echo '</table>';
@@ -90,7 +92,7 @@
     </section>
 
     <footer class="omgcenter">
-      &copy; 2016 Kcchouette
+      Powered by <a href="https://github.com/Kcchouette/XDCC-simple">XDCC Simple</a>
     </footer>
 
 	<script type="text/javascript">
@@ -100,12 +102,12 @@
 		?>
 		}
 	</script>
-	
-	//<script src="script.js"></script>
-	
+
+	<!--<script src="script.js"></script>-->
+
     <!-- OMGCSS small js -->
     <script src="https://fabienwang.github.io/omgcss/dist/js/omg.js"></script>
 
   </body>
-  
+
 </html>
