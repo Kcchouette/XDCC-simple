@@ -1,23 +1,56 @@
 <?php
 
-	class Bot {
+//controler
 
-		private $name = "";
-		private $xml = "";
+require_once 'database.php';
 
-		function __construct($n, $x) {
-			$this->name = $n;
-			$this->xml = $x;
-		}
+require_once 'class/Bot.php';
 
-		public function getName() {
-			return $this->name;
-		}
+function getBotList() {
+	$jsonRS = readBotFile();
+	$bots = array();
+	foreach ($jsonRS as $rs) {
+		array_push($bots, new Bot(stripslashes($rs["name"]), stripslashes($rs["xml"])));
+	}
+	return $bots;
+}
 
-		public function getXmlFile() {
-			return $this->xml;
+function insertBot($b) {
+	$bots = getBotList();
+	array_push($bots, $b);
+	//save database
+	saveBotList($bots);
+}
+
+//http://stackoverflow.com/q/21559760
+function removeBot($bname) {
+	$bots = getBotList();
+
+	$id = searchIdBot($bots, $bname);
+
+	unset($bots[$id]); //removes the array at given index
+    $reindex = array_values($bots); //normalize index
+    $bots = $reindex; //update variable
+
+	saveBotList($bots);
+}
+
+function searchBotList($b, $n) {
+	for($i = 0; $i < count($b); $i++) {
+		if($b[$i]->getName() == $n) {
+			return $b[$i]->getXmlFile();
 		}
 	}
+}
+
+function searchIdBot($b, $n) {
+	for($i = 0; $i < count($b); $i++) {
+		if($b[$i]->getName() == $n) {
+			return $i;
+		}
+	}
+}
+
 
 	class XDCC_File {
 
@@ -38,23 +71,7 @@
 		}
 	}
 
-	function getBotList() {
-		$string = file_get_contents("data.json");
-		$jsonRS = json_decode($string, true);
-		$bots = array();
-		foreach ($jsonRS as $rs) {
-			array_push($bots, new Bot(stripslashes($rs["name"]), stripslashes($rs["xml"])));
-		}
-		return $bots;
-	}
 
-	function searchBot($b, $n) {
-		for($i = 0; $i < count($b); $i++) {
-			if($b[$i]->getName() == $n) {
-				return $b[$i]->getXmlFile();
-			}
-		}
-	}
 
 	function haveSize( $nbytes ) {
 
