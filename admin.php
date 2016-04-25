@@ -15,65 +15,78 @@
   </head>
 
   <body>
-    <div class="omgcontainer90 omglowerthat omgcenter">
+    <div class="fixed730 omglowmargin">
 <?php
 
 require_once 'config.php';
 require_once 'xdcc.php';
-require_once 'class/Bot.php';
+
+echo '<header>
+      <h1 class="omginline"><a class="omgtitle" href="#">' . $lang[$language]["Admin_page"] . '</a></h1>
+      <a href="#" onclick="toggleMenu(\'omgmenu1\')" class="menubtn">&#9776;</a>
+      <nav id="omgmenu1" class="omgmenu omginline omgpullright" style="display:none">
+        <ul>
+          <li><a class="omgbtn" href="index.php">' . $lang[$language]["Home_but"] . '</a></li>';
+          if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user && $_POST["pass"] == $password) {
+            echo '<li><a class="omgbtn" href="admin.php">' . $lang[$language]["Disconnect_but"] . '</a></li>';
+          }
+
+        echo '</ul>
+      </nav>
+    </header>';
 
 if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user && $_POST["pass"] == $password) {
 
 	if (isset($_POST["nameBot"]) && isset($_POST["xmlBot"]) && !isset($_POST["isModifBotname"])) {
 		insertBot(new Bot($_POST["nameBot"], $_POST["xmlBot"]));
 		echo '<div class="omgmsg omginfo">
-            <p class="omgcenter">Bot is add : ' . $_POST["nameBot"] . '</p>
+            <p class="omgcenter">' . $_POST["nameBot"] . ' ' . $lang[$language]["bot_add"] . '</p>
           </div>';
 	}
   else if (isset($_POST["isModifBotname"])) {
 		removeBot($_POST["isModifBotname"]);
     insertBot(new Bot($_POST["nameBot"], $_POST["xmlBot"]));
 		echo '<div class="omgmsg omginfo">
-            <p class="omgcenter">Bot is modif : ' . $_POST["isModifBotname"] . '</p>
+            <p class="omgcenter">' . $_POST["isModifBotname"] . ' ' . $lang[$language]["bot_modify"] . '</p>
           </div>';
 	}
   else if (isset($_POST["rmBotname"])) {
 		removeBot($_POST["rmBotname"]);
 		echo '<div class="omgmsg omginfo">
-            <p class="omgcenter">Bot is rm : ' . $_POST["rmBotname"] . '</p>
+            <p class="omgcenter">' . $_POST["rmBotname"] . ' ' . $lang[$language]["bot_remove"] . '</p>
           </div>';
 	}
 
 	echo '<div class="omgcontainer90">';
       if($_POST["modifBotname"]){
-        echo '<h2>Modifier un bot</h2>';
+        echo '<h2>' . $lang[$language]["Modify_h2"] . '</h2>';
         echo '<p class="omgcenter">
     				<form method="post" action="admin.php">
-    					<input type="text" name="nameBot" placeholder="Name of the bot" value="' . $_POST["modifBotname"] . '" required >
-    					<input type="text" name="xmlBot" placeholder="XML of the bot" value="' . searchBotList(getBotList(), $_POST["modifBotname"]) . '" required >
+    					<input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" value="' . $_POST["modifBotname"] . '" required >
+    					<input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" value="' . searchBotList(getBotList(), $_POST["modifBotname"]) . '" required >
     					<input type="hidden" name="user" value="' . $_POST["user"] . '">
     					<input type="hidden" name="pass" value="' . $_POST["pass"] . '">
               <input type="hidden" name="isModifBotname" value="' . $_POST["modifBotname"] . '">
-    					<input type="submit" value="Modifier!">
+    					<input type="submit" value="' . $lang[$language]["Modify_but"] . '">
     			</form>
     		</p>';
       }
       else {
-        echo '<h2>Ajouter un bot</h2>';
+        echo '<h2>' . $lang[$language]["Add_h2"] . '</h2>';
         echo '<p class="omgcenter">
     				<form method="post" action="admin.php">
-    					<input type="text" name="nameBot" placeholder="Name of the bot" required >
-    					<input type="text" name="xmlBot" placeholder="XML of the bot" required >
+    					<input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" required >
+    					<input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" required >
     					<input type="hidden" name="user" value="' . $_POST["user"] . '">
     					<input type="hidden" name="pass" value="' . $_POST["pass"] . '">
-    					<input type="submit" value="Ajouter!">
+    					<input type="submit" value="' . $lang[$language]["Add_but"] . '">
     			</form>
     		</p>';
       }
 	   echo '</div>';
 
 	  echo '<div class="omgcontainer90">
-			<h2>Modifier/Supprimer un bot</h2>
+			<h2>' . $lang[$language]["Modify_Remove_h2"] . '</h2>
 			<table>';
 
 			$bots = getBotList();
@@ -86,7 +99,7 @@ if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user &&
   						<input type="hidden" name="user" value="' . $_POST["user"] . '">
   						<input type="hidden" name="pass" value="' . $_POST["pass"] . '">
   						<input type="hidden" name="modifBotname" value="' . $b->getName() . '">
-  						<input type="submit" value="Modifier!">
+  						<input type="submit" value="' . $lang[$language]["Modify_but"] . '">
 						</form>
 					</td>
           <td>
@@ -94,7 +107,7 @@ if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user &&
   						<input type="hidden" name="user" value="' . $_POST["user"] . '">
   						<input type="hidden" name="pass" value="' . $_POST["pass"] . '">
   						<input type="hidden" name="rmBotname" value="' . $b->getName() . '">
-  						<input type="submit" value="Supprimer!">
+  						<input type="submit" value="' . $lang[$language]["Remove_but"] . '">
 						</form>
 					</td>
 				</tr>';
@@ -108,7 +121,7 @@ else {
     <form method="post" action="admin.php" class="omgvertical omgcenter">
         <input type="text" name="user" placeholder="' . $lang[$language]["User"] . '" required >
         <input type="password" name="pass" placeholder="' . $lang[$language]["Password"] . '" required >
-        <input type="submit" value="Connect!">
+        <input type="submit" value="' . $lang[$language]["Connect_but"] . '">
     </form>
     ';
 }
