@@ -10,7 +10,7 @@
     <title><?php require 'config.php'; echo $title; ?></title>
 
     <!-- OMGCSS core CSS -->
-    <link href="https://fabienwang.github.io/omgcss/dist/css/omg.css" rel="stylesheet">
+    <link href="https://cdn.rawgit.com/fabienwang/omgcss/gh-pages/dist/css/omg.css" rel="stylesheet">
 
   </head>
 
@@ -123,7 +123,7 @@ else {
     </footer>
 
     <!-- OMGCSS small js -->
-    <script src="https://fabienwang.github.io/omgcss/dist/js/omg.js"></script>
+    <script src="https://cdn.rawgit.com/fabienwang/omgcss/gh-pages/dist/js/omg.js"></script>
 
   </body>
 
