@@ -85,7 +85,7 @@
         echo '</table>';
       }
       ?>
-    </div></p>
+    </div>
   </div>
 </section>
 

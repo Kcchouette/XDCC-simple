@@ -3,7 +3,6 @@
 //controler
 
 require_once 'database.php';
-
 require_once 'class/Bot.php';
 
 function getBotList() {
