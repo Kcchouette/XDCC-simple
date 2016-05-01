@@ -6,6 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
+  <?php require_once 'config.php';
+    if($can_track) {
+      echo '<meta name="robots" content="index, follow">';
+    }
+    else {
+      echo '<meta name="robots" content="noindex, nofollow, noarchive">';
+    }
+   ?>
 
   <title><?php require 'config.php'; echo $title; ?></title>
 
@@ -16,11 +24,28 @@
 
 </head>
 
-<body>
+<body class="omgcontainer90">
 
   <center><h1><?php require_once 'config.php'; echo $title; ?></h1></center>
 
-  <section class="omgcontainer90 omggrid omg3columns">
+  <section>
+        <a onclick="toggleMenu('menu2')"  class="menubtn">&#9776;</a>
+        <nav id="menu2" class="omgmenu omginline omgpullleft" style="display:none">
+          <ul>
+            <?php require_once 'config.php';
+            //test if bot is get + if website else show main
+            if (/*!isset($_GET["bot"]) &&*/ !empty($main_website)) {
+              echo '<li><a href="' . $main_website . '" class="omgbtn">' . $name_website . '</a></li>';
+            }
+            if (/*!isset($_GET["bot"]) &&*/ $main_irc) {
+              echo '<li><a href="irc://' . $irc_server .'/' . $irc_channel . '" class="omgbtn omgrounded omgwarn">'. $lang[$language]["IRC"] . ' #' . $irc_channel . ' ' . $lang[$language]["IRC_on"] . ' ' . $irc_server . ' </a></li>';
+            }
+            ?>
+          </ul>
+        </nav>
+      </section>
+
+  <section class="omggrid omg3columns">
     <div class="omgblock">
       <div class="omgborder">
         <h3>Bots</h3>
@@ -45,11 +70,11 @@
     </div>
     <div class="omgblock omgblockof2">
       <h3>Bot: <?php echo htmlspecialchars($_GET["bot"]); ?></h3>
-      <p><div class="omgcenter"><?php
+      <p><div><?php
       if (!isset($_GET["bot"]))
       {
         require_once 'config.php';
-        echo $lang[$language]["choose_bot"];
+        echo '<div class="omgcenter">' . $lang[$language]["choose_bot"] . '</div>';
       }
       else
       {
@@ -64,19 +89,17 @@
         else {
           echo '<tr id="trmain">';
           echo '<th>' . $lang[$language]["Pack"] . '</th>';
-          echo '<th>' . $lang[$language]["File"] . '</th>';
           echo '<th>' . $lang[$language]["Size"] . '</th>';
-          echo '<th>' . $lang[$language]["Downloads"] . '</th>';
+          echo '<th>' . $lang[$language]["File"] . '</th>';
           echo '</tr>';
 
           foreach($xml->packlist->pack as $p) {
             echo '<tr>';
-            echo '<td>' . $p->packnr . '</td>';
+            echo '<td class="omgcenter">' . $p->packnr . '</td>';
+            echo '<td class="omgcenter">' . $p->packsize . '</td>';
             echo '<td>';
             echo '<a href="#" onclick="javascript:paste(\'' . $_GET["bot"] . '\', ' . $p->packnr . ');" title="' . $p->packname . '" >' . $p->packname . '</a>';
             echo '</td>';
-            echo '<td>' . $p->packsize . '</td>';
-            echo '<td>' . $p->packgets . '</td>';
             echo '</tr>';
           }
 

@@ -1,8 +1,6 @@
 <?php
 
-/*
-Title of the page
-*/
+/* Title of the page */
 $title = 'XDCC';
 
 /*
@@ -12,19 +10,47 @@ language available:
 */
 $language = 'en';
 
-
-
-/*Do you want to show the Bookmark block:
+/*
+Do you want to show the Bookmark block:
 - true
 - false
 */
-$bookmark = false;
+$bookmark = false; //do not change
 
-/*For admin.php page*/
-$user="user";
-$password="user";
+/*
+Can Search engines track this website?
+- true (yes)
+- false (no)
+*/
+$can_track = 'true';
 
-/************************************************************\
+/*
+Activate the main IRC channel
+- true
+- false
+*/
+$main_irc = true;
+/* The IRC server to connect to. */
+$irc_server = "test";
+/*
+When your IRC client connects to the server, it will automatically join this channel.
+Note that you must not include the # character.
+*/
+$irc_channel = "plop";
+
+/*
+Your main website
+- "" for no website
+- begin with ftp/http
+*/
+$main_website = "";
+$name_website = "Website";
+
+/* For admin.php page */
+$user = "user";
+$password = "user";
+
+/**********************************************************\
 *      _                                                   *
 *     | |                                                  *
 *     | |     __ _ _ __   __ _ _   _  __ _  __ _  ___      *
@@ -33,7 +59,7 @@ $password="user";
 *     \_____/\__,_|_| |_|\__, |\__,_|\__,_|\__, |\___|     *
 *                         __/ |             __/ |          *
 *                        |___/             |___/           *
-\************************************************************/
+\**********************************************************/
 
 $lang = array (
 "en" => array(
@@ -61,9 +87,11 @@ $lang = array (
 	"Admin_page" => "Admin Page",
 	"Disconnect_but" => "Disconnect",
 	"Home_but" => "Home",
+	"IRC" => "IRC:",
+	"IRC_on" => "on",
 ),
 "fr" => array(
-	"choose_bot" => "Choisissez un bot dans la liste de gauche",
+	"choose_bot" => "Choisissez un bot dans la liste",
 	"Pack" => "Pack",
 	"File" => "Fichier",
 	"Size" => "Taille",
@@ -87,6 +115,8 @@ $lang = array (
 	"Admin_page" => "Page d'administration",
 	"Disconnect_but" => "Se déconnecter",
 	"Home_but" => "Accueil",
+	"IRC" => "IRC :",
+	"IRC_on" => "sur",
 ),
 );
 ?>

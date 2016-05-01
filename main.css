@@ -7,3 +7,15 @@ tr:hover {
 	/* change that if you want to change the color of when the mouse hover the text*/
 	background-color: #FFFF99;
 }
+
+.menubtn {
+	cursor: pointer;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    width: 50px;
+}
