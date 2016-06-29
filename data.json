@@ -1,1 +1,11 @@
-[{"name":"BOT2","xml":"mybot.xml"},{"name":"test","xml":"plop.xml"}]
+[{
+	"name": "BOT2",
+	"xml": "mybot.xml",
+	"website": "http://test.com",
+	"irc": ""
+}, {
+	"name": "test",
+	"xml": "plop.xml",
+	"website": "",
+	"irc": "irc link"
+}]

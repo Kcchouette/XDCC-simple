@@ -33,12 +33,25 @@
         <nav id="menu2" class="omgmenu omginline omgpullleft" style="display:none">
           <ul>
             <?php require_once 'config.php';
+                  require_once 'xdcc.php';
             //test if bot is get + if website else show main
-            if (/*!isset($_GET["bot"]) &&*/ !empty($main_website)) {
-              echo '<li><a href="' . $main_website . '" class="omgbtn">' . $name_website . '</a></li>';
+            /* A variable is considered empty
+                * if it does not exist
+                * if its value equals FALSE
+                * else the var exists AND has a non-empty, non-zero value.
+            */
+            if (isset($_GET["bot"]) && !empty(returnBotWebsite(getBotList(), $_GET["bot"]))) {
+                echo '<li><a href="' . returnBotWebsite(getBotList(), $_GET["bot"]) . '" class="omgbtn">' . $_GET["bot"] . ' ' . $lang[$language]["website"] . '</a></li>';
             }
-            if (/*!isset($_GET["bot"]) &&*/ $main_irc) {
-              echo '<li><a href="irc://' . $irc_server .'/' . $irc_channel . '" class="omgbtn omgrounded omgwarn">'. $lang[$language]["IRC"] . ' #' . $irc_channel . ' ' . $lang[$language]["IRC_on"] . ' ' . $irc_server . ' </a></li>';
+            else if (!isset($_GET["bot"]) && !empty($website_link)) {
+              echo '<li><a href="' . $website_link . '" class="omgbtn">' . $website_label . '</a></li>';
+            }
+
+            if (isset($_GET["bot"]) && !empty(returnBotIRC(getBotList(), $_GET["bot"]))) {
+                echo '<li><a href="' . returnBotWebsite(getBotList(), $_GET["bot"]) . '" class="omgbtn omgrounded omgwarn">' . $_GET["bot"] . ' ' . $lang[$language]["IRC"] . '</a></li>';
+            }
+            else if (!isset($_GET["bot"]) && !empty($irc_link)) {
+              echo '<li><a href="' . $irc_link . '" class="omgbtn omgrounded omgwarn">'. $irc_label . '</a></li>';
             }
             ?>
           </ul>
@@ -53,7 +66,7 @@
           <?php require_once 'xdcc.php';
           $bots = getBotList();
           foreach($bots as &$bot) {
-            echo '<a href="?bot=' . $bot->getName() . '">' . $bot->getName() . '</a><br>';
+            echo '<a class="chbot" href="?bot=' . $bot->getName() . '">' . $bot->getName() . '</a><br>';
           }
           ?>
         </p>
@@ -63,7 +76,7 @@
       if ($bookmark) {
         echo "
         <h3>Bookmarks</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget volutpat nibh, ac pellentesque sem. Integer aliquet nunc at commodo tincidunt.</p>
+        <p>Bookmarks is not yet finished...</p>
         ";
       }
       ?>
@@ -78,6 +91,7 @@
       }
       else
       {
+        require_once 'config.php';
         require_once 'xdcc.php';
 
         echo '<table>';
@@ -85,7 +99,7 @@
         $xml = simplexml_load_file(searchBotList(getBotList(), $_GET["bot"]));
 
         if (!$xml->packlist->pack)
-        echo '<tr>Fail to load XML file, or the XML file is empty</tr>';
+          echo '<tr id="trmain"><th>' . $lang[$language]["Fail_load_XML"] . '</th></tr>';
         else {
           echo '<tr id="trmain">';
           echo '<th>' . $lang[$language]["Pack"] . '</th>';

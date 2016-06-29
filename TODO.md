@@ -11,14 +11,14 @@
 - [x] Translatable (through a php config file)
 - [x] Use bot database from a json file
 - [x] Add/edit/remove bot easily through an ADMIN page
-- [ ] Reorder bots
 - [x] "disconnect" from the admin page
 - [ ] Use "session" for the admin page? # because a history back can "reconnect" you
-- [ ] Adding IRC link (1 main + 1 per bot)
-- [ ] Adding URL of the website (1 main + 1 per bot) # when adding bot, ask if irc same
+- [x] Adding IRC link (1 main + 1 per bot)
+- [x] Adding URL of the website (1 main + 1 per bot)
+- [ ] When adding bot, ask if Website/IRC are the same than the main
 - [ ] Use Nick from xdcc list? # what in case multi-nick?
 - [ ] Display if the bot support @find (and how many ?) # config of bot
-- [ ] Change display when mouse over for the bot listing (underline?)
+- [x] Change display when mouse over for the bot listing (underline?)
 - [x] Robot meta tag (choose in the config file)
 - [x] The GitHub link
 
@@ -30,8 +30,13 @@
  - [ ] A Search input (to search on all BOTs) # all instanciate of object before index use it?
  - [ ] Display for example 50 number, else use a pagination
  - [ ] Save the config.php and data.json
- - [ ] Import data.json
+ - [ ] Import/Export data.json
+ - [ ] Choose the XML file using a select tag in the ADMIN page
+ - [ ] Possibility of reordering bots in the ADMIN page
 
 ## Bonus
 
 - [x] Listing of folders
+
+## Improve
+- list for bot name (instead of a simple echo + br)?

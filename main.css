@@ -3,7 +3,7 @@ html, #trmain:hover {
 	background-color: #FFFFFF;
 }
 
-tr:hover {
+tr:hover, .chbot:hover {
 	/* change that if you want to change the color of when the mouse hover the text*/
 	background-color: #FFFF99;
 }

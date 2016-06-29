@@ -9,7 +9,7 @@ function getBotList() {
 	$jsonRS = readBotFile();
 	$bots = array();
 	foreach ($jsonRS as $rs) {
-		array_push($bots, new Bot(stripslashes($rs["name"]), stripslashes($rs["xml"])));
+		array_push($bots, new Bot(stripslashes($rs["name"]), stripslashes($rs["xml"]), stripslashes($rs["website"]), stripslashes($rs["irc"])));
 	}
 	return $bots;
 }
@@ -38,6 +38,22 @@ function searchBotList($b, $n) {
 	for($i = 0; $i < count($b); $i++) {
 		if($b[$i]->getName() == $n) {
 			return $b[$i]->getXmlFile();
+		}
+	}
+}
+
+function returnBotWebsite($b, $n) {
+	for($i = 0; $i < count($b); $i++) {
+		if($b[$i]->getName() == $n) {
+			return $b[$i]->getWebsite();
+		}
+	}
+}
+
+function returnBotIRC($b, $n) {
+	for($i = 0; $i < count($b); $i++) {
+		if($b[$i]->getName() == $n) {
+			return $b[$i]->getIRC();
 		}
 	}
 }

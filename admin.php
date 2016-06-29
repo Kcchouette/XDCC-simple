@@ -60,7 +60,7 @@ if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user &&
 	echo '<div class="omgcontainer90">';
       if($_POST["modifBotname"]){
         echo '<h2>' . $lang[$language]["Modify_h2"] . '</h2>';
-        echo '<p class="omgcenter">
+        echo '<div class="omgcenter">
     				<form method="post" action="admin.php">
     					<input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" value="' . $_POST["modifBotname"] . '" required >
     					<input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" value="' . searchBotList(getBotList(), $_POST["modifBotname"]) . '" required >
@@ -69,11 +69,11 @@ if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user &&
               <input type="hidden" name="isModifBotname" value="' . $_POST["modifBotname"] . '">
     					<input type="submit" value="' . $lang[$language]["Modify_but"] . '">
     			</form>
-    		</p>';
+    		</div>';
       }
       else {
         echo '<h2>' . $lang[$language]["Add_h2"] . '</h2>';
-        echo '<p class="omgcenter">
+        echo '<div class="omgcenter">
     				<form method="post" action="admin.php">
     					<input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" required >
     					<input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" required >
@@ -81,7 +81,7 @@ if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user &&
     					<input type="hidden" name="pass" value="' . $_POST["pass"] . '">
     					<input type="submit" value="' . $lang[$language]["Add_but"] . '">
     			</form>
-    		</p>';
+    		</div>';
       }
 	   echo '</div>';
 

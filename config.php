@@ -24,29 +24,30 @@ Can Search engines track this website?
 */
 $can_track = 'true';
 
-/*
-Activate the main IRC channel
-- true
-- false
-*/
-$main_irc = true;
-/* The IRC server to connect to. */
-$irc_server = "test";
-/*
-When your IRC client connects to the server, it will automatically join this channel.
-Note that you must not include the # character.
-*/
-$irc_channel = "plop";
 
 /*
 Your main website
 - "" for no website
 - begin with ftp/http
 */
-$main_website = "";
-$name_website = "Website";
+$website_link = "ff";
+$website_label = "Website";
 
-/* For admin.php page */
+
+/* The IRC server to connect to:
+change in this example irc://irc-server:port/channel?key:
+	* `irc-server` by your IRC server
+	* `port` by the port by default (optionnal)
+	* `channel` by your channel (without the #)
+	* `key` by the key to enter to your channel (optionnal, if you don't put it, remove the ? in the URL too)
+
+	For example "irc://freenode.net/wikihow" is ok
+*/
+$irc_link = "irc://irc-server:port/channel?key";
+$irc_label = "IRC";
+
+
+/* IMPORTANT: For admin.php page */
 $user = "user";
 $password = "user";
 
@@ -87,8 +88,9 @@ $lang = array (
 	"Admin_page" => "Admin Page",
 	"Disconnect_but" => "Disconnect",
 	"Home_but" => "Home",
-	"IRC" => "IRC:",
-	"IRC_on" => "on",
+	"website" => "website",
+	"IRC" => "- IRC",
+	"Fail_load_XML" => "Failed to load XML file, or the XML file is empty",
 ),
 "fr" => array(
 	"choose_bot" => "Choisissez un bot dans la liste",
@@ -115,8 +117,9 @@ $lang = array (
 	"Admin_page" => "Page d'administration",
 	"Disconnect_but" => "Se déconnecter",
 	"Home_but" => "Accueil",
-	"IRC" => "IRC :",
-	"IRC_on" => "sur",
+	"website" => "- site internet",
+	"IRC" => "- IRC",
+	"Fail_load_XML" => "Échec du chargement du fichier XML ou le fichier XML est vide",
 ),
 );
 ?>
