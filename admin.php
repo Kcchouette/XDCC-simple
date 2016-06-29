@@ -38,14 +38,14 @@ echo '<header>
 if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user && $_POST["pass"] == $password) {
 
 	if (isset($_POST["nameBot"]) && isset($_POST["xmlBot"]) && !isset($_POST["isModifBotname"])) {
-		insertBot(new Bot($_POST["nameBot"], $_POST["xmlBot"]));
+		insertBot(new Bot($_POST["nameBot"], $_POST["xmlBot"], $_POST["websiteBot"], $_POST["ircBot"]));
 		echo '<div class="omgmsg omginfo">
             <p class="omgcenter">' . $_POST["nameBot"] . ' ' . $lang[$language]["bot_add"] . '</p>
           </div>';
 	}
   else if (isset($_POST["isModifBotname"])) {
 		removeBot($_POST["isModifBotname"]);
-    insertBot(new Bot($_POST["nameBot"], $_POST["xmlBot"]));
+    insertBot(new Bot($_POST["nameBot"], $_POST["xmlBot"], $_POST["websiteBot"], $_POST["ircBot"]));
 		echo '<div class="omgmsg omginfo">
             <p class="omgcenter">' . $_POST["isModifBotname"] . ' ' . $lang[$language]["bot_modify"] . '</p>
           </div>';
@@ -64,6 +64,8 @@ if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user &&
     				<form method="post" action="admin.php">
     					<input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" value="' . $_POST["modifBotname"] . '" required >
     					<input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" value="' . searchBotList(getBotList(), $_POST["modifBotname"]) . '" required >
+              <input type="url" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" value="' . returnBotWebsite(getBotList(), $_POST["modifBotname"]) . '" >
+              <input type="url" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" value="' . returnBotIRC(getBotList(), $_POST["modifBotname"]) . '" >
     					<input type="hidden" name="user" value="' . $_POST["user"] . '">
     					<input type="hidden" name="pass" value="' . $_POST["pass"] . '">
               <input type="hidden" name="isModifBotname" value="' . $_POST["modifBotname"] . '">
@@ -77,6 +79,8 @@ if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user &&
     				<form method="post" action="admin.php">
     					<input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" required >
     					<input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" required >
+              <input type="url" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" >
+              <input type="url" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" >
     					<input type="hidden" name="user" value="' . $_POST["user"] . '">
     					<input type="hidden" name="pass" value="' . $_POST["pass"] . '">
     					<input type="submit" value="' . $lang[$language]["Add_but"] . '">
@@ -86,14 +90,23 @@ if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user &&
 	   echo '</div>';
 
 	  echo '<div class="omgcontainer90">
-			<h2>' . $lang[$language]["Modify_Remove_h2"] . '</h2>
-			<table>';
+			<h2>' . $lang[$language]["Modify_Remove_h2"] . '</h2>';
 
-			$bots = getBotList();
-				foreach($bots as $b) {
+		$bots = getBotList();
+
+      echo '<table>';
+      echo '<tr>
+            <th>' . $lang[$language]["Bot_name"] . '</th>
+            <th>' . $lang[$language]["Bot_xml"] . '</th>
+            <th>' . $lang[$language]["Bot_website"] . '</th>
+            <th>' . $lang[$language]["Bot_irc"] . '</th>
+            <tr>';
+			foreach($bots as $b) {
 				echo '<tr class="omgcenter">
 					<td>' . $b->getName() . '</td>
 					<td>' . $b->getXmlFile() . '</td>
+          <td>' . $b->getWebsite() . '</td>
+          <td>' . $b->getIRC() . '</td>
 					<td>
 						<form method="post" action="admin.php">
   						<input type="hidden" name="user" value="' . $_POST["user"] . '">
@@ -119,7 +132,7 @@ if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user &&
 else {
     echo '
     <form method="post" action="admin.php" class="omgvertical omgcenter">
-        <input type="text" name="user" placeholder="' . $lang[$language]["User"] . '" required >
+        <input type="text" name="user" placeholder="' . $lang[$language]["User"] . '" required autofocus>
         <input type="password" name="pass" placeholder="' . $lang[$language]["Password"] . '" required >
         <input type="submit" value="' . $lang[$language]["Connect_but"] . '">
     </form>

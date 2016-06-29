@@ -15,12 +15,12 @@
 - [ ] Use "session" for the admin page? # because a history back can "reconnect" you
 - [x] Adding IRC link (1 main + 1 per bot)
 - [x] Adding URL of the website (1 main + 1 per bot)
-- [ ] When adding bot, ask if Website/IRC are the same than the main
 - [ ] Use Nick from xdcc list? # what in case multi-nick?
 - [ ] Display if the bot support @find (and how many ?) # config of bot
 - [x] Change display when mouse over for the bot listing (underline?)
 - [x] Robot meta tag (choose in the config file)
 - [x] The GitHub link
+
 
 ## For v0.2
 
@@ -33,6 +33,13 @@
  - [ ] Import/Export data.json
  - [ ] Choose the XML file using a select tag in the ADMIN page
  - [ ] Possibility of reordering bots in the ADMIN page
+ - [ ] When adding bot, ask if Website/IRC are the same than the main in the ADMIN page
+ - [ ] Download a CSV file with the number of download for each bot/for all bot?
+
+
+## For v0.3
+
+- [ ] Try to use text file?
 
 ## Bonus
 
