@@ -1,3 +1,7 @@
+<?php //start before DOCTYPE
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="<?php require 'config.php'; echo $lang; ?>">
   <head>
@@ -10,7 +14,7 @@
     <title><?php require 'config.php'; echo $title; ?></title>
 
     <!-- OMGCSS core CSS -->
-    <link href="https://cdn.rawgit.com/fabienwang/omgcss/gh-pages/dist/css/omg.css" rel="stylesheet">
+    <link href="https://cdn.rawgit.com/Kcchouette/omgcss/ef95db62775411425dfc2f0bcc6a8a43282efc83/dist/css/omg.css" rel="stylesheet">
 
   </head>
 
@@ -149,7 +153,7 @@ else {
     </footer>
 
     <!-- OMGCSS small js -->
-    <script src="https://cdn.rawgit.com/fabienwang/omgcss/gh-pages/dist/js/omg.js"></script>
+    <script src="https://cdn.rawgit.com/Kcchouette/omgcss/ef95db62775411425dfc2f0bcc6a8a43282efc83/dist/js/omg.js"></script>
 
   </body>
 
