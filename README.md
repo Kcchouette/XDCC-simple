@@ -5,20 +5,23 @@ You can see what this website do by [watching the todo list](TODO.md)
 
 ## Why another XDCC Parser?
 
-- Because [XDCCParser-global](https://github.com/nitmir/XDCCParser-global) is bugged
-- Because [my fork](https://github.com/Kcchouette/XDCCParser) is less bugged; but isn't **responsive** (mobile) and use Text File from Iroffer
-- Use **XML file** from Iroffer
-- No Database
-- No Composer or other things
-- Minimalist CSS (with [OMGCSS](https://fabienwang.github.io/omgcss/))
+ - Because [XDCCParser-global](https://github.com/nitmir/XDCCParser-global) is bugged
+ - Because [my fork](https://github.com/Kcchouette/XDCCParser) is less bugged; but isn't **responsive** (mobile) and use Text File from Iroffer
+ - Use **XML file** from Iroffer
+ - No Database
+ - No Composer or other things
+ - Minimalist CSS (with [OMGCSS (miror)](https://kcchouette.github.io/omgcss/))
+ - Very Light: 2 CSS (9,41Ko) + 1 JS (0,19Ko) + 1 HTML (~10 Ko; depends of content)
+
 
 ## Requirements:
 
-- XML File from Iroffer (remove the `#` from `#xdccxmlfile mybot.xml` [here](https://github.com/dinoex/iroffer-dinoex/blob/master/sample.config#L108))
-- PHP (I develop it using PHP7.0, so I think >= 5.0 is ok)
+ - XML File from Iroffer (remove the `#` from `#xdccxmlfile mybot.xml` [here](https://github.com/dinoex/iroffer-dinoex/blob/master/sample.config#L108))
+ - PHP (I develop it using PHP7.0, so I think >= 5.0 is ok)
+
 
 ## How to use it?
 
-1. Edit the `config.php` file and set: `$user="";` and `$password="";` for the admin page
-2. Add your bot on the `admin.php` page (the `name` of your bot must be UNIQUE!)
-2. Finish :)
+ 1. Edit the `config.php` file and set: `$user="";` and `$password="";` for the admin page
+ 2. Add your bot on the `admin.php` page (the `name` of your bot must be UNIQUE!)
+ 2. Finish :)
