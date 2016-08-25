@@ -10,7 +10,7 @@ You can see what this website do by [watching the todo list](TODO.md)
  - Use **XML file** from Iroffer
  - No Database
  - No Composer or other things
- - Minimalist CSS (with [OMGCSS (miror)](https://kcchouette.github.io/omgcss/))
+ - Minimalist CSS (with [OMGCSS (miror)](https://github.com/Kcchouette/omgcss))
  - Very Light: 2 CSS (9,41Ko) + 1 JS (0,19Ko) + 1 HTML (~10 Ko; depends of content)
 
 
@@ -24,4 +24,4 @@ You can see what this website do by [watching the todo list](TODO.md)
 
  1. Edit the `config.php` file and set: `$user="";` and `$password="";` for the admin page
  2. Add your bot on the `admin.php` page (the `name` of your bot must be UNIQUE!)
- 2. Finish :)
+ 3. Finish :)

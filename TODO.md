@@ -9,7 +9,7 @@
 - [x] Use bot database from a json file
 - [x] Add/edit/remove bot easily through an ADMIN page
 - [x] "disconnect" from the admin page
-- [ ] Use "session" for the admin page? # because a history back can "reconnect" you
+- [x] Use "session" for the admin page
 - [x] Adding IRC link (1 main + 1 per bot)
 - [x] Adding URL of the website (1 main + 1 per bot)
 - [x] Change display when mouse over for the bot listing (underline?)
