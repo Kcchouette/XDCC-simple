@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?php require 'config.php'; echo $lang; ?>">
+<html lang="<?php require_once 'config.php'; echo $lang; ?>">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,9 +15,9 @@
     }
    ?>
 
-  <title><?php require 'config.php'; echo $title; ?></title>
+  <title><?php require_once 'config.php'; echo $title; ?></title>
 
-  <link href="main.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
 
   <!-- OMGCSS core CSS -->
   <link href="https://cdn.rawgit.com/Kcchouette/omgcss/ef95db62775411425dfc2f0bcc6a8a43282efc83/dist/css/omg.css" rel="stylesheet">
@@ -128,13 +128,15 @@
 
 <footer class="omgcenter">
 <?php
-  echo $lang[$language]["Powered"] . ' <a href="https://github.com/Kcchouette/XDCC-simple">XDCC Simple</a> - <a href="admin.php">admin page</a>';
+  require_once 'config.php';
+  echo $lang[$language]["Powered"] . ' <a href="https://github.com/Kcchouette/XDCC-simple">XDCC Simple</a> - <a href="admin.php">' . $lang[$language]["Admin_page"] . '</a>';
  ?>
 </footer>
 
 <script type="text/javascript">
 function paste(bot, pack){
   <?php
+  require_once 'config.php';
   echo 'window.prompt("' . $lang[$language]["Paste_windows"] . '", "/msg " + bot + " xdcc send #" + pack);';
   ?>
 }

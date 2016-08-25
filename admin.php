@@ -16,7 +16,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 
       <title>' . $title . ' - ' . $lang[$language]["Admin_page"] . '</title>
 
-      <link href="input.css" rel="stylesheet">
+      <link href="css/input.css" rel="stylesheet">
 
       <!-- OMGCSS core CSS -->
       <link href="https://cdn.rawgit.com/Kcchouette/omgcss/ef95db62775411425dfc2f0bcc6a8a43282efc83/dist/css/omg.css" rel="stylesheet">
