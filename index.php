@@ -128,7 +128,7 @@
 
 <footer class="omgcenter">
 <?php
-  echo $lang[$language]["Powered"] . ' <a href="https://github.com/Kcchouette/XDCC-simple">XDCC Simple</a>';
+  echo $lang[$language]["Powered"] . ' <a href="https://github.com/Kcchouette/XDCC-simple">XDCC Simple</a> - <a href="admin.php">admin page</a>';
  ?>
 </footer>
 

@@ -1,45 +1,39 @@
-<?php //start before DOCTYPE
+<?php //start before HTML code
 session_start();
-?>
-
-<!DOCTYPE html>
-<html lang="<?php require 'config.php'; echo $lang; ?>">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title><?php require 'config.php'; echo $title; ?></title>
-
-    <!-- OMGCSS core CSS -->
-    <link href="https://cdn.rawgit.com/Kcchouette/omgcss/ef95db62775411425dfc2f0bcc6a8a43282efc83/dist/css/omg.css" rel="stylesheet">
-
-  </head>
-
-  <body>
-    <div class="fixed730 omglowmargin">
-<?php
 
 require_once 'config.php';
 require_once 'xdcc.php';
 
-echo '<header>
-      <h1 class="omginline"><a class="omgtitle" href="#">' . $lang[$language]["Admin_page"] . '</a></h1>
-      <a href="#" onclick="toggleMenu(\'omgmenu1\')" class="menubtn">&#9776;</a>
-      <nav id="omgmenu1" class="omgmenu omginline omgpullright" style="display:none">
-        <ul>
-          <li><a class="omgbtn" href="index.php">' . $lang[$language]["Home_but"] . '</a></li>';
-          if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user && $_POST["pass"] == $password) {
-            echo '<li><a class="omgbtn" href="admin.php">' . $lang[$language]["Disconnect_but"] . '</a></li>';
-          }
+if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
+  echo '<!DOCTYPE html>
+  <html lang="' . $lang . '">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
 
-        echo '</ul>
-      </nav>
-    </header>';
+      <title>' . $title . ' - ' . $lang[$language]["Admin_page"] . '</title>
 
-if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user && $_POST["pass"] == $password) {
+      <!-- OMGCSS core CSS -->
+      <link href="https://cdn.rawgit.com/Kcchouette/omgcss/ef95db62775411425dfc2f0bcc6a8a43282efc83/dist/css/omg.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+      <div class="fixed730 omglowmargin">';
+
+  echo '<header>
+        <h1 class="omginline"><a class="omgtitle" href="#">' . $lang[$language]["Admin_page"] . '</a></h1>
+        <a href="#" onclick="toggleMenu(\'omgmenu1\')" class="menubtn">&#9776;</a>
+        <nav id="omgmenu1" class="omgmenu omginline omgpullright" style="display:none">
+          <ul>
+            <li><a class="omgbtn" href="index.php">' . $lang[$language]["Home_but"] . '</a></li>';
+            echo '<li><a class="omgbtn" href="logout.php">' . $lang[$language]["Disconnect_but"] . '</a></li>';
+          echo '</ul>
+        </nav>
+      </header>';
 
 	if (isset($_POST["nameBot"]) && isset($_POST["xmlBot"]) && !isset($_POST["isModifBotname"])) {
 		insertBot(new Bot($_POST["nameBot"], $_POST["xmlBot"], $_POST["websiteBot"], $_POST["ircBot"]));
@@ -70,8 +64,6 @@ if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user &&
     					<input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" value="' . searchBotList(getBotList(), $_POST["modifBotname"]) . '" required >
               <input type="url" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" value="' . returnBotWebsite(getBotList(), $_POST["modifBotname"]) . '" >
               <input type="url" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" value="' . returnBotIRC(getBotList(), $_POST["modifBotname"]) . '" >
-    					<input type="hidden" name="user" value="' . $_POST["user"] . '">
-    					<input type="hidden" name="pass" value="' . $_POST["pass"] . '">
               <input type="hidden" name="isModifBotname" value="' . $_POST["modifBotname"] . '">
     					<input type="submit" value="' . $lang[$language]["Modify_but"] . '">
     			</form>
@@ -85,8 +77,6 @@ if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user &&
     					<input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" required >
               <input type="url" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" >
               <input type="url" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" >
-    					<input type="hidden" name="user" value="' . $_POST["user"] . '">
-    					<input type="hidden" name="pass" value="' . $_POST["pass"] . '">
     					<input type="submit" value="' . $lang[$language]["Add_but"] . '">
     			</form>
     		</div>';
@@ -113,16 +103,12 @@ if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user &&
           <td>' . $b->getIRC() . '</td>
 					<td>
 						<form method="post" action="admin.php">
-  						<input type="hidden" name="user" value="' . $_POST["user"] . '">
-  						<input type="hidden" name="pass" value="' . $_POST["pass"] . '">
   						<input type="hidden" name="modifBotname" value="' . $b->getName() . '">
   						<input type="submit" value="' . $lang[$language]["Modify_but"] . '">
 						</form>
 					</td>
           <td>
 						<form method="post" action="admin.php">
-  						<input type="hidden" name="user" value="' . $_POST["user"] . '">
-  						<input type="hidden" name="pass" value="' . $_POST["pass"] . '">
   						<input type="hidden" name="rmBotname" value="' . $b->getName() . '">
   						<input type="submit" value="' . $lang[$language]["Remove_but"] . '">
 						</form>
@@ -134,13 +120,8 @@ if (isset($_POST["user"]) && isset($_POST["pass"]) && $_POST["user"] == $user &&
 		echo '</div>';
 }
 else {
-    echo '
-    <form method="post" action="admin.php" class="omgvertical omgcenter">
-        <input type="text" name="user" placeholder="' . $lang[$language]["User"] . '" required autofocus>
-        <input type="password" name="pass" placeholder="' . $lang[$language]["Password"] . '" required >
-        <input type="submit" value="' . $lang[$language]["Connect_but"] . '">
-    </form>
-    ';
+  //go to login
+  header ('location: login.php');
 }
 
 ?>
@@ -148,6 +129,7 @@ else {
 
     <footer class="omgcenter">
     <?php
+      require_once 'config.php';
       echo $lang[$language]["Powered"] . ' <a href="https://github.com/Kcchouette/XDCC-simple">XDCC Simple</a>';
      ?>
     </footer>
