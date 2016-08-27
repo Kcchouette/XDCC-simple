@@ -48,7 +48,7 @@
             }
 
             if (isset($_GET["bot"]) && !empty(returnBotIRC(getBotList(), $_GET["bot"]))) {
-                echo '<li><a href="' . returnBotWebsite(getBotList(), $_GET["bot"]) . '" class="omgbtn omgrounded omgwarn">' . $_GET["bot"] . ' ' . $lang[$language]["IRC"] . '</a></li>';
+                echo '<li><a href="' . returnBotIRC(getBotList(), $_GET["bot"]) . '" class="omgbtn omgrounded omgwarn">' . $_GET["bot"] . ' ' . $lang[$language]["IRC"] . '</a></li>';
             }
             else if (!isset($_GET["bot"]) && !empty($irc_link)) {
               echo '<li><a href="' . $irc_link . '" class="omgbtn omgrounded omgwarn">'. $irc_label . '</a></li>';
@@ -61,7 +61,7 @@
   <section class="omggrid omg3columns">
     <div class="omgblock">
       <div class="omgborder">
-        <h3>Bots</h3>
+        <h3><?php require_once 'config.php'; echo $lang[$language]["Bots"]; ?></h3>
         <p>
           <?php require_once 'xdcc.php';
           $bots = getBotList();
@@ -82,16 +82,15 @@
       ?>
     </div>
     <div class="omgblock omgblockof2">
-      <h3>Bot: <?php echo htmlspecialchars($_GET["bot"]); ?></h3>
+      <h3><?php require_once 'config.php'; echo $lang[$language]["Bot:"] . ' ' . htmlspecialchars($_GET["bot"]); ?></h3>
       <p><div><?php
-      if (!isset($_GET["bot"]))
-      {
-        require_once 'config.php';
+
+      require_once 'config.php';
+
+      if (!isset($_GET["bot"])) {
         echo '<div class="omgcenter">' . $lang[$language]["choose_bot"] . '</div>';
       }
-      else
-      {
-        require_once 'config.php';
+      else {
         require_once 'xdcc.php';
 
         echo '<table>';
