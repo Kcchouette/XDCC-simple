@@ -37,58 +37,43 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
         </nav>
       </header>';
 
-	if (isset($_POST["nameBot"]) && isset($_POST["xmlBot"]) && !isset($_POST["isModifBotname"])) {
-		insertBot(new Bot($_POST["nameBot"], $_POST["xmlBot"], $_POST["websiteBot"], $_POST["ircBot"]));
-		echo '<div class="omgmsg omginfo">
-            <p class="omgcenter">' . $_POST["nameBot"] . ' ' . $lang[$language]["bot_add"] . '</p>
-          </div>';
-	}
-  else if (isset($_POST["isModifBotname"])) {
-		removeBot($_POST["isModifBotname"]);
-    insertBot(new Bot($_POST["nameBot"], $_POST["xmlBot"], $_POST["websiteBot"], $_POST["ircBot"]));
-		echo '<div class="omgmsg omginfo">
-            <p class="omgcenter">' . $_POST["isModifBotname"] . ' ' . $lang[$language]["bot_modify"] . '</p>
-          </div>';
-	}
-  else if (isset($_POST["rmBotname"])) {
-		removeBot($_POST["rmBotname"]);
-		echo '<div class="omgmsg omginfo">
-            <p class="omgcenter">' . $_POST["rmBotname"] . ' ' . $lang[$language]["bot_remove"] . '</p>
-          </div>';
-	}
+    if (isset($_SESSION['message'])) {
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+    }
 
-	echo '<div class="omgcontainer90">';
-      if($_POST["modifBotname"]){
+    echo '<div class="omgcontainer90">';
+      if(isset($_POST["modifBotname"])){
         echo '<h2>' . $lang[$language]["Modify_h2"] . '</h2>';
         echo '<div class="omgcenter">
-    				<form method="post" action="admin.php">
-    					<input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" value="' . $_POST["modifBotname"] . '" required >
-    					<input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" value="' . searchBotList(getBotList(), $_POST["modifBotname"]) . '" required >
-              <input type="url" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" value="' . returnBotWebsite(getBotList(), $_POST["modifBotname"]) . '" >
-              <input type="url" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" value="' . returnBotIRC(getBotList(), $_POST["modifBotname"]) . '" >
-              <input type="hidden" name="isModifBotname" value="' . $_POST["modifBotname"] . '">
-    					<input type="submit" value="' . $lang[$language]["Modify_but"] . '">
-    			</form>
-    		</div>';
+                    <form method="post" action="update.php">
+                        <input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" value="' . $_POST["modifBotname"] . '" required >
+                        <input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" value="' . searchBotList(getBotList(), $_POST["modifBotname"]) . '" required >
+                        <input type="url" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" value="' . returnBotWebsite(getBotList(), $_POST["modifBotname"]) . '" >
+                        <input type="url" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" value="' . returnBotIRC(getBotList(), $_POST["modifBotname"]) . '" >
+                        <input type="hidden" name="isModifBotname" value="' . $_POST["modifBotname"] . '">
+                        <input type="submit" value="' . $lang[$language]["Modify_but"] . '">
+                </form>
+            </div>';
       }
       else {
         echo '<h2>' . $lang[$language]["Add_h2"] . '</h2>';
         echo '<div class="omgcenter">
-    				<form method="post" action="admin.php">
-    					<input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" required >
-    					<input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" required >
-              <input type="url" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" >
-              <input type="url" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" >
-    					<input type="submit" value="' . $lang[$language]["Add_but"] . '">
-    			</form>
-    		</div>';
+                    <form method="post" action="update.php">
+                        <input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" required >
+                        <input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" required >
+                        <input type="url" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" >
+                        <input type="url" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" >
+                        <input type="submit" value="' . $lang[$language]["Add_but"] . '">
+                </form>
+            </div>';
       }
-	   echo '</div>';
+       echo '</div>';
 
-	  echo '<div class="omgcontainer90">
-			<h2>' . $lang[$language]["Modify_Remove_h2"] . '</h2>';
+      echo '<div class="omgcontainer90">
+            <h2>' . $lang[$language]["Modify_Remove_h2"] . '</h2>';
 
-		$bots = getBotList();
+        $bots = getBotList();
 
       echo '<table>';
       echo '<tr>
@@ -97,29 +82,29 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
             <th>' . $lang[$language]["Bot_website"] . '</th>
             <th>' . $lang[$language]["Bot_irc"] . '</th>
             <tr>';
-			foreach($bots as $b) {
-				echo '<tr class="omgcenter">
-					<td>' . $b->getName() . '</td>
-					<td>' . $b->getXmlFile() . '</td>
-          <td>' . $b->getWebsite() . '</td>
-          <td>' . $b->getIRC() . '</td>
-					<td>
-						<form method="post" action="admin.php">
-  						<input type="hidden" name="modifBotname" value="' . $b->getName() . '">
-  						<input type="submit" value="' . $lang[$language]["Modify_but"] . '">
-						</form>
-					</td>
-          <td>
-						<form method="post" action="admin.php">
-  						<input type="hidden" name="rmBotname" value="' . $b->getName() . '">
-  						<input type="submit" value="' . $lang[$language]["Remove_but"] . '">
-						</form>
-					</td>
-				</tr>';
-				}
+            foreach($bots as $b) {
+                echo '<tr class="omgcenter">
+                    <td>' . $b->getName() . '</td>
+                    <td>' . $b->getXmlFile() . '</td>
+                    <td>' . $b->getWebsite() . '</td>
+                    <td>' . $b->getIRC() . '</td>
+                    <td>
+                        <form method="post" action="admin.php">
+                        <input type="hidden" name="modifBotname" value="' . $b->getName() . '">
+                        <input type="submit" value="' . $lang[$language]["Modify_but"] . '">
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="update.php">
+                        <input type="hidden" name="rmBotname" value="' . $b->getName() . '">
+                        <input type="submit" value="' . $lang[$language]["Remove_but"] . '">
+                        </form>
+                    </td>
+                </tr>';
+                }
 
-		echo '</table>';
-		echo '</div>';
+        echo '</table>';
+        echo '</div>';
 }
 else {
   //go to login
