@@ -13,7 +13,7 @@
  - [ ] Rss based on `adddate` tag # http://www.carronmedia.com/create-an-rss-feed-with-php/
  - [ ] Choose the XML file location using a select tag in the ADMIN page if not using URL
  - [ ] Possibility of reordering bots in the ADMIN page
- - [ ] Download a CSV file with the number of download for each bot/for all bot?
+ - [x] Download a CSV file with the number of download for each bot
  - [ ] When adding bot, ask if Website/IRC are the same than the main in the ADMIN page
 
 

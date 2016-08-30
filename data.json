@@ -1,10 +1,10 @@
 [{
-	"name": "BOT2",
+	"name": "Test1",
 	"xml": "mybot.xml",
 	"website": "http://test.com",
 	"irc": ""
 }, {
-	"name": "test",
+	"name": "Test2",
 	"xml": "plop.xml",
 	"website": "",
 	"irc": "irc link"

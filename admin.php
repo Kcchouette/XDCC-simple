@@ -100,6 +100,12 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
                         <input type="submit" value="' . $lang[$language]["Remove_but"] . '">
                         </form>
                     </td>
+                    <td>
+                        <form method="post" action="update.php">
+                        <input type="hidden" name="export_ddl" value="' . $b->getName() . '">
+                        <input type="submit" value="' . $lang[$language]["Export_csv"] . '">
+                        </form>
+                    </td>
                 </tr>';
                 }
 
