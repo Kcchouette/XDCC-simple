@@ -16,6 +16,8 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 
       <title>' . $title . ' - ' . $lang[$language]["Admin_page"] . '</title>
 
+	  <link href="css/main.css" rel="stylesheet">
+
       <link href="css/input.css" rel="stylesheet">
 
       <!-- OMGCSS core CSS -->
@@ -23,7 +25,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 
     </head>
 
-    <body>
+    <body class="omgcontainer90">
       <div class="fixed730 omglowmargin">';
 
   echo '<header>
@@ -41,76 +43,56 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
         echo $_SESSION['message'];
         unset($_SESSION['message']);
     }
-
-    echo '<div class="omgcontainer90">';
-      if(isset($_POST["modifBotname"])){
-        echo '<h2>' . $lang[$language]["Modify_h2"] . '</h2>';
-        echo '<div class="omgcenter">
-                    <form method="post" action="update.php">
-                        <input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" value="' . $_POST["modifBotname"] . '" required >
-                        <input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" value="' . searchBotList(getBotList(), $_POST["modifBotname"]) . '" required >
-                        <input type="url" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" value="' . returnBotWebsite(getBotList(), $_POST["modifBotname"]) . '" >
-                        <input type="url" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" value="' . returnBotIRC(getBotList(), $_POST["modifBotname"]) . '" >
-                        <input type="hidden" name="isModifBotname" value="' . $_POST["modifBotname"] . '">
-                        <input type="submit" value="' . $lang[$language]["Modify_but"] . '">
-                </form>
-            </div>';
-      }
-      else {
-        echo '<h2>' . $lang[$language]["Add_h2"] . '</h2>';
-        echo '<div class="omgcenter">
-                    <form method="post" action="update.php">
-                        <input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" required >
-                        <input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" required >
-                        <input type="url" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" >
-                        <input type="url" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" >
-                        <input type="submit" value="' . $lang[$language]["Add_but"] . '">
-                </form>
-            </div>';
-      }
-       echo '</div>';
-
-      echo '<div class="omgcontainer90">
-            <h2>' . $lang[$language]["Modify_Remove_h2"] . '</h2>';
-
-        $bots = getBotList();
-
-      echo '<table>';
-      echo '<tr>
-            <th>' . $lang[$language]["Bot_name"] . '</th>
-            <th>' . $lang[$language]["Bot_xml"] . '</th>
-            <th>' . $lang[$language]["Bot_website"] . '</th>
-            <th>' . $lang[$language]["Bot_irc"] . '</th>
-            <tr>';
-            foreach($bots as $b) {
-                echo '<tr class="omgcenter">
+	echo '<div class="omgcontainer90">';
+		echo '<section class="omggrid omg3columns">
+        <div class="omgblock">
+            <div class="omgborder">';
+			echo '<h3>' . $lang[$language]["Modify_Remove_h2"] . '</h3>';
+                require_once 'xdcc.php';
+                $bots = getBotList();
+				echo '<table>';
+                foreach($bots as &$b) {
+                    echo '<tr class="omgcenter">
                     <td>' . $b->getName() . '</td>
-                    <td>' . $b->getXmlFile() . '</td>
-                    <td>' . $b->getWebsite() . '</td>
-                    <td>' . $b->getIRC() . '</td>
                     <td>
-                        <form method="post" action="admin.php">
-                        <input type="hidden" name="modifBotname" value="' . $b->getName() . '">
-                        <input type="submit" value="' . $lang[$language]["Modify_but"] . '">
-                        </form>
+                        <form method="post" action="bot_admin.php">
+							<input type="hidden" name="modifBot" value="' . $b->getName() . '">
+							<input type="image" class="icon" src="img/Edit_icon.svg" alt="Modif">
+						</form>
                     </td>
                     <td>
-                        <form method="post" action="update.php">
-                        <input type="hidden" name="rmBotname" value="' . $b->getName() . '">
-                        <input type="submit" value="' . $lang[$language]["Remove_but"] . '">
-                        </form>
+						<form method="post" action="update.php">
+							<input type="hidden" name="export_ddl" value="' . $b->getName() . '">
+							<input type="image" class="icon" src="img/csv_file.svg" alt="Modif">
+						</form>
+
                     </td>
                     <td>
-                        <form method="post" action="update.php">
-                        <input type="hidden" name="export_ddl" value="' . $b->getName() . '">
-                        <input type="submit" value="' . $lang[$language]["Export_csv"] . '">
-                        </form>
+						<form method="post" action="update.php">
+							<input type="hidden" name="rmBot" value="' . $b->getName() . '">
+							<input type="image" class="icon" src="img/remove_icon.svg" alt="Modif">
+						</form>
                     </td>
                 </tr>';
                 }
 
-        echo '</table>';
+              echo '</table>';
         echo '</div>';
+		echo '</div>';
+		echo '<div class="omgblock omgblockof2">';
+		/*echo '<form method="post" action="update.php">
+				<input type="hidden" name="upload_json" value="true">
+				<input type="file" id="uploadedfile" name="uploadedfile">
+				<input type="submit" value="Import data.json" >
+			  </form>';*/
+		echo '<form method="post" action="update.php">
+				<input type="hidden" name="exp_json" value="true">
+				<input type="submit" value="Export data.json" >
+			  </form>';
+		echo '</div>';
+		echo '</section>';
+		echo '</div>';
+
 }
 else {
   //go to login

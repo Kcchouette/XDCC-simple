@@ -2,15 +2,16 @@
 
 ## For v0.2
 
- - [ ] Import/Export data.json
+ - [ ] Import data.json
+ - [x] Export data.json
  - [ ] Upload the XML file into cache
  - [ ] Cache can be refreshed (automatic check?)
  - [ ] Download the XML file (from URL)? into cache (use the `lastupdate` tag; an epoch time)
  - [ ] View to show Bookmarks from JSON # using the search input
  - [ ] ADD/REMOVE Bookmarks from JSON
- - [ ] A Search input (to search on one BOT) # https://datatables.net/examples/basic_init/filter_only.html ?
- - [ ] A Search input (to search on all BOTs) # all instanciate of object before index use it?
- - [ ] Rss based on `adddate` tag # http://www.carronmedia.com/create-an-rss-feed-with-php/
+ - [x] A Search input (to search on one BOT)
+ - [x] A Search input (to search on all BOTs)
+ - [x] Atom feed based on `adddate` tag
  - [ ] Choose the XML file location using a select tag in the ADMIN page if not using URL
  - [ ] Possibility of reordering bots in the ADMIN page
  - [x] Download a CSV file with the number of download for each bot

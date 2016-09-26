@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="<?php require_once 'config.php'; echo $lang; ?>">
+<html lang="<?php require_once 'config.php'; echo $language; ?>">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="<?php require_once 'config.php'; echo $description; ?>">
+    <!-- <meta name="author" content=""> -->
     <?php require_once 'config.php';
     if($can_track) {
         echo '<meta name="robots" content="index, follow">';
@@ -29,8 +29,8 @@
     <center><h1><?php require_once 'config.php'; echo $title; ?></h1></center>
 
     <section>
-        <a onclick="toggleMenu('menu2')"  class="menubtn">&#9776;</a>
-        <nav id="menu2" class="omgmenu omginline omgpullleft" style="display:none">
+        <a onclick="toggleMenu('menu1')"  class="menubtn">&#9776;</a>
+        <nav id="menu1" class="omgmenu omginline" style="display:none">
             <ul>
             <?php require_once 'config.php';
                   require_once 'xdcc.php';
@@ -55,6 +55,22 @@
             }
             ?>
             </ul>
+            <form name="searchform" class="omgpullright">
+              <input type="text" name="search" placeholder="Search on "  <?php if(!empty($_GET["search"])) echo 'value="' . $_GET["search"] . '"';?> required/>
+			  <select name="bot">
+				<option value="">TOUS</option>
+			  <?php require_once 'xdcc.php';
+                $bots = getBotList();
+                foreach($bots as &$bot) {
+					if ($bot->getName() === $_GET["bot"])
+						echo '<option value="' . $bot->getName() . '" selected>' . $bot->getName() . '</option>';
+					else
+						echo '<option value="' . $bot->getName() . '">' . $bot->getName() . '</option>';
+                }
+                ?>
+			  </select>
+              <input type="submit" class="omgbtn omgokay" value="Search"/>
+            </form>
         </nav>
     </section>
 
@@ -81,20 +97,23 @@
             ?>
         </div>
         <div class="omgblock omgblockof2">
-        <h3><?php require_once 'config.php'; echo $lang[$language]["Bot:"] . ' ' . htmlspecialchars($_GET["bot"]); ?></h3>
-            <p><div><?php
+        <h3><?php require_once 'config.php'; if(!empty($_GET["bot"])) echo ' &#8212; ' . $lang[$language]["Bot:"] . ' <code>' . htmlspecialchars($_GET["bot"]) . '</code>' . ' <a href="syndication.php?bot=' . $_GET["bot"] . '"> <img class="icon" src="img/Feed-icon.svg"></a> '; if(isset($_GET["search"])) echo ' &#8212; Recherche : <code>' . htmlspecialchars($_GET["search"]) . '</code>'; ?></h3>
+            <div><?php
 
             require_once 'config.php';
 
-            if (!isset($_GET["bot"])) {
+            if (!isset($_GET["bot"]) && !isset($_GET["search"])) { //if none set, show an error
                 echo '<div class="omgcenter">' . $lang[$language]["choose_bot"] . '</div>';
             }
-            else {
+            else if (empty($_GET["bot"])) { //if bot is empty, search in all bot
+              echo searchBotsList($_GET["search"]);
+            }
+            else { //if bot, show all the list OR show the search on a bot
                 require_once 'xdcc.php';
 
-                echo '<table>';
+                echo '<table id="filelist">';
 
-                $xml = simplexml_load_file(searchBotList(getBotList(), $_GET["bot"]));
+                $xml = simplexml_load_file(searchBotXMLFile(getBotList(), $_GET["bot"]));
 
                 if (!$xml->packlist->pack)
                     echo '<tr id="trmain"><th>' . $lang[$language]["Fail_load_XML"] . '</th></tr>';
@@ -105,27 +124,22 @@
                     echo '<th>' . $lang[$language]["File"] . '</th>';
                     echo '</tr>';
 
-                    foreach($xml->packlist->pack as $p) {
-                        echo '<tr>';
-                        echo '<td class="omgcenter">' . $p->packnr . '</td>';
-                        echo '<td class="omgcenter">' . $p->packsize . '</td>';
-                        echo '<td>';
-                        echo '<a href="#" onclick="javascript:paste(\'' . $_GET["bot"] . '\', ' . $p->packnr . ');" title="' . $p->packname . '" >' . $p->packname . '</a>';
-                        echo '</td>';
-                        echo '</tr>';
-                    }
+                    if (!empty($_GET["search"]))
+                      echo searchBotList($xml, $_GET["bot"], $_GET["search"]);
+                    else
+                      echo showBotList($xml);
                 }
                 echo '</table>';
             }
             ?>
-           </div></p>
+           </div>
         </div>
     </section>
 
     <footer class="omgcenter">
     <?php
       require_once 'config.php';
-      echo $lang[$language]["Powered"] . ' <a href="https://github.com/Kcchouette/XDCC-simple">XDCC Simple</a> - <a href="admin.php">' . $lang[$language]["Admin_page"] . '</a>';
+      echo $lang[$language]["Powered"] . ' <a href="https://github.com/Kcchouette/XDCC-simple">XDCC Simple</a> &#8212; <a href="admin.php">' . $lang[$language]["Admin_page"] . '</a>';
      ?>
     </footer>
 
@@ -138,7 +152,7 @@ function paste(bot, pack){
 }
 </script>
 
-<!--<script src="script.js"></script>-->
+<!-- <script type='text/javascript' src='js/script.js'></script> -->
 
 <!-- OMGCSS small js -->
 <script src="https://cdn.rawgit.com/Kcchouette/omgcss/ef95db62775411425dfc2f0bcc6a8a43282efc83/dist/js/omg.js"></script>

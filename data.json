@@ -1,6 +1,6 @@
 [{
 	"name": "Test1",
-	"xml": "mybot.xml",
+	"xml": "../mybot.xml",
 	"website": "http://test.com",
 	"irc": ""
 }, {

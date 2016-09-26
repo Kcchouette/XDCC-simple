@@ -4,7 +4,7 @@ session_start();
 require_once 'config.php';
 require_once 'xdcc.php';
 
-if (isset($_POST["nameBot"]) && isset($_POST["xmlBot"]) && !isset($_POST["isModifBotname"])) {
+if (isset($_POST["isCreate"])) {
     insertBot(new Bot($_POST["nameBot"], $_POST["xmlBot"], $_POST["websiteBot"], $_POST["ircBot"]));
     $_SESSION['message'] = '<div class="omgmsg omginfo">
                                 <p class="omgcenter">' . $_POST["nameBot"] . ' ' . $lang[$language]["bot_add"] . '</p>
@@ -13,33 +13,33 @@ if (isset($_POST["nameBot"]) && isset($_POST["xmlBot"]) && !isset($_POST["isModi
     unset($_POST["xmlBot"]);
     unset($_POST["websiteBot"]);
     unset($_POST["ircBot"]);
+	unset($_POST["isCreate"]);
+	header ('location: admin.php');
 }
-else if (isset($_POST["isModifBotname"])) {
-    removeBot($_POST["isModifBotname"]);
+else if (isset($_POST["isModifBot"])) {
+    removeBot($_POST["isModifBot"]);
     insertBot(new Bot($_POST["nameBot"], $_POST["xmlBot"], $_POST["websiteBot"], $_POST["ircBot"]));
     $_SESSION['message'] = '<div class="omgmsg omginfo">
-            <p class="omgcenter">' . $_POST["isModifBotname"] . ' ' . $lang[$language]["bot_modify"] . '</p>
+            <p class="omgcenter">' . $_POST["isModifBot"] . ' ' . $lang[$language]["bot_modify"] . '</p>
            </div>';
-    unset($_POST["isModifBotname"]);
+    unset($_POST["isModifBot"]);
     unset($_POST["nameBot"]);
     unset($_POST["xmlBot"]);
     unset($_POST["websiteBot"]);
     unset($_POST["ircBot"]);
+	header ('location: admin.php');
 }
-else if (isset($_POST["rmBotname"])) {
-    removeBot($_POST["rmBotname"]);
+else if (isset($_POST["rmBot"])) {
+    removeBot($_POST["rmBot"]);
     $_SESSION['message'] = '<div class="omgmsg omginfo">
-            <p class="omgcenter">' . $_POST["rmBotname"] . ' ' . $lang[$language]["bot_remove"] . '</p>
+            <p class="omgcenter">' . $_POST["rmBot"] . ' ' . $lang[$language]["bot_remove"] . '</p>
           </div>';
-    unset($_POST["rmBotname"]);
+    unset($_POST["rmBot"]);
+	header ('location: admin.php');
 }
 
-if (!isset($_POST["export_ddl"])) {
-    header ('location: admin.php');
-}
-else {
-    require_once 'xdcc.php';
-    $xml = simplexml_load_file(searchBotList(getBotList(), $_POST["export_ddl"]));
+else if (isset($_POST["export_ddl"])) {
+    $xml = simplexml_load_file(searchBotXMLFile(getBotList(), $_POST["export_ddl"]));
 
     header('Content-Type: text/csv');
     header('Content-Disposition: attachment; filename="' . $_POST["export_ddl"] . '.csv"');
@@ -77,5 +77,47 @@ else {
 
     unset($_POST["export_ddl"]);
 }
+
+else if (isset($_POST["exp_json"])) {
+	
+	header('Content-disposition: attachment; filename=data.json');
+	header('Content-type: application/json');
+	echo file_get_contents("data.json");
+	
+	unset($_POST["exp_json"]);
+}
+else if (isset($_POST["upload_json"])) {
+	echo basename($_FILES["uploadedfile"]["name"]);
+
+	$target_path = "uploads/";
+
+	$target_file = $target_path . basename($_FILES["uploadedfile"]["name"]); //__DIR__ . '/' . basename($_FILES["uploadedfile"]["name"]);
+
+	if(file_exists($target_file)) {
+		//chmod($target_file, 0755); //Change the file permissions if allowed
+		unlink($target_file); //remove the file
+	}
+	
+	if ( is_writable(dirname($target_file)) ) {
+    //move_uploaded_file( $_FILES['uploadedfile']['tmp_name'], $target_file );
+	if (move_uploaded_file( $_FILES['uploadedfile']['tmp_name'], $target_file ))
+		echo "rrr";
+	else
+		echo "fff";
+} else {
+   echo ( 'File upload failed: Directory is not writable.' );
+}
+	
+	
+	//echo move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], $target_file);
+
+	unset($_POST["upload_json"]);
+	
+	//header ('location: admin.php');
+
+}
+
+else
+	header ('location: admin.php');
 
 ?>

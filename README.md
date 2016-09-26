@@ -29,3 +29,10 @@ This project uses:
  1. Edit the `config.php` file and set: `$user="";` and `$password="";` using to connect on the admin page
  2. Add your bot on the `admin.php` page (the `name` of your bot must be UNIQUE!)
  3. Finish :)
+
+## Thanks
+
+For the Feed icon: <a href="https://en.wikipedia.org/w/index.php?curid=33285359">https://en.wikipedia.org/w/index.php?curid=33285359</a>
+For the edit icon: By Simple Icons (https://www.thenounproject.com/term/edit/31085/) [<a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>], <a href="https://commons.wikimedia.org/wiki/File%3AEdit_Notepad_Icon.svg">via Wikimedia Commons</a>
+For the Remove icon: By VisualEditor team - <a class="external free" href="https://git.wikimedia.org/summary/mediawiki%2Fextensions%2FVisualEditor.git">https://git.wikimedia.org/summary/mediawiki%2Fextensions%2FVisualEditor.git</a>, <a href="http://opensource.org/licenses/mit-license.php" title="MIT license">MIT</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=26927469">https://commons.wikimedia.org/w/index.php?curid=26927469</a>
+For the CSV icon: By RRZEicons (Own work) [<a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>], <a href="https://commons.wikimedia.org/wiki/File%3AText-csv-text.svg">via Wikimedia Commons</a>

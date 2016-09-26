@@ -1,7 +1,8 @@
 <?php
 
-/* Title of the page */
+/* Title + description of the page */
 $title = 'XDCC';
+$description = 'My XDCC!';
 
 /*
 language available:

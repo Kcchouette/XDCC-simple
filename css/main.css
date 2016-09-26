@@ -19,3 +19,7 @@ table {
 th {
     width: 50px;
 }
+
+.icon, input.icon {
+	width: 20px;
+}

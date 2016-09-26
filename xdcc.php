@@ -34,10 +34,18 @@ function removeBot($bname) {
     saveBotList($bots);
 }
 
-function searchBotList($b, $n) {
+function searchBotXMLFile($b, $n) {
     for($i = 0; $i < count($b); $i++) {
         if($b[$i]->getName() == $n) {
             return $b[$i]->getXmlFile();
+        }
+    }
+}
+
+function returnBot($b, $n) {
+    for($i = 0; $i < count($b); $i++) {
+        if($b[$i]->getName() == $n) {
+            return $b[$i];
         }
     }
 }
@@ -64,6 +72,76 @@ function searchIdBot($b, $n) {
             return $i;
         }
     }
+}
+
+function showBotList($xml) {
+  $dom = '';
+  foreach($xml->packlist->pack as $p) {
+      $dom .= '<tr>';
+      $dom .= '<td class="omgcenter">' . $p->packnr . '</td>';
+      $dom .= '<td class="omgcenter">' . $p->packsize . '</td>';
+      $dom .= '<td>';
+      $dom .= '<a href="#" onclick="javascript:paste(\'plop\', ' . $p->packnr . ');" title="' . $p->packname . '" >' . $p->packname . '</a>';
+      $dom .= '</td>';
+      $dom .= '</tr>';
+  }
+  return $dom;
+}
+
+function searchBotList($xml, $bot, $search) {
+  $dom = '';
+  foreach($xml->packlist->pack as $p) {
+    if (stripos($p->packname, $search) !== false) {
+      $dom .= '<tr>';
+      $dom .= '<td class="omgcenter">' . $p->packnr . '</td>';
+      $dom .= '<td class="omgcenter">' . $p->packsize . '</td>';
+      $dom .= '<td>';
+      $dom .= '<a href="#" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');" title="' . $p->packname . '" >' . $p->packname . '</a>';
+      $dom .= '</td>';
+      $dom .= '</tr>';
+    }
+  }
+  return $dom;
+}
+
+function domBotsList($xml, $bot, $search) {
+  $dom = '';
+  foreach($xml->packlist->pack as $p) {
+    if (stripos($p->packname, $search) !== false) {
+      $dom .= '<tr>';
+      $dom .= '<td class="omgcenter">' . $bot . '</td>';
+      $dom .= '<td class="omgcenter">' . $p->packnr . '</td>';
+      $dom .= '<td class="omgcenter">' . $p->packsize . '</td>';
+      $dom .= '<td>';
+      $dom .= '<a href="#" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');" title="' . $p->packname . '" >' . $p->packname . '</a>';
+      $dom .= '</td>';
+      $dom .= '</tr>';
+    }
+  }
+  return $dom;
+}
+
+function searchBotsList($search) {
+  require 'config.php'; //with require_once, it does nothing
+
+  $dom = '';
+  $bots = getBotList();
+  $dom .= '<table id="filelist">';
+  $dom .= '<tr id="trmain">';
+  $dom .= '<th>' . $lang[$language]["Bot:"] . '</th>';
+  $dom .= '<th>' . $lang[$language]["Pack"] . '</th>';
+  $dom .= '<th>' . $lang[$language]["Size"] . '</th>';
+  $dom .= '<th>' . $lang[$language]["File"] . '</th>';
+  $dom .= '</tr>';
+  foreach($bots as $bot) {
+    $xml = simplexml_load_file(searchBotXMLFile(getBotList(), $bot->getName()));
+    if (!$xml->packlist->pack)
+    ;
+    else
+      $dom .= domBotsList($xml, $bot->getName(), $search);
+  }
+  $dom .= '</table>';
+  return $dom;
 }
 
 
