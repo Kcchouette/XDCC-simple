@@ -6,7 +6,7 @@ require_once 'xdcc.php';
 
 if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
   echo '<!DOCTYPE html>
-  <html lang="' . $lang . '">
+  <html lang="' . $language . '">
     <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,7 +16,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 
       <title>' . $title . ' - ' . $lang[$language]["Admin_page"] . '</title>
 
-	  <link href="css/main.css" rel="stylesheet">
+	    <link href="css/main.css" rel="stylesheet">
 
       <link href="css/input.css" rel="stylesheet">
 
@@ -56,43 +56,40 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
                     <td>' . $b->getName() . '</td>
                     <td>
                         <form method="post" action="bot_admin.php">
-							<input type="hidden" name="modifBot" value="' . $b->getName() . '">
-							<input type="image" class="icon" src="img/Edit_icon.svg" alt="Modif">
-						</form>
+            							<input type="hidden" name="modifBot" value="' . $b->getName() . '">
+            							<input type="image" class="icon" src="img/Edit_icon.svg" alt="Modif">
+            						</form>
                     </td>
                     <td>
-						<form method="post" action="update.php">
-							<input type="hidden" name="export_ddl" value="' . $b->getName() . '">
-							<input type="image" class="icon" src="img/csv_file.svg" alt="Modif">
-						</form>
-
+          						<form method="post" action="update.php">
+          							<input type="hidden" name="export_ddl" value="' . $b->getName() . '">
+          							<input type="image" class="icon" src="img/csv_file.svg" alt="Modif">
+          						</form>
                     </td>
                     <td>
-						<form method="post" action="update.php">
-							<input type="hidden" name="rmBot" value="' . $b->getName() . '">
-							<input type="image" class="icon" src="img/remove_icon.svg" alt="Modif">
-						</form>
+          						<form method="post" action="update.php">
+          							<input type="hidden" name="rmBot" value="' . $b->getName() . '">
+          							<input type="image" class="icon" src="img/remove_icon.svg" alt="Modif">
+          						</form>
                     </td>
-                </tr>';
+                    </tr>';
                 }
-
               echo '</table>';
-        echo '</div>';
-		echo '</div>';
-		echo '<div class="omgblock omgblockof2">';
-		/*echo '<form method="post" action="update.php">
-				<input type="hidden" name="upload_json" value="true">
-				<input type="file" id="uploadedfile" name="uploadedfile">
-				<input type="submit" value="Import data.json" >
-			  </form>';*/
-		echo '<form method="post" action="update.php">
-				<input type="hidden" name="exp_json" value="true">
-				<input type="submit" value="Export data.json" >
-			  </form>';
+            echo '</div>';
+		    echo '</div>';
+		echo '<div class="omgblock omgblockof2 omgpullleft">';
+  		echo '<form method="post" action="update.php" enctype="multipart/form-data">
+      				<input type="hidden" name="upload_json" value="true">
+      				<input type="file" id="uploadedfile" name="uploadedfile">
+      				<input type="submit" value="Import data.json" >
+      			</form>';
+  		echo '<form method="post" action="update.php">
+      				<input type="hidden" name="exp_json" value="true">
+      				<input type="submit" value="Export data.json" >
+  			    </form>';
 		echo '</div>';
 		echo '</section>';
 		echo '</div>';
-
 }
 else {
   //go to login

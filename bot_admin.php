@@ -6,7 +6,7 @@ require_once 'xdcc.php';
 
 if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
   echo '<!DOCTYPE html>
-  <html lang="' . $lang . '">
+  <html lang="' . $language . '">
     <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +17,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
       <title>' . $title . ' - ' . $lang[$language]["Admin_page"] . '</title>
 
 	  <link href="css/main.css" rel="stylesheet">
-	
+
       <link href="css/input.css" rel="stylesheet">
 
       <!-- OMGCSS core CSS -->
@@ -68,12 +68,12 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
                 </form>
             </div>';
       }
-	 
+
 	 else { //if no action
 		 header ('location: admin.php');
 	 }
 
-}						
+}
 else {
   //go to login
   header ('location: login.php');

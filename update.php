@@ -79,42 +79,25 @@ else if (isset($_POST["export_ddl"])) {
 }
 
 else if (isset($_POST["exp_json"])) {
-	
+
 	header('Content-disposition: attachment; filename=data.json');
 	header('Content-type: application/json');
 	echo file_get_contents("data.json");
-	
+
 	unset($_POST["exp_json"]);
 }
 else if (isset($_POST["upload_json"])) {
-	echo basename($_FILES["uploadedfile"]["name"]);
 
-	$target_path = "uploads/";
-
-	$target_file = $target_path . basename($_FILES["uploadedfile"]["name"]); //__DIR__ . '/' . basename($_FILES["uploadedfile"]["name"]);
+	$target_file = basename($_FILES["uploadedfile"]["name"]); //__DIR__ . '/' . basename($_FILES["uploadedfile"]["name"]);
 
 	if(file_exists($target_file)) {
-		//chmod($target_file, 0755); //Change the file permissions if allowed
 		unlink($target_file); //remove the file
 	}
-	
-	if ( is_writable(dirname($target_file)) ) {
-    //move_uploaded_file( $_FILES['uploadedfile']['tmp_name'], $target_file );
-	if (move_uploaded_file( $_FILES['uploadedfile']['tmp_name'], $target_file ))
-		echo "rrr";
-	else
-		echo "fff";
-} else {
-   echo ( 'File upload failed: Directory is not writable.' );
-}
-	
-	
-	//echo move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], $target_file);
+  move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], $target_file);
 
 	unset($_POST["upload_json"]);
-	
-	//header ('location: admin.php');
 
+	header ('location: admin.php');
 }
 
 else

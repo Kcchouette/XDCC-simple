@@ -2,7 +2,7 @@
 
 ## For v0.2
 
- - [ ] Import data.json
+ - [x] Import data.json
  - [x] Export data.json
  - [ ] Upload the XML file into cache
  - [ ] Cache can be refreshed (automatic check?)
