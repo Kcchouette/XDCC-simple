@@ -63,13 +63,13 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
                     <td>
           						<form method="post" action="update.php">
           							<input type="hidden" name="export_ddl" value="' . $b->getName() . '">
-          							<input type="image" class="icon" src="img/csv_file.svg" alt="Modif">
+          							<input type="image" class="icon" src="img/csv_file.svg" alt="ddl">
           						</form>
                     </td>
                     <td>
           						<form method="post" action="update.php">
           							<input type="hidden" name="rmBot" value="' . $b->getName() . '">
-          							<input type="image" class="icon" src="img/remove_icon.svg" alt="Modif">
+          							<input type="image" class="icon" src="img/remove_icon.svg" alt="remove">
           						</form>
                     </td>
                     </tr>';
@@ -78,6 +78,10 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
             echo '</div>';
 		    echo '</div>';
 		echo '<div class="omgblock omgblockof2 omgpullleft">';
+    echo '<form method="post" action="bot_admin.php">
+            <input type="hidden" name="addBot" value="true">
+            <input type="submit" value="Add bot" >
+          </form>';
   		echo '<form method="post" action="update.php" enctype="multipart/form-data">
       				<input type="hidden" name="upload_json" value="true">
       				<input type="file" id="uploadedfile" name="uploadedfile">

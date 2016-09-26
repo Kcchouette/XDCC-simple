@@ -88,7 +88,7 @@ else if (isset($_POST["exp_json"])) {
 }
 else if (isset($_POST["upload_json"])) {
 
-	$target_file = basename($_FILES["uploadedfile"]["name"]); //__DIR__ . '/' . basename($_FILES["uploadedfile"]["name"]);
+	$target_file = basename($_FILES["uploadedfile"]["name"]);
 
 	if(file_exists($target_file)) {
 		unlink($target_file); //remove the file
