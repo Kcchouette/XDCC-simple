@@ -77,12 +77,10 @@ function searchIdBot($b, $n) {
 function showBotList($xml) {
   $dom = '';
   foreach($xml->packlist->pack as $p) {
-      $dom .= '<tr>';
+      $dom .= '<tr class="mouse_pointer" title="' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
       $dom .= '<td class="omgcenter">' . $p->packnr . '</td>';
       $dom .= '<td class="omgcenter">' . $p->packsize . '</td>';
-      $dom .= '<td>';
-      $dom .= '<a href="#" onclick="javascript:paste(\'plop\', ' . $p->packnr . ');" title="' . $p->packname . '" >' . $p->packname . '</a>';
-      $dom .= '</td>';
+      $dom .= '<td>' . $p->packname . '</td>';
       $dom .= '</tr>';
   }
   return $dom;
@@ -92,12 +90,10 @@ function searchBotList($xml, $bot, $search) {
   $dom = '';
   foreach($xml->packlist->pack as $p) {
     if (stripos($p->packname, $search) !== false) {
-      $dom .= '<tr>';
+      $dom .= '<tr class="mouse_pointer" title="' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
       $dom .= '<td class="omgcenter">' . $p->packnr . '</td>';
       $dom .= '<td class="omgcenter">' . $p->packsize . '</td>';
-      $dom .= '<td>';
-      $dom .= '<a href="#" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');" title="' . $p->packname . '" >' . $p->packname . '</a>';
-      $dom .= '</td>';
+      $dom .= '<td>' . $p->packname . '</td>';
       $dom .= '</tr>';
     }
   }
@@ -108,13 +104,11 @@ function domBotsList($xml, $bot, $search) {
   $dom = '';
   foreach($xml->packlist->pack as $p) {
     if (stripos($p->packname, $search) !== false) {
-      $dom .= '<tr>';
+      $dom .= '<tr class="mouse_pointer" title="' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
       $dom .= '<td class="omgcenter">' . $bot . '</td>';
       $dom .= '<td class="omgcenter">' . $p->packnr . '</td>';
       $dom .= '<td class="omgcenter">' . $p->packsize . '</td>';
-      $dom .= '<td>';
-      $dom .= '<a href="#" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');" title="' . $p->packname . '" >' . $p->packname . '</a>';
-      $dom .= '</td>';
+      $dom .= '<td>' . $p->packname . '</td>';
       $dom .= '</tr>';
     }
   }

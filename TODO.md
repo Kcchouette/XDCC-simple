@@ -21,7 +21,7 @@
 ## For v0.3
 
  - [ ] Try to use the text file listing from iroffer
-
+ - [ ] Parse the cache boorkmark of XDCCParser-global
 
 ## Improve
 

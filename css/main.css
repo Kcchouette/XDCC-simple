@@ -12,6 +12,10 @@ tr:hover, .chbot:hover {
 	cursor: pointer;
 }
 
+.mouse_pointer {
+	cursor: pointer;
+}
+
 table {
     width: 100%;
 }
