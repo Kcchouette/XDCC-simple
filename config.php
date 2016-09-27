@@ -35,8 +35,8 @@ $website_link = "";
 $website_label = "Website";
 
 
-/* The IRC server to connect to:
-change in this example irc://irc-server:port/channel?key:
+/*	The IRC server to connect to:
+	change in this example irc://irc-server:port/channel?key:
 	* `irc-server` by your IRC server
 	* `port` by the port by default (optionnal)
 	* `channel` by your channel (without the #)
@@ -58,6 +58,18 @@ $password = "user";
 */
 $csv_separator = ",";
 
+/*	Where to host the json files
+	and where name they have.
+ 	Per default:
+ 	* data.json for bot
+ 	* bookmarks.json for bookmarks
+ 		in the folder cache/
+ */
+$folder_json_files = '';
+$bot_file = 'data.json';
+$bookmarks_file = 'bookmarks.json';
+
+
 /**********************************************************\
 *      _                                                   *
 *     | |                                                  *
@@ -68,6 +80,7 @@ $csv_separator = ",";
 *                         __/ |             __/ |          *
 *                        |___/             |___/           *
 \**********************************************************/
+
 
 $lang = array (
 "en" => array(
@@ -90,12 +103,13 @@ $lang = array (
 	"Bot_website" => "Website linked to the bot",
 	"Bot_irc" => "IRC linked to the bot",
 	"Add_but" => "Add it!",
-	"Modify_but" => "Modify it!",
-	"Remove_but" => "Remove it!",
+	"Modify_but" => "Modify it",
+	"Remove_but" => "Remove it",
 	"Connect_but" => "Log in!",
 	"Bot:" => "Bot:",
 	"Bots" => "Bots",
-	"Add_h2" => "Add a bot",
+	"Bookmarks" => "Bookmarks",
+	"Add_bot_but" => "Add a bot",
 	"Modify_h2" => "Modify a bot",
 	"Modify_Remove_h2" => "Modify/Remove a bot",
 	"Login_page" => "Login Page",
@@ -116,6 +130,17 @@ $lang = array (
 	"Main_queue_max" => "Maximum number of parallele download:",
 	"Idle_queue_max" => "Maximum number of idle download:",
 	"Bandwith_max" => "Maximum Bandwith reached:",
+	"Search:" => "Search:",
+	"Import_botJSON" => "Import " . $bot_file,
+	"Export_botJSON" => "Export " . $bot_file,
+	"Import_bookJSON" => "Import " . $bookmarks_file,
+	"Export_bookJSON" => "Export " . $bookmarks_file,
+	"Return_admin" => "Return to the Admin Page",
+	"Search_on" => "Search on",
+	"ALL_BOTS" => "ALL BOTS",
+	"Upload_file" => "Your file has been correctly imported.",
+	"Upload_file_fail" => "Your file's upload failed.",
+	"Upload_file_fail_name" => "The file's name is not <code>" . $bot_file . "</code>",
 ),
 "fr" => array(
 	"choose_bot" => "Choisissez un bot dans la liste",
@@ -137,12 +162,13 @@ $lang = array (
 	"Bot_website" => "Site internet lié au bot",
 	"Bot_irc" => "IRC lié au bot",
 	"Add_but" => "L'ajouter !",
-	"Modify_but" => "Le modifier !",
-	"Remove_but" => "Le supprimer !",
+	"Modify_but" => "Modifier le bot",
+	"Remove_but" => "Supprimer le bot",
 	"Connect_but" => "Se connecter",
 	"Bot:" => "Bot :",
 	"Bots" => "Bots",
-	"Add_h2" => "Ajouter un bot",
+	"Bookmarks" => "Signets",
+	"Add_bot_but" => "Ajouter un bot",
 	"Modify_h2" => "Modifier un bot",
 	"Modify_Remove_h2" => "Modifier/Supprimer un bot",
 	"Login_page" => "Page de connexion",
@@ -163,6 +189,17 @@ $lang = array (
 	"Main_queue_max" => "Nombres de transferts parallèle maximum :",
 	"Idle_queue_max" => "Nombres de transferts en pause maximum :",
 	"Bandwith_max" => "Vitesse maximum atteint :",
+	"Search:" => "Recherche :",
+	"Import_botJSON" => "Importer " . $bot_file,
+	"Export_botJSON" => "Exporter " . $bot_file,
+	"Import_bookJSON" => "Importer " . $bookmarks_file,
+	"Export_bookJSON" => "Exporter " . $bookmarks_file,
+	"Return_admin" => "Retourner sur la page d'administration",
+	"Search_on" => "Rechercher sur",
+	"ALL_BOTS" => "TOUS LES BOTS",
+	"Upload_file" => "Le fichier a correctement été importé.",
+	"Upload_file_fail" => "Echec de l'import.",
+	"Upload_file_fail_name" => "Le nom du fichier n'est pas <code>" . $bot_file . "</code>",
 ),
 );
 ?>

@@ -13,8 +13,8 @@ class Bot implements JsonSerializable {
 		$this->xml = $x;
 		$this->website = $wb;
 		$this->irc = $irc;
-
 	}
+
 	public function getName() {
 		return $this->name;
 	}

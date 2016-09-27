@@ -21,18 +21,21 @@ echo '<id>tag:' . $_SERVER['HTTP_HOST'] . ',2016:' . htmlspecialchars($url) . '<
 echo '<link href="' . $url . '" rel="self"/>';
 
 if (isset($_GET["bot"])) {
-	$xml = simplexml_load_file(searchBotXMLFile(getBotList(), $_GET["bot"]));
-	echo'<updated>' . date('c', (int)$xml->sysinfo->stats->lastupdate) . '</updated>';
+	$xml = haveXMLfile(searchBotXMLFile(getBotList(), $_GET["bot"]));
+	if ($xml && $xml->packlist->pack) {
 
-    foreach($xml->packlist->pack as $p) {
-        echo '<entry>';
-        echo '<title><![CDATA[' . $p->packname . ']]></title>';
-        echo '<link href="index.php?' . $_GET["bot"] . '&amp;search=' . urlencode($p->packname) . '"/>';
-        echo '<id>tag:' . $_SERVER['HTTP_HOST'] . ',' . date('Y', (int)$p->adddate) . ':' . $p->packbytes . '</id>';
-        echo '<updated>' . date('c', (int)$p->adddate) . '</updated>';
-        echo '<summary>' . "/msg " . $_GET["bot"] . " xdcc send #" . $p->packnr . '</summary>';
-        echo '</entry>';
-    }
+		echo'<updated>' . date('c', (int)$xml->sysinfo->stats->lastupdate) . '</updated>';
+
+		foreach($xml->packlist->pack as $p) {
+			echo '<entry>';
+			echo '<title><![CDATA[' . $p->packname . ']]></title>';
+			echo '<link href="index.php?' . $_GET["bot"] . '&amp;search=' . urlencode($p->packname) . '"/>';
+			echo '<id>tag:' . $_SERVER['HTTP_HOST'] . ',' . date('Y', (int)$p->adddate) . ':' . $p->packbytes . '</id>';
+			echo '<updated>' . date('c', (int)$p->adddate) . '</updated>';
+			echo '<summary>' . "/msg " . $_GET["bot"] . " xdcc send #" . $p->packnr . '</summary>';
+			echo '</entry>';
+		}
+	}
 }
 echo '</feed>';
 ?>
