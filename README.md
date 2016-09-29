@@ -9,6 +9,7 @@ You can see what this website do by watching the release list:
 
  - Because [XDCCParser-global](https://github.com/nitmir/XDCCParser-global) is bugged
  - Because [my fork](https://github.com/Kcchouette/XDCCParser) is less bugged; but isn't **responsive** (mobile) and use Text File from Iroffer
+ - Because [iroffer-state](https://github.com/dinoex/iroffer-state) use the `.state` file of the bot
 
 This project uses:
  - **XML file** from Iroffer

@@ -16,7 +16,7 @@ Do you want to show the Bookmark block:
 - true
 - false
 */
-$bookmark = false; //do not change
+$bookmark = true; //do not change
 
 /*
 Can Search engines track this website?
@@ -65,7 +65,7 @@ $csv_separator = ",";
  	* bookmarks.json for bookmarks
  		in the folder cache/
  */
-$folder_json_files = '';
+$folder_json_files = 'json/';
 $bot_file = 'data.json';
 $bookmarks_file = 'bookmarks.json';
 
@@ -95,13 +95,16 @@ $lang = array (
 	"User" => "User",
 	"Password" => "Password",
 	"Powered" => "Powered by",
-	"bot_add" => "has been successfully added!",
-	"bot_modify" => "has been successfully modified!",
-	"bot_remove" => "has been successfully removed!",
+	"msg_add" => "has been successfully added!",
+	"msg_modify" => "has been successfully modified!",
+	"msg_remove" => "has been successfully removed!",
 	"Bot_name" => "Name of the bot",
 	"Bot_xml" => "XML of the bot",
 	"Bot_website" => "Website linked to the bot",
 	"Bot_irc" => "IRC linked to the bot",
+	"Bookmark_name" => "Name of the bookmark",
+	"Bookmark_search" => "Search query of the bookmark",
+	"Bookmark_bot" => "Bot linked to the bookmark",
 	"Add_but" => "Add it!",
 	"Modify_but" => "Modify it",
 	"Remove_but" => "Remove it",
@@ -110,8 +113,11 @@ $lang = array (
 	"Bots" => "Bots",
 	"Bookmarks" => "Bookmarks",
 	"Add_bot_but" => "Add a bot",
-	"Modify_h2" => "Modify a bot",
-	"Modify_Remove_h2" => "Modify/Remove a bot",
+	"Modify_bot_h2" => "Modify a bot",
+	"Modify_bookmark_h2" => "Modify a bookmark",
+	"Modify_Remove_Bot_h2" => "Modify/Remove a bot",
+	"Modify_Remove_Bookmark_h2" => "Modify/Remove a bookmark",
+	"Add_bookmark_but" => "Add a bookmark",
 	"Login_page" => "Login Page",
 	"Admin_page" => "Admin Page",
 	"Disconnect_but" => "Disconnect",
@@ -154,13 +160,16 @@ $lang = array (
 	"User" => "Utilisateur",
 	"Password" => "Mot de passe",
 	"Powered" => "Utilise",
-	"bot_add" => "a été ajouté !",
-	"bot_modify" => "a été modifié !",
-	"bot_remove" => "a été supprimé !",
+	"msg_add" => "a été ajouté !",
+	"msg_modify" => "a été modifié !",
+	"msg_remove" => "a été supprimé !",
 	"Bot_name" => "Nom du bot",
 	"Bot_xml" => "XML du bot",
 	"Bot_website" => "Site internet lié au bot",
 	"Bot_irc" => "IRC lié au bot",
+	"Bookmark_name" => "Nom du signet",
+	"Bookmark_search" => "Recherche du signet",
+	"Bookmark_bot" => "Bot du signet",
 	"Add_but" => "L'ajouter !",
 	"Modify_but" => "Modifier le bot",
 	"Remove_but" => "Supprimer le bot",
@@ -169,8 +178,11 @@ $lang = array (
 	"Bots" => "Bots",
 	"Bookmarks" => "Signets",
 	"Add_bot_but" => "Ajouter un bot",
-	"Modify_h2" => "Modifier un bot",
-	"Modify_Remove_h2" => "Modifier/Supprimer un bot",
+	"Modify_bot_h2" => "Modifier un bot",
+	"Modify_bookmark_h2" => "Modifier un bookmark",
+	"Modify_Remove_Bot_h2" => "Modifier/Supprimer un bot",
+	"Modify_Remove_Bookmark_h2" => "Modifier/Supprimer un signet",
+	"Add_bookmark_but" => "Ajouter un signet",
 	"Login_page" => "Page de connexion",
 	"Admin_page" => "Page d'administration",
 	"Disconnect_but" => "Se déconnecter",

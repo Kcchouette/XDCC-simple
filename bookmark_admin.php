@@ -38,31 +38,29 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 				</nav>
 			</header>';
 
-		if (isset($_POST["modifBot"])){
+		if (isset($_POST["modifBookmark"])){
 			require_once 'xdcc.php';
-			$b = returnObject(getBotList(), $_POST["modifBot"]);
+			$b = returnObject(getBookmarkList(), $_POST["modifBookmark"]);
 
-			echo '<h2>' . $lang[$language]["Modify_bot_h2"] . '</h2>';
+			echo '<h2>' . $lang[$language]["Modify_bookmark_h2"] . '</h2>';
 			echo '<div class="omgcenter">
 					<form method="post" action="update.php">
-						<input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" value="' . $b->getName() . '" required >
-						<input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" value="' . $b->getXmlFile() . '" required >
-						<input type="url" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" value="' . $b->getWebsite() . '" >
-						<input type="url" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" value="' . $b->getIRC() . '" >
-						<input type="hidden" name="isModifBot" value="' . $b->getName() . '">
+						<input type="text" name="nameBookmark" placeholder="' . $lang[$language]["Bookmark_name"] . '" value="' . $b->getName() . '" required >
+						<input type="text" name="searchBookmark" placeholder="' . $lang[$language]["Bookmark_search"] . '" value="' . $b->getStringSearch() . '" required >
+						<input type="text" name="botBookmark" placeholder="' . $lang[$language]["Bookmark_bot"] . '" value="' . $b->getBotSearch() . '" >
+						<input type="hidden" name="isModifBookmark" value="' . $b->getName() . '">
 						<input type="submit" value="' . $lang[$language]["Modify_but"] . '">
 					</form>
 				</div>';
 		}
-		else if (isset($_POST["addBot"])) {
-			echo '<h2>' . $lang[$language]["Add_bot_but"] . '</h2>';
+		else if (isset($_POST["addBookmark"])) {
+			echo '<h2>' . $lang[$language]["Add_bookmark_but"] . '</h2>';
 			echo '<div class="omgcenter">
 					<form method="post" action="update.php">
-						<input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" required >
-						<input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" required >
-						<input type="url" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" >
-						<input type="url" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" >
-						<input type="hidden" name="isCreateBot" value="true">
+						<input type="text" name="nameBookmark" placeholder="' . $lang[$language]["Bookmark_name"] . '" required >
+						<input type="text" name="searchBookmark" placeholder="' . $lang[$language]["Bookmark_search"] . '" required >
+						<input type="text" name="botBookmark" placeholder="' . $lang[$language]["Bookmark_bot"] . '" >
+						<input type="hidden" name="isCreateBookmark" value="true">
 						<input type="submit" value="' . $lang[$language]["Add_but"] . '">
 					</form>
 				</div>';

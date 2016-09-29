@@ -43,15 +43,15 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 			echo $_SESSION['message'];
 			unset($_SESSION['message']);
 		}
-		echo '<div class="omgcontainer90">';
+		echo '<div>';
 			echo '<section class="omggrid omg3columns">
 					<div class="omgblock">
 						<div class="omgborder">';
-					echo '<h3>' . $lang[$language]["Modify_Remove_h2"] . '</h3>';
+					echo '<h3>' . $lang[$language]["Modify_Remove_Bot_h2"] . '</h3>';
 							require_once 'xdcc.php';
 							$bots = getBotList();
 						echo '<table>';
-							foreach($bots as &$b) {
+							foreach($bots as $b) {
 								echo '<tr class="omgcenter">
 									<td>' . $b->getName() . '</td>
 									<td>
@@ -83,12 +83,12 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 							<input type="submit" value="' . $lang[$language]["Add_bot_but"] . '" >
 						</form>';
 					echo '<form method="post" action="update.php" enctype="multipart/form-data">
-							<input type="hidden" name="upload_json" value="true">
+							<input type="hidden" name="upload_bot_json" value="true">
 							<input type="file" id="uploadedfile" name="uploadedfile">
 							<input type="submit" value="' . $lang[$language]["Import_botJSON"] . '" >
 						</form>';
 					echo '<form method="post" action="update.php">
-							<input type="hidden" name="exp_json" value="true">
+							<input type="hidden" name="exp_bot_json" value="true">
 							<input type="submit" value="' . $lang[$language]["Export_botJSON"] . '" >
 						</form>';
 				echo '</div>';
@@ -98,22 +98,22 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 			echo '<section class="omggrid omg3columns">
 					<div class="omgblock">
 						<div class="omgborder">';
-					echo '<h3>Modify, Remove bookmark***</h3>';
+					echo '<h3>' . $lang[$language]["Modify_Remove_Bookmark_h2"] . '</h3>';
 							require_once 'xdcc.php';
 							$bookmarks = getBookmarkList();
 						echo '<table>';
-							foreach($bookmarks as &$b) {
+							foreach($bookmarks as $b) {
 								echo '<tr class="omgcenter">
 									<td>' . $b->getName() . '</td>
 									<td>
-										<form method="post" action="bot_admin.php">
-											<input type="hidden" name=" ***" value="' . $b->getName() . '">
+										<form method="post" action="bookmark_admin.php">
+											<input type="hidden" name="modifBookmark" value="' . $b->getName() . '">
 											<input type="image" class="icon" src="img/Edit_icon.svg" title="' . $lang[$language]["Modify_but"] . '" alt="' . $lang[$language]["Modify_but"] . '">
 										</form>
 									</td>
 									<td>
 										<form method="post" action="update.php">
-											<input type="hidden" name=" ***" value="' . $b->getName() . '">
+											<input type="hidden" name="rmBookmark" value="' . $b->getName() . '">
 											<input type="image" class="icon" src="img/remove_icon.svg" title="' . $lang[$language]["Remove_but"] . '" alt="' . $lang[$language]["Remove_but"] . '">
 										</form>
 									</td>
@@ -123,17 +123,17 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 					echo '</div>';
 				echo '</div>';
 				echo '<div class="omgblock omgblockof2 omgpullleft">';
-					echo '<form method="post" action="bot_admin.php">
-							<input type="hidden" name=" ***" value="true">
-							<input type="submit" value="****Add a bookmark" >
+					echo '<form method="post" action="bookmark_admin.php">
+							<input type="hidden" name="addBookmark" value="true">
+							<input type="submit" value="' . $lang[$language]["Add_bookmark_but"] . '" >
 						</form>';
 					echo '<form method="post" action="update.php" enctype="multipart/form-data">
-							<input type="hidden" name=" ***" value="true">
+							<input type="hidden" name="upload_bookmark_json" value="true">
 							<input type="file" id="uploadedfile" name="uploadedfile">
 							<input type="submit" value="' . $lang[$language]["Import_bookJSON"] . '" >
 						</form>';
 					echo '<form method="post" action="update.php">
-							<input type="hidden" name=" ***" value="true">
+							<input type="hidden" name="exp_bookmark_json" value="true">
 							<input type="submit" value="' . $lang[$language]["Export_bookJSON"] . '" >
 						</form>';
 				echo '</div>';

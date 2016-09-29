@@ -6,7 +6,98 @@ require_once 'database.php';
 require_once 'class/Bookmark.php';
 require_once 'class/Bot.php';
 
-// for BOOKMARKS
+
+function haveXMLfile($xmlFile) {
+	if (file_exists($xmlFile))
+		return simplexml_load_file($xmlFile);
+	else
+		return false;
+}
+
+
+// return bookmark or bot object
+function returnObject($b, $n) {
+	for($i = 0; $i < count($b); $i++) {
+		if($b[$i]->getName() == $n) {
+			return $b[$i];
+		}
+	}
+}
+
+function searchId($b, $n) {
+	for($i = 0; $i < count($b); $i++) {
+		if($b[$i]->getName() == $n) {
+			return $i;
+		}
+	}
+}
+
+
+class XDCC_File {
+
+	private $id = "";
+	private $name = "";
+
+	function __construct($id, $n) {
+		$this->id = $id;
+		$this->name = $n;
+	}
+
+	public function getId() {
+		return $this->id;
+	}
+
+	public function getName() {
+		return $this->name;
+	}
+}
+
+
+function haveSize( $nbytes ) {
+
+	if ( $nbytes < 0 ) {
+		return '0b';
+	}
+	if ( $nbytes < 1000 ) {
+		return sprintf( '%db', $nbytes );
+	}
+	$nbytes = ( $nbytes + 512 ) / 1024;
+	if ( $nbytes < 1000 ) {
+		return sprintf( '%dk', $nbytes );
+	}
+	$nbytes = ( $nbytes + 512 ) / 1024;
+	if ( $debug != '' ) {
+		return sprintf( '%dM', $nbytes );
+	}
+	if ( $nbytes < 1000 ) {
+		return sprintf( '%dM', $nbytes );
+	}
+	if ( $nbytes < 10000 ) {
+		return sprintf( '%.1fG', $nbytes / 1024 );
+	}
+	$nbytes = ( $nbytes + 512 ) / 1024;
+	if ( $nbytes < 1000 ) {
+		return sprintf( '%dG', $nbytes );
+	}
+	if ( $nbytes < 10000 ) {
+		return sprintf( '%.1fT', $nbytes / 1024 );
+	}
+	$nbytes = ( $nbytes + 512 ) / 1024;
+	if ( $nbytes < 1000 ) {
+		return sprintf( '%dT', $nbytes );
+	}
+	return sprintf( '%dE', $nbytes );
+}
+
+
+/*
+ ____              _                         _    
+| __ )  ___   ___ | | ___ __ ___   __ _ _ __| | __
+|  _ \ / _ \ / _ \| |/ / '_ ` _ \ / _` | '__| |/ /
+| |_) | (_) | (_) |   <| | | | | | (_| | |  |   < 
+|____/ \___/ \___/|_|\_\_| |_| |_|\__,_|_|  |_|\_\
+*/
+
 function getBookmarkList() {
 	$jsonRS = readBookmarkFile();
 	$bookmarks = array();
@@ -16,7 +107,34 @@ function getBookmarkList() {
 	return $bookmarks;
 }
 
-// for BOTS
+function insertBookmark($b) {
+	$bookmarks = getBookmarkList();
+	array_push($bookmarks, $b);
+	//save database
+	saveBookmarkList($bookmarks);
+}
+
+//http://stackoverflow.com/q/21559760
+function removeBookmark($bname) {
+	$bookmarks = getBookmarkList();
+
+	$id = searchId($bookmarks, $bname);
+
+	unset($bookmarks[$id]); //removes the array at given index
+	$reindex = array_values($bookmarks); //normalize index
+	$bookmarks = $reindex; //update variable
+
+	saveBookmarkList($bookmarks);
+}
+
+/*
+ ____        _   
+| __ )  ___ | |_ 
+|  _ \ / _ \| __|
+| |_) | (_) | |_ 
+|____/ \___/ \__|
+*/
+
 function getBotList() {
 	$jsonRS = readBotFile();
 	$bots = array();
@@ -37,7 +155,7 @@ function insertBot($b) {
 function removeBot($bname) {
 	$bots = getBotList();
 
-	$id = searchIdBot($bots, $bname);
+	$id = searchId($bots, $bname);
 
 	unset($bots[$id]); //removes the array at given index
 	$reindex = array_values($bots); //normalize index
@@ -51,21 +169,6 @@ function searchBotXMLFile($b, $n) {
 			if($b[$i]->getName() == $n) {
 				return $b[$i]->getXmlFile();
 			}
-	}
-}
-
-function haveXMLfile($xmlFile) {
-	if (file_exists($xmlFile))
-		return simplexml_load_file($xmlFile);
-	else
-		return false;
-}
-
-function returnBot($b, $n) {
-	for($i = 0; $i < count($b); $i++) {
-		if($b[$i]->getName() == $n) {
-			return $b[$i];
-		}
 	}
 }
 
@@ -85,13 +188,7 @@ function returnBotIRC($b, $n) {
 	}
 }
 
-function searchIdBot($b, $n) {
-	for($i = 0; $i < count($b); $i++) {
-		if($b[$i]->getName() == $n) {
-			return $i;
-		}
-	}
-}
+
 
 function showBotList($xml, $bot) {
 	$dom = '';
@@ -157,60 +254,4 @@ function searchBotsList($search) {
 	return $dom;
 }
 
-
-class XDCC_File {
-
-	private $id = "";
-	private $name = "";
-
-	function __construct($id, $n) {
-		$this->id = $id;
-		$this->name = $n;
-	}
-
-	public function getId() {
-		return $this->id;
-	}
-
-	public function getName() {
-		return $this->name;
-	}
-}
-
-
-function haveSize( $nbytes ) {
-
-	if ( $nbytes < 0 ) {
-		return '0b';
-	}
-	if ( $nbytes < 1000 ) {
-		return sprintf( '%db', $nbytes );
-	}
-	$nbytes = ( $nbytes + 512 ) / 1024;
-	if ( $nbytes < 1000 ) {
-		return sprintf( '%dk', $nbytes );
-	}
-	$nbytes = ( $nbytes + 512 ) / 1024;
-	if ( $debug != '' ) {
-		return sprintf( '%dM', $nbytes );
-	}
-	if ( $nbytes < 1000 ) {
-		return sprintf( '%dM', $nbytes );
-	}
-	if ( $nbytes < 10000 ) {
-		return sprintf( '%.1fG', $nbytes / 1024 );
-	}
-	$nbytes = ( $nbytes + 512 ) / 1024;
-	if ( $nbytes < 1000 ) {
-		return sprintf( '%dG', $nbytes );
-	}
-	if ( $nbytes < 10000 ) {
-		return sprintf( '%.1fT', $nbytes / 1024 );
-	}
-	$nbytes = ( $nbytes + 512 ) / 1024;
-	if ( $nbytes < 1000 ) {
-		return sprintf( '%dT', $nbytes );
-	}
-	return sprintf( '%dE', $nbytes );
-}
 ?>

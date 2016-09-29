@@ -4,14 +4,14 @@
 
 
 	// for BOOKMARK
-	function databaseBoookmarkNameFile() {
+	function databaseBookmarkNameFile() {
 		require 'config.php';
 		return $bookmarks_file;
 	}
 
 	function databaseBookmarkFullFile() {
 		require 'config.php';
-		return $folder_json_files .  databaseBoookmarkNameFile();
+		return $folder_json_files .  databaseBookmarkNameFile();
 	}
 
 	function saveBookmarkList($bookmarks) {
