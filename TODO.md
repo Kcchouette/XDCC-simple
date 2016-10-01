@@ -1,16 +1,5 @@
 # TODO
 
-## For v0.2
-
- - [x] Import JSON files
- - [x] Export JSON files
- - [x] View to show Bookmarks from JSON
- - [x] ADD/REMOVE Bookmarks from JSON
- - [x] A Search input (to search on one BOT)
- - [x] A Search input (to search on all BOTs)
- - [x] Atom feed based on `adddate` tag
- - [x] Download a CSV file with the number of download for each bot
-
 ## For v0.3
 
  - [ ] Upload the XML file into cache (serialize it? download it?)
