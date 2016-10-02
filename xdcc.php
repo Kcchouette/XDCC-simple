@@ -194,8 +194,8 @@ function showBotList($xml, $bot) {
 	$dom = '';
 	foreach($xml->packlist->pack as $p) {
 		$dom .= '<tr class="mouse_pointer" title="' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
-		$dom .= '<td class="omgcenter">' . $p->packnr . '</td>';
-		$dom .= '<td class="omgcenter">' . $p->packsize . '</td>';
+		$dom .= '<td class="text-center">' . $p->packnr . '</td>';
+		$dom .= '<td class="text-center">' . $p->packsize . '</td>';
 		$dom .= '<td>' . $p->packname . '</td>';
 		$dom .= '</tr>';
 	}
@@ -207,8 +207,8 @@ function searchBotList($xml, $bot, $search) {
 	foreach($xml->packlist->pack as $p) {
 		if (stripos($p->packname, $search) !== false) {
 			$dom .= '<tr class="mouse_pointer" title="' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
-			$dom .= '<td class="omgcenter">' . $p->packnr . '</td>';
-			$dom .= '<td class="omgcenter">' . $p->packsize . '</td>';
+			$dom .= '<td class="text-center">' . $p->packnr . '</td>';
+			$dom .= '<td class="text-center">' . $p->packsize . '</td>';
 			$dom .= '<td>' . $p->packname . '</td>';
 			$dom .= '</tr>';
 		}
@@ -221,9 +221,9 @@ function domBotsList($xml, $bot, $search) {
 	foreach($xml->packlist->pack as $p) {
 		if (stripos($p->packname, $search) !== false) {
 			$dom .= '<tr class="mouse_pointer" title="' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
-			$dom .= '<td class="omgcenter">' . $bot . '</td>';
-			$dom .= '<td class="omgcenter">' . $p->packnr . '</td>';
-			$dom .= '<td class="omgcenter">' . $p->packsize . '</td>';
+			$dom .= '<td class="text-center">' . $bot . '</td>';
+			$dom .= '<td class="text-center">' . $p->packnr . '</td>';
+			$dom .= '<td class="text-center">' . $p->packsize . '</td>';
 			$dom .= '<td>' . $p->packname . '</td>';
 			$dom .= '</tr>';
 		}

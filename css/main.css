@@ -8,6 +8,13 @@ tr:hover, .chbot:hover {
 	background-color: #FFFF99;
 }
 
+/* h2 is like h5 of milligram */
+h2 {
+	font-size: 1.8rem;
+	letter-spacing: -.05rem;
+	line-height: 1.5;
+}
+
 .menubtn {
 	cursor: pointer;
 }
@@ -26,4 +33,29 @@ th {
 
 .icon, input.icon {
 	width: 20px;
+}
+
+/* remove the border of the fieldset */
+fieldset {
+	border: 0;
+}
+
+/* omgborder from OMGCSS */
+.border_1 {
+	border: 1px solid #aaa;
+	padding: 0.5em;
+	min-height:6em;
+}
+
+form {
+	display: inline;
+}
+
+/* footer from OMGCSS */
+footer {
+	margin-top: 3em;
+	font-size: 0.9em;
+	padding-top: 2em;
+	border-top: 1px solid #ccc;
+	padding-bottom: 2em;
 }
