@@ -16,7 +16,7 @@ Do you want to show the Bookmark block:
 - true
 - false
 */
-$bookmark = true; //do not change
+$bookmark = true;
 
 /*
 Can Search engines track this website?
@@ -123,7 +123,7 @@ $lang = array (
 	"Disconnect_but" => "Disconnect",
 	"Home_but" => "Home",
 	"website" => "website",
-	"IRC" => "- IRC",
+	"IRC" => "IRC",
 	"Fail_load_XML" => "Failed to load XML file, or the XML file is empty",
 	"Export_csv" => "Export the number of download per file",
 	"Transfered_daily" => "Transfered Daily",
@@ -166,8 +166,8 @@ $lang = array (
 	"msg_remove" => "a été supprimé !",
 	"Bot_name" => "Nom du bot",
 	"Bot_xml" => "XML du bot",
-	"Bot_website" => "Site internet lié au bot",
-	"Bot_irc" => "IRC lié au bot",
+	"Bot_website" => "Site web du bot",
+	"Bot_irc" => "IRC du bot",
 	"Bookmark_name" => "Nom du signet",
 	"Bookmark_search" => "Recherche du signet",
 	"Bookmark_bot" => "Bot du signet",
@@ -189,7 +189,7 @@ $lang = array (
 	"Disconnect_but" => "Se déconnecter",
 	"Home_but" => "Accueil",
 	"website" => "- site internet",
-	"IRC" => "- IRC",
+	"IRC" => "IRC",
 	"Fail_load_XML" => "Échec du chargement du fichier XML ou le fichier XML est vide",
 	"Export_csv" => "Exporter le nombre de téléchargement par fichier",
 	"Transfered_daily" => "Transferé par jour",

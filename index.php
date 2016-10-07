@@ -42,19 +42,19 @@
 				$b = returnObject(getBotList(), $_GET["bot"]);
 				if ($b !== null) {
 					if (!empty($b->getWebsite())) {
-						echo '<a href="' . $b->getWebsite() . '" class="btn btn-outline-inverted">' . $b->getName() . ' ' . $lang[$language]["website"] . '</a>';
+						echo '<a href="' . $b->getWebsite() . '" class="btn btn-outline-inverted" title="' . $lang[$language]["Bot_website"] . ' ' . $b->getName() . '">' . $lang[$language]["website"] . '</a>';
 					}
 					if (!empty($b->getIRC())) {
-						echo '<a href="' . $b->getIRC() . '" class="btn btn-outline-inverted">' . $b->getName() . ' ' . $lang[$language]["IRC"] . '</a>';
+						echo '<a href="' . $b->getIRC() . '" class="btn btn-outline-inverted" title="' . $lang[$language]["Bot_irc"] . ' ' . $b->getName() . '">' . $lang[$language]["IRC"] . '</a>';
 					}
 				}
 			}
 			else {
 				if (!empty($website_link)) {
-					echo '<a href="' . $website_link . '" class="btn btn-outline-inverted">' . $website_label . '</a>';
+					echo '<a href="' . $website_link . '" title="' . $lang[$language]["website"] . '" class="btn btn-outline-inverted">' . $website_label . '</a>';
 				}
 				if (!empty($irc_link)) {
-					echo '<a href="' . $irc_link . '" class="btn btn-outline-inverted">'. $irc_label . '</a>';
+					echo '<a href="' . $irc_link . '" title="' . $lang[$language]["IRC"] . '" class="btn btn-outline-inverted">'. $irc_label . '</a>';
 				}
 			}
 			?>
@@ -67,7 +67,7 @@
 						<?php require_once 'xdcc.php';
 						$bots = getBotList();
 						foreach($bots as &$bot) {
-							if ($bot->getName() === $_GET["bot"])
+							if (!empty($_GET["bot"]) && $bot->getName() === $_GET["bot"])
 								echo '<option value="' . $bot->getName() . '" selected>' . $bot->getName() . '</option>';
 							else
 								echo '<option value="' . $bot->getName() . '">' . $bot->getName() . '</option>';
@@ -88,7 +88,7 @@
 				$bots = getBotList();
 				echo '<ul>';
 				foreach($bots as &$bot) {
-					echo '<li><a class="chbot" href="?bot=' . $bot->getName() . '">' . $bot->getName() . '</a></li>';
+					echo '<li><a class="chbot" href="?bot=' . $bot->getName() . '" title="' . $bot->getName() . '">' . substr($bot->getName(), 0, 22) . '</a></li>';
 				}
 				echo '</ul>'
 				?>
@@ -100,7 +100,7 @@
 						$bookmarks = getBookmarkList();
 						echo '<ul>';
 						foreach($bookmarks as &$b) {
-							echo '<li><a class="chbot" href="?search=' . $b->getStringSearch() . '&amp;bot=' . $b->getBotSearch() . '">' . $b->getName() . '</a></li>';
+							echo '<li><a class="chbot" href="?search=' . $b->getStringSearch() . '&amp;bot=' . $b->getBotSearch() . '" title="' . $b->getName() . '">' . substr($b->getName(), 0, 22) . '</a></li>';
 						}
 
 						echo '</ul>';
@@ -112,7 +112,7 @@
 
 		<div class="col-1"></div>
 		<div class="col-8">
-		<h2><?php require_once 'config.php'; if(!empty($_GET["bot"])) echo ' &#8212; ' . $lang[$language]["Bot:"] . ' <code>' . htmlspecialchars($_GET["bot"]) . '</code>' . ' <a href="syndication.php?bot=' . $_GET["bot"] . '"> <img class="icon" src="img/Feed-icon.svg"></a> '; if(isset($_GET["search"])) echo ' &#8212; ' . $lang[$language]["Search:"] . ' <code>' . htmlspecialchars($_GET["search"]) . '</code>'; ?></h2>
+		<h2><?php require_once 'config.php'; if(!empty($_GET["bot"])) echo ' &#8212; ' . $lang[$language]["Bot:"] . ' <code>' . htmlspecialchars($_GET["bot"]) . '</code>' . ' <a href="syndication.php?bot=' . $_GET["bot"] . '"> <img class="icon" src="img/Feed_icon.svg"></a> '; if(isset($_GET["search"])) echo ' &#8212; ' . $lang[$language]["Search:"] . ' <code>' . htmlspecialchars($_GET["search"]) . '</code>'; ?></h2>
 			<div><?php
 
 			require_once 'config.php';

@@ -49,7 +49,10 @@ th {
 
 .border_1 > ul {
 	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
+
 
 .border_1 a {
 	text-decoration: none;

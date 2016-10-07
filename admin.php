@@ -52,7 +52,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 						echo '<table>';
 							foreach($bots as $b) {
 								echo '<tr class="text-center">
-									<td>' . $b->getName() . '</td>
+									<td title="' . $b->getName() . '">' . substr($b->getName(), 0, 16) . '</td>
 									<td>
 										<form method="post" action="adding_admin.php">
 											<fieldset>
@@ -65,7 +65,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 										<form method="post" action="update.php">
 											<fieldset>
 												<input type="hidden" name="export_ddl" value="' . $b->getName() . '">
-												<input type="image" class="icon" src="img/csv_file.svg" title="' . $lang[$language]["Export_csv"] . '" alt="' . $lang[$language]["Export_csv"] . '">
+												<input type="image" class="icon" src="img/CSV_file.svg" title="' . $lang[$language]["Export_csv"] . '" alt="' . $lang[$language]["Export_csv"] . '">
 											</fieldset>
 										</form>
 									</td>
@@ -73,7 +73,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 										<form method="post" action="update.php">
 											<fieldset>
 												<input type="hidden" name="rmBot" value="' . $b->getName() . '">
-												<input type="image" class="icon" src="img/remove_icon.svg" title="' . $lang[$language]["Remove_but"] . '" alt="' . $lang[$language]["Remove_but"] . '">
+												<input type="image" class="icon" src="img/Remove_icon.svg" title="' . $lang[$language]["Remove_but"] . '" alt="' . $lang[$language]["Remove_but"] . '">
 											</fieldset>
 										</form>
 									</td>
@@ -117,7 +117,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 						echo '<table>';
 							foreach($bookmarks as $b) {
 								echo '<tr class="text-center">
-									<td>' . $b->getName() . '</td>
+									<td title="' . $b->getName() . '">' . substr($b->getName(), 0, 16) . '</td>
 									<td>
 										<form method="post" action="adding_admin.php">
 											<fieldset>
@@ -130,7 +130,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 										<form method="post" action="update.php">
 											<fieldset>
 												<input type="hidden" name="rmBookmark" value="' . $b->getName() . '">
-												<input type="image" class="icon" src="img/remove_icon.svg" title="' . $lang[$language]["Remove_but"] . '" alt="' . $lang[$language]["Remove_but"] . '">
+												<input type="image" class="icon" src="img/Remove_icon.svg" title="' . $lang[$language]["Remove_but"] . '" alt="' . $lang[$language]["Remove_but"] . '">
 											</fieldset>
 										</form>
 									</td>
