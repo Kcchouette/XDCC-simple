@@ -1,0 +1,66 @@
+/* remove the border of the fieldset */
+fieldset {
+	border: 0;
+}
+
+/* color of submit button in admin.php */
+.button_add {
+	background: #256328;
+}
+
+.button_import {
+	background: #472563;
+}
+
+.button_export {
+	background: #B0167D;
+}
+
+.icon:hover, input.icon:hover {
+	background-color: #DDD;
+}
+
+.import_fieldset {
+	background-color: #f6f5f1;
+}
+
+/* based on .alert of Siimple CSS */
+.msg {
+	display: block;
+	width: calc(100% - 30px);
+	font-weight: 300;
+	text-align: left;
+	padding-left: 14px;
+	padding-right: 14px;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	border-width: 1px;
+	border-style: solid;
+	background-color: #E1F5FE;
+	color: #03A9F4;
+	border-color: #03A9F4;
+}
+
+.msg a {
+	text-decoration: none;
+	font-weight: normal;
+}
+
+.msg-error {
+	color: #D32F2F;
+	background-color: #FFEBEE;
+	border-color: #F44336;
+}
+
+.msg-warning {
+	background-color: #FFF8E1;
+	color: #FF8F00;
+	border-color: #FFC107;
+}
+
+.msg-done {
+	background-color: #E8F5E9;
+	color: #388E3C;
+	border-color: #4CAF50;
+}

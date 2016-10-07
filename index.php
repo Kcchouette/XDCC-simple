@@ -17,21 +17,19 @@
 
 	<title><?php require_once 'config.php'; echo $title; ?></title>
 
-	<link href="css/main.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.7/wing.min.css">
 
-	<!-- OMGCSS core CSS -->
-	<link href="https://cdn.rawgit.com/Kcchouette/omgcss/ef95db62775411425dfc2f0bcc6a8a43282efc83/dist/css/omg.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
 
 </head>
 
-<body class="omgcontainer90">
+<body class="container">
 
-	<center><h1><?php require_once 'config.php'; echo $title; ?></h1></center>
+	<h1 class="text-center"><?php require_once 'config.php'; echo $title; ?></h1>
 
-	<section>
-		<a onclick="toggleMenu('menu1')"  class="menubtn">&#9776;</a>
-		<nav id="menu1" class="omgmenu omginline" style="display:none">
-			<ul>
+	<header>
+		<nav class="row">
+			<div class="col-6">
 			<?php require_once 'config.php';
 				  require_once 'xdcc.php';
 			//test if bot is get + if website else show main
@@ -40,76 +38,87 @@
 				* if its value equals FALSE
 				* else the var exists AND has a non-empty, non-zero value.
 			*/
-			if (isset($_GET["bot"]) && !empty(returnBotWebsite(getBotList(), $_GET["bot"]))) {
-				echo '<li><a href="' . returnBotWebsite(getBotList(), $_GET["bot"]) . '" class="omgbtn">' . $_GET["bot"] . ' ' . $lang[$language]["website"] . '</a></li>';
+			if (isset($_GET["bot"])) {
+				$b = returnObject(getBotList(), $_GET["bot"]);
+				if ($b !== null) {
+					if (!empty($b->getWebsite())) {
+						echo '<a href="' . $b->getWebsite() . '" class="btn btn-outline-inverted">' . $b->getName() . ' ' . $lang[$language]["website"] . '</a>';
+					}
+					if (!empty($b->getIRC())) {
+						echo '<a href="' . $b->getIRC() . '" class="btn btn-outline-inverted">' . $b->getName() . ' ' . $lang[$language]["IRC"] . '</a>';
+					}
+				}
 			}
-			else if (!isset($_GET["bot"]) && !empty($website_link)) {
-				echo '<li><a href="' . $website_link . '" class="omgbtn">' . $website_label . '</a></li>';
-			}
-
-			if (isset($_GET["bot"]) && !empty(returnBotIRC(getBotList(), $_GET["bot"]))) {
-				echo '<li><a href="' . returnBotIRC(getBotList(), $_GET["bot"]) . '" class="omgbtn omgrounded omgwarn">' . $_GET["bot"] . ' ' . $lang[$language]["IRC"] . '</a></li>';
-			}
-			else if (!isset($_GET["bot"]) && !empty($irc_link)) {
-				echo '<li><a href="' . $irc_link . '" class="omgbtn omgrounded omgwarn">'. $irc_label . '</a></li>';
+			else {
+				if (!empty($website_link)) {
+					echo '<a href="' . $website_link . '" class="btn btn-outline-inverted">' . $website_label . '</a>';
+				}
+				if (!empty($irc_link)) {
+					echo '<a href="' . $irc_link . '" class="btn btn-outline-inverted">'. $irc_label . '</a>';
+				}
 			}
 			?>
-			</ul>
-			<form name="searchform" class="omgpullright">
-				<input type="text" name="search" placeholder="<?php require_once 'config.php'; echo $lang[$language]["Search_on"]; ?>"  <?php if(!empty($_GET["search"])) echo 'value="' . $_GET["search"] . '"';?> required/>
-				<select name="bot">
-					<option value=""><?php require_once 'config.php'; echo $lang[$language]["ALL_BOTS"]; ?></option>
-					<?php require_once 'xdcc.php';
-					$bots = getBotList();
-					foreach($bots as &$bot) {
-						if ($bot->getName() === $_GET["bot"])
-							echo '<option value="' . $bot->getName() . '" selected>' . $bot->getName() . '</option>';
-						else
-							echo '<option value="' . $bot->getName() . '">' . $bot->getName() . '</option>';
-					}
-					?>
-				</select>
-				<input type="submit" class="omgbtn omgokay" value="Search"/>
+			</div>
+			<form name="searchform" class="col-6">
+				<fieldset class="row">
+					<input type="text" name="search" class="col-4" placeholder="<?php require_once 'config.php'; echo $lang[$language]["Search_on"]; ?>"  <?php if(!empty($_GET["search"])) echo 'value="' . $_GET["search"] . '"';?> required/>
+					<select name="bot" class="col-4">
+						<option value=""><?php require_once 'config.php'; echo $lang[$language]["ALL_BOTS"]; ?></option>
+						<?php require_once 'xdcc.php';
+						$bots = getBotList();
+						foreach($bots as &$bot) {
+							if ($bot->getName() === $_GET["bot"])
+								echo '<option value="' . $bot->getName() . '" selected>' . $bot->getName() . '</option>';
+							else
+								echo '<option value="' . $bot->getName() . '">' . $bot->getName() . '</option>';
+						}
+						?>
+					</select>
+					<div class="col-4"><input type="submit" value="Search"/></div>
+				</fieldset>
 			</form>
 		</nav>
-	</section>
+	</header>
 
-	<section class="omggrid omg3columns">
-		<div class="omgblock">
-			<div class="omgborder">
-				<h3><?php require_once 'config.php'; echo $lang[$language]["Bots"]; ?></h3>
-				<p>
+	<section class="row">
+		<div class="col-3">
+			<div class="border_1">
+				<h2><?php require_once 'config.php'; echo $lang[$language]["Bots"]; ?></h2>
 				<?php require_once 'xdcc.php';
 				$bots = getBotList();
+				echo '<ul>';
 				foreach($bots as &$bot) {
-					echo '<a class="chbot" href="?bot=' . $bot->getName() . '">' . $bot->getName() . '</a><br>';
+					echo '<li><a class="chbot" href="?bot=' . $bot->getName() . '">' . $bot->getName() . '</a></li>';
 				}
+				echo '</ul>'
 				?>
-				</p>
 				<?php require_once 'config.php';
 				if ($bookmark) {
 					echo '<hr>
-						<h3>' . $lang[$language]["Bookmarks"] . '</h3>';
-						echo '<p>';
+						<h2>' . $lang[$language]["Bookmarks"] . '</h2>';
 						require_once 'xdcc.php';
 						$bookmarks = getBookmarkList();
+						echo '<ul>';
 						foreach($bookmarks as &$b) {
-							echo '<a class="chbot" href="?search=' . $b->getStringSearch() . '&bot=' . $b->getBotSearch() . '">' . $b->getName() . '</a><br>';
+							echo '<li><a class="chbot" href="?search=' . $b->getStringSearch() . '&amp;bot=' . $b->getBotSearch() . '">' . $b->getName() . '</a></li>';
 						}
-						echo '<p>';
+
+						echo '</ul>';
 				}
 				?>
 			</div>
 			
 		</div>
-		<div class="omgblock omgblockof2">
-		<h3><?php require_once 'config.php'; if(!empty($_GET["bot"])) echo ' &#8212; ' . $lang[$language]["Bot:"] . ' <code>' . htmlspecialchars($_GET["bot"]) . '</code>' . ' <a href="syndication.php?bot=' . $_GET["bot"] . '"> <img class="icon" src="img/Feed-icon.svg"></a> '; if(isset($_GET["search"])) echo ' &#8212; ' . $lang[$language]["Search:"] . ' <code>' . htmlspecialchars($_GET["search"]) . '</code>'; ?></h3>
+
+		<div class="col-1"></div>
+		<div class="col-8">
+		<h2><?php require_once 'config.php'; if(!empty($_GET["bot"])) echo ' &#8212; ' . $lang[$language]["Bot:"] . ' <code>' . htmlspecialchars($_GET["bot"]) . '</code>' . ' <a href="syndication.php?bot=' . $_GET["bot"] . '"> <img class="icon" src="img/Feed-icon.svg"></a> '; if(isset($_GET["search"])) echo ' &#8212; ' . $lang[$language]["Search:"] . ' <code>' . htmlspecialchars($_GET["search"]) . '</code>'; ?></h2>
 			<div><?php
 
 			require_once 'config.php';
 
 			if (!isset($_GET["bot"]) && !isset($_GET["search"])) { //if none set, show an error
-				echo '<div class="omgcenter">' . $lang[$language]["choose_bot"] . '</div>';
+				echo '<div class="">' . $lang[$language]["choose_bot"] . '</div>';
 			}
 			else if (empty($_GET["bot"])) { //if bot is empty, search in all bot
 				echo searchBotsList($_GET["search"]);
@@ -117,7 +126,7 @@
 			else { //if bot, show all the list OR show the search on a bot
 				require_once 'xdcc.php';
 
-				echo '<table id="filelist">';
+				echo '<table class="" id="filelist">';
 
 				
 				$xml = haveXMLfile(searchBotXMLFile(getBotList(), $_GET["bot"]));
@@ -126,15 +135,13 @@
 					echo '<tr id="trmain"><th>' . $lang[$language]["Fail_load_XML"] . '</th></tr>';
 				else {
 					echo '<tr id="trmain">';
-					echo '<th>' . $lang[$language]["Pack"] . '</th>';
-					echo '<th>' . $lang[$language]["Size"] . '</th>';
-					echo '<th>' . $lang[$language]["File"] . '</th>';
+					echo '<th class="text-center">' . $lang[$language]["Pack"] . '</th>';
+					echo '<th class="text-center">' . $lang[$language]["Size"] . '</th>';
+					echo '<th >' . $lang[$language]["File"] . '</th>';
 					echo '</tr>';
 
-					if (!empty($_GET["search"]))
-						echo searchBotList($xml, $_GET["bot"], $_GET["search"]);
-					else
-						echo showBotList($xml, $_GET["bot"]);
+					echo searchBotList($xml, $_GET["bot"], empty($_GET["search"]) ? null : $_GET["search"]);
+
 				}
 				echo '</table>';
 			}
@@ -143,11 +150,10 @@
 		</div>
 	</section>
 
-	<footer class="omgcenter">
-	<?php
-	require_once 'config.php';
-		echo $lang[$language]["Powered"] . ' <a href="https://github.com/Kcchouette/XDCC-simple">XDCC Simple</a> &#8212; <a href="admin.php">' . $lang[$language]["Admin_page"] . '</a>';
-	 ?>
+	<footer class="text-center">
+	<?php require_once 'config.php';
+		echo $lang[$language]["Powered"]; ?> <a href="https://github.com/Kcchouette/XDCC-simple"> XDCC Simple</a> &#8212; <a href="admin.php"><?php require_once 'config.php';
+		echo $lang[$language]["Admin_page"]; ?></a>
 	</footer>
 
 <script type="text/javascript">
@@ -159,10 +165,7 @@ function paste(bot, pack){
 }
 </script>
 
-<!-- <script type='text/javascript' src='js/script.js'></script> -->
-
-<!-- OMGCSS small js -->
-<script src="https://cdn.rawgit.com/Kcchouette/omgcss/ef95db62775411425dfc2f0bcc6a8a43282efc83/dist/js/omg.js"></script>
+<!--<script type='text/javascript' src='js/script.js'></script> -->
 
 </body>
 

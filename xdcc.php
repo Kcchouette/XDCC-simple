@@ -53,43 +53,6 @@ class XDCC_File {
 }
 
 
-function haveSize( $nbytes ) {
-
-	if ( $nbytes < 0 ) {
-		return '0b';
-	}
-	if ( $nbytes < 1000 ) {
-		return sprintf( '%db', $nbytes );
-	}
-	$nbytes = ( $nbytes + 512 ) / 1024;
-	if ( $nbytes < 1000 ) {
-		return sprintf( '%dk', $nbytes );
-	}
-	$nbytes = ( $nbytes + 512 ) / 1024;
-	if ( $debug != '' ) {
-		return sprintf( '%dM', $nbytes );
-	}
-	if ( $nbytes < 1000 ) {
-		return sprintf( '%dM', $nbytes );
-	}
-	if ( $nbytes < 10000 ) {
-		return sprintf( '%.1fG', $nbytes / 1024 );
-	}
-	$nbytes = ( $nbytes + 512 ) / 1024;
-	if ( $nbytes < 1000 ) {
-		return sprintf( '%dG', $nbytes );
-	}
-	if ( $nbytes < 10000 ) {
-		return sprintf( '%.1fT', $nbytes / 1024 );
-	}
-	$nbytes = ( $nbytes + 512 ) / 1024;
-	if ( $nbytes < 1000 ) {
-		return sprintf( '%dT', $nbytes );
-	}
-	return sprintf( '%dE', $nbytes );
-}
-
-
 /*
  ____              _                         _    
 | __ )  ___   ___ | | ___ __ ___   __ _ _ __| | __
@@ -126,6 +89,7 @@ function removeBookmark($bname) {
 
 	saveBookmarkList($bookmarks);
 }
+
 
 /*
  ____        _   
@@ -172,58 +136,27 @@ function searchBotXMLFile($b, $n) {
 	}
 }
 
-function returnBotWebsite($b, $n) {
-	for($i = 0; $i < count($b); $i++) {
-		if($b[$i]->getName() == $n) {
-			return $b[$i]->getWebsite();
-		}
-	}
-}
-
-function returnBotIRC($b, $n) {
-	for($i = 0; $i < count($b); $i++) {
-		if($b[$i]->getName() == $n) {
-			return $b[$i]->getIRC();
-		}
-	}
-}
-
-
-
 function showBotList($xml, $bot) {
 	$dom = '';
 	foreach($xml->packlist->pack as $p) {
 		$dom .= '<tr class="mouse_pointer" title="' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
-		$dom .= '<td class="omgcenter">' . $p->packnr . '</td>';
-		$dom .= '<td class="omgcenter">' . $p->packsize . '</td>';
+		$dom .= '<td class="text-center">' . $p->packnr . '</td>';
+		$dom .= '<td class="text-center">' . $p->packsize . '</td>';
 		$dom .= '<td>' . $p->packname . '</td>';
 		$dom .= '</tr>';
 	}
 	return $dom;
 }
 
-function searchBotList($xml, $bot, $search) {
+function searchBotList($xml, $bot, $search = null, $onBot = true) {
 	$dom = '';
 	foreach($xml->packlist->pack as $p) {
-		if (stripos($p->packname, $search) !== false) {
+		if ($search === null || stripos($p->packname, $search) !== false) {
 			$dom .= '<tr class="mouse_pointer" title="' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
-			$dom .= '<td class="omgcenter">' . $p->packnr . '</td>';
-			$dom .= '<td class="omgcenter">' . $p->packsize . '</td>';
-			$dom .= '<td>' . $p->packname . '</td>';
-			$dom .= '</tr>';
-		}
-	}
-	return $dom;
-}
-
-function domBotsList($xml, $bot, $search) {
-	$dom = '';
-	foreach($xml->packlist->pack as $p) {
-		if (stripos($p->packname, $search) !== false) {
-			$dom .= '<tr class="mouse_pointer" title="' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
-			$dom .= '<td class="omgcenter">' . $bot . '</td>';
-			$dom .= '<td class="omgcenter">' . $p->packnr . '</td>';
-			$dom .= '<td class="omgcenter">' . $p->packsize . '</td>';
+			if (!$onBot)
+				$dom .= '<td class="text-center">' . $bot . '</td>';
+			$dom .= '<td class="text-center">' . $p->packnr . '</td>';
+			$dom .= '<td class="text-center">' . $p->packsize . '</td>';
 			$dom .= '<td>' . $p->packname . '</td>';
 			$dom .= '</tr>';
 		}
@@ -248,7 +181,7 @@ function searchBotsList($search) {
 		if (!$xml || !$xml->packlist->pack)
 			;
 		else
-			$dom .= domBotsList($xml, $bot->getName(), $search);
+			$dom .= searchBotList($xml, $bot->getName(), $search, false);
 	}
 	$dom .= '</table>';
 	return $dom;

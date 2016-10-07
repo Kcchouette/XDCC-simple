@@ -2,14 +2,15 @@
 session_start();
 
 require_once 'config.php';
+require_once 'database.php';
 require_once 'xdcc.php';
 
 // BOT
 if (isset($_POST["isCreateBot"])) {
 	insertBot(new Bot($_POST["nameBot"], $_POST["xmlBot"], $_POST["websiteBot"], $_POST["ircBot"]));
 
-	$_SESSION['message'] = '<div class="omgmsg omginfo">
-								<p class="omgcenter">' . $_POST["nameBot"] . ' ' . $lang[$language]["msg_add"] . '</p>
+	$_SESSION['message'] = '<div class="msg">
+								<p>' . $_POST["nameBot"] . ' ' . $lang[$language]["msg_add"] . '</p>
 							</div>';
 
 	unset($_POST["nameBot"]);
@@ -24,8 +25,8 @@ else if (isset($_POST["isModifBot"])) {
 	removeBot($_POST["isModifBot"]);
 	insertBot(new Bot($_POST["nameBot"], $_POST["xmlBot"], $_POST["websiteBot"], $_POST["ircBot"]));
 
-	$_SESSION['message'] = '<div class="omgmsg omginfo">
-								<p class="omgcenter">' . $_POST["isModifBot"] . ' ' . $lang[$language]["msg_modify"] . '</p>
+	$_SESSION['message'] = '<div class="msg">
+								<p>' . $_POST["isModifBot"] . ' ' . $lang[$language]["msg_modify"] . '</p>
 							</div>';
 
 	unset($_POST["isModifBot"]);
@@ -37,8 +38,8 @@ else if (isset($_POST["isModifBot"])) {
 }
 else if (isset($_POST["rmBot"])) {
 	removeBot($_POST["rmBot"]);
-	$_SESSION['message'] = '<div class="omgmsg omginfo">
-								<p class="omgcenter">' . $_POST["rmBot"] . ' ' . $lang[$language]["msg_remove"] . '</p>
+	$_SESSION['message'] = '<div class="msg">
+								<p>' . $_POST["rmBot"] . ' ' . $lang[$language]["msg_remove"] . '</p>
 							</div>';
 
 	unset($_POST["rmBot"]);
@@ -48,8 +49,8 @@ else if (isset($_POST["rmBot"])) {
 else if (isset($_POST["isCreateBookmark"])) {
 	insertBookmark(new Bookmark($_POST["nameBookmark"], $_POST["searchBookmark"], $_POST["botBookmark"]));
 
-	$_SESSION['message'] = '<div class="omgmsg omginfo">
-								<p class="omgcenter">' . $_POST["nameBookmark"] . ' ' . $lang[$language]["msg_add"] . '</p>
+	$_SESSION['message'] = '<div class="msg">
+								<p>' . $_POST["nameBookmark"] . ' ' . $lang[$language]["msg_add"] . '</p>
 							</div>';
 
 	unset($_POST["nameBookmark"]);
@@ -63,8 +64,8 @@ else if (isset($_POST["isModifBookmark"])) {
 	removeBookmark($_POST["isModifBookmark"]);
 	insertBookmark(new Bookmark($_POST["nameBookmark"], $_POST["searchBookmark"], $_POST["botBookmark"]));
 
-	$_SESSION['message'] = '<div class="omgmsg omginfo">
-								<p class="omgcenter">' . $_POST["isModifBookmark"] . ' ' . $lang[$language]["msg_modify"] . '</p>
+	$_SESSION['message'] = '<div class="msg">
+								<p>' . $_POST["isModifBookmark"] . ' ' . $lang[$language]["msg_modify"] . '</p>
 							</div>';
 
 	unset($_POST["isModifBookmark"]);
@@ -75,8 +76,8 @@ else if (isset($_POST["isModifBookmark"])) {
 }
 else if (isset($_POST["rmBookmark"])) {
 	removeBookmark($_POST["rmBookmark"]);
-	$_SESSION['message'] = '<div class="omgmsg omginfo">
-								<p class="omgcenter">' . $_POST["rmBookmark"] . ' ' . $lang[$language]["msg_remove"] . '</p>
+	$_SESSION['message'] = '<div class="msg">
+								<p>' . $_POST["rmBookmark"] . ' ' . $lang[$language]["msg_remove"] . '</p>
 							</div>';
 
 	unset($_POST["rmBookmark"]);
@@ -125,20 +126,20 @@ else if (isset($_POST["export_ddl"])) {
 	unset($_POST["export_ddl"]);
 }
 
-else if (isset($_POST["exp_bot_jsonexp_bot_json"])) {
+else if (isset($_POST["exp_bot_json"])) {
 
-	header('Content-disposition: attachment; filename=' . $bot_file);
+	header('Content-disposition: attachment; filename=' . databaseBotNameFile());
 	header('Content-type: application/json');
-	echo file_get_contents($bot_file);
+	echo file_get_contents(databaseBotFullFile());
 
 	unset($_POST["exp_json"]);
 }
 
 else if (isset($_POST["exp_bookmark_json"])) {
 
-	header('Content-disposition: attachment; filename=' . $bot_file);
+	header('Content-disposition: attachment; filename=' . databaseBookmarkNameFile());
 	header('Content-type: application/json');
-	echo file_get_contents($bot_file);
+	echo file_get_contents(databaseBookmarkFullFile());
 
 	unset($_POST["exp_json"]);
 }
@@ -147,26 +148,26 @@ else if (isset($_POST["upload_bot_json"])) {
 
 	$target_file = basename($_FILES["uploadedfile"]["name"]);
 
-	if ($target_file === $bot_file && pathinfo($target_file, PATHINFO_EXTENSION) === 'json') {
-		if(file_exists($target_file)) {
-			unlink($target_file); //remove the file
+	if ($target_file === databaseBotNameFile() && pathinfo($target_file, PATHINFO_EXTENSION) === 'json') {
+		if(file_exists(databaseBotFullFile())) {
+			unlink(databaseBotFullFile()); //remove the file
 		}
-		if (move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], $target_file)) {
-			$_SESSION['message'] = '<div class="omgmsg omginfo">
-								<p class="omgcenter">' . $lang[$language]["Upload_file"] . '</p>
+		if (move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], databaseBotFullFile())) {
+			$_SESSION['message'] = '<div class="msg">
+								<p>' . $lang[$language]["Upload_file"] . '</p>
 							</div>';
 		 }
 		 else {
-		 	$_SESSION['message'] = '<div class="omgmsg omgerr">
-								<p class="omgcenter">' . $lang[$language]["Upload_file_fail"] . '</p>
+		 	$_SESSION['message'] = '<div class="msg msg-error">
+								<p>' . $lang[$language]["Upload_file_fail"] . '</p>
 							</div>';
 		 }
 
 		
 	}
 	else {
-		$_SESSION['message'] = '<div class="omgmsg omgwarn">
-								<p class="omgcenter">' . $lang[$language]["Upload_file_fail_name"] . '</p>
+		$_SESSION['message'] = '<div class="msg msg-warning">
+								<p>' . $lang[$language]["Upload_file_fail_name"] . '</p>
 							</div>';
 	}
 
@@ -178,26 +179,26 @@ else if (isset($_POST["upload_bookmark_json"])) {
 
 	$target_file = basename($_FILES["uploadedfile"]["name"]);
 
-	if ($target_file === $bot_file && pathinfo($target_file, PATHINFO_EXTENSION) === 'json') {
-		if(file_exists($target_file)) {
-			unlink($target_file); //remove the file
+	if ($target_file === databaseBookmarkNameFile() && pathinfo($target_file, PATHINFO_EXTENSION) === 'json') {
+		if(file_exists(databaseBookmarkFullFile())) {
+			unlink(databaseBookmarkFullFile()); //remove the file
 		}
-		if (move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], $target_file)) {
-			$_SESSION['message'] = '<div class="omgmsg omginfo">
-								<p class="omgcenter">' . $lang[$language]["Upload_file"] . '</p>
+		if (move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], databaseBookmarkFullFile())) {
+			$_SESSION['message'] = '<div class="msg">
+								<p>' . $lang[$language]["Upload_file"] . '</p>
 							</div>';
 		 }
 		 else {
-		 	$_SESSION['message'] = '<div class="omgmsg omgerr">
-								<p class="omgcenter">' . $lang[$language]["Upload_file_fail"] . '</p>
+		 	$_SESSION['message'] = '<div class="msg msg-error">
+								<div>' . $lang[$language]["Upload_file_fail"] . '</div>
 							</div>';
 		 }
 
 		
 	}
 	else {
-		$_SESSION['message'] = '<div class="omgmsg omgwarn">
-								<p class="omgcenter">' . $lang[$language]["Upload_file_fail_name"] . '</p>
+		$_SESSION['message'] = '<div class="msg msg-warning">
+								<p>' . $target_file . '</p>
 							</div>';
 	}
 
