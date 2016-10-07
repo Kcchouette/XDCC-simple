@@ -1,6 +1,6 @@
 html, #trmain:hover {
 	/* change that to change the background color */
-	background-color: #FFFFFF;
+	background-color: #FFF;
 }
 
 tr:hover, .chbot:hover {
@@ -36,9 +36,9 @@ th {
 }
 
 /* remove the border of the fieldset */
-fieldset {
+/*fieldset {
 	border: 0;
-}
+}*/
 
 /* omgborder from OMGCSS */
 .border_1 {
@@ -47,8 +47,35 @@ fieldset {
 	min-height:6em;
 }
 
+.border_1 > ul {
+	list-style-type: none;
+}
+
+.border_1 a {
+	text-decoration: none;
+}
+
 form {
 	display: inline;
+}
+
+/* input file; input url; from wing CSS
+ but no 100% for input file */
+input[type=file], input[type=url] {
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	outline: none;
+	font-family: 'Open Sans';
+}
+
+input[type=url] {
+	width: 100%;
 }
 
 /* footer from OMGCSS */
@@ -58,4 +85,10 @@ footer {
 	padding-top: 2em;
 	border-top: 1px solid #ccc;
 	padding-bottom: 2em;
+}
+
+@media screen and (max-width: 768px) {
+	.hidden {
+		display: none;
+	}
 }

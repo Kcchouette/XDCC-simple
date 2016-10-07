@@ -17,9 +17,8 @@
 
 	<title><?php require_once 'config.php'; echo $title; ?></title>
 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/wing/0.1.7/wing.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.7/wing.min.css">
 
-	<link href="css/button.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 
 </head>
@@ -28,8 +27,8 @@
 
 	<h1 class="text-center"><?php require_once 'config.php'; echo $title; ?></h1>
 
-	<section>
-		<nav id="menu1" class="row">
+	<header>
+		<nav class="row">
 			<div class="col-6">
 			<?php require_once 'config.php';
 				  require_once 'xdcc.php';
@@ -39,21 +38,27 @@
 				* if its value equals FALSE
 				* else the var exists AND has a non-empty, non-zero value.
 			*/
-			if (isset($_GET["bot"]) && !empty(returnBotWebsite(getBotList(), $_GET["bot"]))) {
-				echo '<a href="' . returnBotWebsite(getBotList(), $_GET["bot"]) . '" class="omgbtn"><button class="btn btn-outline-inverted">' . $_GET["bot"] . ' ' . $lang[$language]["website"] . '</button></a>';
+			if (isset($_GET["bot"])) {
+				$b = returnObject(getBotList(), $_GET["bot"]);
+				if ($b !== null) {
+					if (!empty($b->getWebsite())) {
+						echo '<a href="' . $b->getWebsite() . '" class="btn btn-outline-inverted">' . $b->getName() . ' ' . $lang[$language]["website"] . '</a>';
+					}
+					if (!empty($b->getIRC())) {
+						echo '<a href="' . $b->getIRC() . '" class="btn btn-outline-inverted">' . $b->getName() . ' ' . $lang[$language]["IRC"] . '</a>';
+					}
+				}
 			}
-			else if (!isset($_GET["bot"]) && !empty($website_link)) {
-				echo '<a href="' . $website_link . '" class=""><button class="btn btn-outline-inverted">' . $website_label . '</button></a>';
-			}
-
-			if (isset($_GET["bot"]) && !empty(returnBotIRC(getBotList(), $_GET["bot"]))) {
-				echo '<a href="' . returnBotIRC(getBotList(), $_GET["bot"]) . '" class=""><button class="btn btn-outline-inverted">' . $_GET["bot"] . ' ' . $lang[$language]["IRC"] . '</button></a>';
-			}
-			else if (!isset($_GET["bot"]) && !empty($irc_link)) {
-				echo '<a href="' . $irc_link . '" class=""><button class="btn btn-outline-inverted">'. $irc_label . '</button></a>';
+			else {
+				if (!empty($website_link)) {
+					echo '<a href="' . $website_link . '" class="btn btn-outline-inverted">' . $website_label . '</a>';
+				}
+				if (!empty($irc_link)) {
+					echo '<a href="' . $irc_link . '" class="btn btn-outline-inverted">'. $irc_label . '</a>';
+				}
 			}
 			?>
-			<!--</ul>(>--></div>
+			</div>
 			<form name="searchform" class="col-6">
 				<fieldset class="row">
 					<input type="text" name="search" class="col-4" placeholder="<?php require_once 'config.php'; echo $lang[$language]["Search_on"]; ?>"  <?php if(!empty($_GET["search"])) echo 'value="' . $_GET["search"] . '"';?> required/>
@@ -73,31 +78,32 @@
 				</fieldset>
 			</form>
 		</nav>
-	</section>
+	</header>
 
 	<section class="row">
 		<div class="col-3">
 			<div class="border_1">
 				<h2><?php require_once 'config.php'; echo $lang[$language]["Bots"]; ?></h2>
-				<p>
 				<?php require_once 'xdcc.php';
 				$bots = getBotList();
+				echo '<ul>';
 				foreach($bots as &$bot) {
-					echo '<a class="chbot" href="?bot=' . $bot->getName() . '">' . $bot->getName() . '</a><br>';
+					echo '<li><a class="chbot" href="?bot=' . $bot->getName() . '">' . $bot->getName() . '</a></li>';
 				}
+				echo '</ul>'
 				?>
-				</p>
 				<?php require_once 'config.php';
 				if ($bookmark) {
 					echo '<hr>
 						<h2>' . $lang[$language]["Bookmarks"] . '</h2>';
-						echo '<p>';
 						require_once 'xdcc.php';
 						$bookmarks = getBookmarkList();
+						echo '<ul>';
 						foreach($bookmarks as &$b) {
-							echo '<a class="chbot" href="?search=' . $b->getStringSearch() . '&bot=' . $b->getBotSearch() . '">' . $b->getName() . '</a><br>';
+							echo '<li><a class="chbot" href="?search=' . $b->getStringSearch() . '&amp;bot=' . $b->getBotSearch() . '">' . $b->getName() . '</a></li>';
 						}
-						echo '<p>';
+
+						echo '</ul>';
 				}
 				?>
 			</div>
@@ -134,10 +140,8 @@
 					echo '<th >' . $lang[$language]["File"] . '</th>';
 					echo '</tr>';
 
-					if (!empty($_GET["search"]))
-						echo searchBotList($xml, $_GET["bot"], $_GET["search"]);
-					else
-						echo showBotList($xml, $_GET["bot"]);
+					echo searchBotList($xml, $_GET["bot"], empty($_GET["search"]) ? null : $_GET["search"]);
+
 				}
 				echo '</table>';
 			}
@@ -147,10 +151,9 @@
 	</section>
 
 	<footer class="text-center">
-	<?php
-	require_once 'config.php';
-		echo $lang[$language]["Powered"] . ' <a href="https://github.com/Kcchouette/XDCC-simple">XDCC Simple</a> &#8212; <a href="admin.php">' . $lang[$language]["Admin_page"] . '</a>';
-	 ?>
+	<?php require_once 'config.php';
+		echo $lang[$language]["Powered"]; ?> <a href="https://github.com/Kcchouette/XDCC-simple"> XDCC Simple</a> &#8212; <a href="admin.php"><?php require_once 'config.php';
+		echo $lang[$language]["Admin_page"]; ?></a>
 	</footer>
 
 <script type="text/javascript">
@@ -162,10 +165,7 @@ function paste(bot, pack){
 }
 </script>
 
-<!--<script type='text/javascript' src='js/script.js'></script>
-
- OMGCSS small js 
-<script src="https://cdn.rawgit.com/Kcchouette/omgcss/ef95db62775411425dfc2f0bcc6a8a43282efc83/dist/js/omg.js"></script>-->
+<!--<script type='text/javascript' src='js/script.js'></script> -->
 
 </body>
 

@@ -147,6 +147,7 @@ $lang = array (
 	"Upload_file" => "Your file has been correctly imported.",
 	"Upload_file_fail" => "Your file's upload failed.",
 	"Upload_file_fail_name" => "The file's name is not <code>" . $bot_file . "</code>",
+	"Fail_connect" => "Fail to connect",
 ),
 "fr" => array(
 	"choose_bot" => "Choisissez un bot dans la liste",
@@ -212,6 +213,7 @@ $lang = array (
 	"Upload_file" => "Le fichier a correctement été importé.",
 	"Upload_file_fail" => "Echec de l'import.",
 	"Upload_file_fail_name" => "Le nom du fichier n'est pas <code>" . $bot_file . "</code>",
+	"Fail_connect" => "Connexion non réussie",
 ),
 );
 ?>

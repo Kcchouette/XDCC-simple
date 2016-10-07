@@ -6,8 +6,6 @@
  - [ ] Cache can be refreshed (automatic check?)
  - [ ] Download the XML file (from URL)? into cache (use the `lastupdate` tag; an epoch time)
  - [ ] Possibility of reordering bots/bookmarks in the ADMIN page
- - [ ] Try to use the text file listing from iroffer
- - [x] Do a file that parse the cache boorkmark of XDCCParser-global to a json file
  - [ ] When adding bot, ask if Website/IRC are the same than the main in the ADMIN page
 
 ## For v0.4
