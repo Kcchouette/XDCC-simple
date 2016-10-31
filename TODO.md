@@ -6,7 +6,6 @@
  - [ ] Cache can be refreshed (automatic check?)
  - [ ] Download the XML file (from URL)? into cache (use the `lastupdate` tag; an epoch time)
  - [ ] Possibility of reordering bots/bookmarks in the ADMIN page
- - [ ] When adding bot, ask if Website/IRC are the same than the main in the ADMIN page
 
 ## For v0.4
 

@@ -14,6 +14,12 @@ function haveXMLfile($xmlFile) {
 		return false;
 }
 
+function shortText($string, $countChar, $addCharEnd = '') {
+	if (strlen($string) <= $countChar)
+		return $string;
+	else
+		return substr($string, 0, $countChar - strlen($addCharEnd)) . $addCharEnd;
+}
 
 // return bookmark or bot object
 function returnObject($b, $n) {
@@ -136,28 +142,16 @@ function searchBotXMLFile($b, $n) {
 	}
 }
 
-function showBotList($xml, $bot) {
-	$dom = '';
-	foreach($xml->packlist->pack as $p) {
-		$dom .= '<tr class="mouse_pointer" title="' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
-		$dom .= '<td class="text-center">' . $p->packnr . '</td>';
-		$dom .= '<td class="text-center">' . $p->packsize . '</td>';
-		$dom .= '<td>' . $p->packname . '</td>';
-		$dom .= '</tr>';
-	}
-	return $dom;
-}
-
 function searchBotList($xml, $bot, $search = null, $onBot = true) {
 	$dom = '';
 	foreach($xml->packlist->pack as $p) {
 		if ($search === null || stripos($p->packname, $search) !== false) {
-			$dom .= '<tr class="mouse_pointer" title="' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
+			$dom .= '<tr class="mouse_pointer" title="' . $bot . ' &#x2014; ' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
 			if (!$onBot)
-				$dom .= '<td class="text-center">' . $bot . '</td>';
+				$dom .= '<td class="text-center">' . shortText($bot, 14, '...') . '</td>';
 			$dom .= '<td class="text-center">' . $p->packnr . '</td>';
 			$dom .= '<td class="text-center">' . $p->packsize . '</td>';
-			$dom .= '<td>' . $p->packname . '</td>';
+			$dom .= '<td>' . shortText($p->packname, 62, '...') . '</td>';
 			$dom .= '</tr>';
 		}
 	}

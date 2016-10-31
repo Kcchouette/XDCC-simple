@@ -16,7 +16,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 
 			<title>' . $title . ' - ' . $lang[$language]["Admin_page"] . '</title>
 
-			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.7/wing.min.css">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.9/wing.min.css">
 
 			<link href="css/main.css" rel="stylesheet">
 			<link href="css/admin.css" rel="stylesheet">
@@ -52,7 +52,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 						echo '<table>';
 							foreach($bots as $b) {
 								echo '<tr class="text-center">
-									<td title="' . $b->getName() . '">' . substr($b->getName(), 0, 16) . '</td>
+									<td title="' . $b->getName() . '">' . shortText($b->getName(), 16, '...') . '</td>
 									<td>
 										<form method="post" action="adding_admin.php">
 											<fieldset>
@@ -117,7 +117,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 						echo '<table>';
 							foreach($bookmarks as $b) {
 								echo '<tr class="text-center">
-									<td title="' . $b->getName() . '">' . substr($b->getName(), 0, 16) . '</td>
+									<td title="' . $b->getName() . '">' . shortText($b->getName(), 16, '...') . '</td>
 									<td>
 										<form method="post" action="adding_admin.php">
 											<fieldset>

@@ -17,7 +17,7 @@
 
 	<title><?php require_once 'config.php'; echo $title; ?></title>
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.7/wing.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.9/wing.min.css">
 
 	<link href="css/main.css" rel="stylesheet">
 
@@ -88,7 +88,7 @@
 				$bots = getBotList();
 				echo '<ul>';
 				foreach($bots as &$bot) {
-					echo '<li><a class="chbot" href="?bot=' . $bot->getName() . '" title="' . $bot->getName() . '">' . substr($bot->getName(), 0, 22) . '</a></li>';
+					echo '<li><a class="chbot" href="?bot=' . $bot->getName() . '" title="' . $bot->getName() . '">' . shortText($bot->getName(), 24, '...') . '</a></li>';
 				}
 				echo '</ul>'
 				?>
@@ -100,7 +100,7 @@
 						$bookmarks = getBookmarkList();
 						echo '<ul>';
 						foreach($bookmarks as &$b) {
-							echo '<li><a class="chbot" href="?search=' . $b->getStringSearch() . '&amp;bot=' . $b->getBotSearch() . '" title="' . $b->getName() . '">' . substr($b->getName(), 0, 22) . '</a></li>';
+							echo '<li><a class="chbot" href="?search=' . $b->getStringSearch() . '&amp;bot=' . $b->getBotSearch() . '" title="' . $b->getName() . '">' . shortText($b->getName(), 18, '...') . '</a></li>';
 						}
 
 						echo '</ul>';

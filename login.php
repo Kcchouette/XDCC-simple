@@ -14,7 +14,7 @@ session_start();
 		<title><?php require_once 'config.php'; echo $title . ' - ' . $lang[$language]["Login_page"]; ?></title>
 
 
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.7/wing.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.9/wing.min.css">
 
 		<link href="css/main.css" rel="stylesheet">
 
