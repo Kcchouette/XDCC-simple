@@ -88,7 +88,7 @@
 				$bots = getBotList();
 				echo '<ul>';
 				foreach($bots as &$bot) {
-					echo '<li><a class="chbot" href="?bot=' . $bot->getName() . '" title="' . $bot->getName() . '">' . shortText($bot->getName(), 24, '...') . '</a></li>';
+					echo '<li><a class="chbot" href="?bot=' . $bot->getName() . '" title="' . $bot->getName() . '">' . $bot->getName() . '</a></li>';
 				}
 				echo '</ul>'
 				?>
@@ -100,7 +100,7 @@
 						$bookmarks = getBookmarkList();
 						echo '<ul>';
 						foreach($bookmarks as &$b) {
-							echo '<li><a class="chbot" href="?search=' . $b->getStringSearch() . '&amp;bot=' . $b->getBotSearch() . '" title="' . $b->getName() . '">' . shortText($b->getName(), 18, '...') . '</a></li>';
+							echo '<li><a class="chbot" href="?search=' . $b->getStringSearch() . '&amp;bot=' . $b->getBotSearch() . '" title="' . $b->getName() . '">' . $b->getName() . '</a></li>';
 						}
 
 						echo '</ul>';

@@ -23,7 +23,7 @@
  - [ ] Use Nick from xdcc list? # what in case multi-nick?
  - [ ] Display if the bot support @find (and how many ?) # config of bot
  - [ ] Possibility to edit the config.php online
- - [ ] Choose the IRC adress by using a list of network provided by the ``network` tag
+ - [ ] Choose the IRC adress by using a list of network provided by the `network` tag
  - [ ] Select bot for bookmark with a select
  - [ ] Choose the XML file location using a select tag in the ADMIN page if not using URL
  - [ ] Allow to cache PHP file?

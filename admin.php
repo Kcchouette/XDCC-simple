@@ -52,7 +52,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 						echo '<table>';
 							foreach($bots as $b) {
 								echo '<tr class="text-center">
-									<td title="' . $b->getName() . '">' . shortText($b->getName(), 16, '...') . '</td>
+									<td title="' . $b->getName() . '">' . $b->getName() . '</td>
 									<td>
 										<form method="post" action="adding_admin.php">
 											<fieldset>
@@ -117,7 +117,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 						echo '<table>';
 							foreach($bookmarks as $b) {
 								echo '<tr class="text-center">
-									<td title="' . $b->getName() . '">' . shortText($b->getName(), 16, '...') . '</td>
+									<td title="' . $b->getName() . '">' . $b->getName() . '</td>
 									<td>
 										<form method="post" action="adding_admin.php">
 											<fieldset>

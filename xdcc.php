@@ -14,13 +14,6 @@ function haveXMLfile($xmlFile) {
 		return false;
 }
 
-function shortText($string, $countChar, $addCharEnd = '') {
-	if (strlen($string) <= $countChar)
-		return $string;
-	else
-		return substr($string, 0, $countChar - strlen($addCharEnd)) . $addCharEnd;
-}
-
 // return bookmark or bot object
 function returnObject($b, $n) {
 	for($i = 0; $i < count($b); $i++) {
@@ -148,10 +141,10 @@ function searchBotList($xml, $bot, $search = null, $onBot = true) {
 		if ($search === null || stripos($p->packname, $search) !== false) {
 			$dom .= '<tr class="mouse_pointer" title="' . $bot . ' &#x2014; ' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
 			if (!$onBot)
-				$dom .= '<td class="text-center">' . shortText($bot, 14, '...') . '</td>';
+				$dom .= '<td class="text-center">' . $bot . '</td>';
 			$dom .= '<td class="text-center">' . $p->packnr . '</td>';
 			$dom .= '<td class="text-center">' . $p->packsize . '</td>';
-			$dom .= '<td>' . shortText($p->packname, 62, '...') . '</td>';
+			$dom .= '<td>' . $p->packname . '</td>';
 			$dom .= '</tr>';
 		}
 	}
