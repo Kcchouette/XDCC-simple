@@ -1,16 +1,18 @@
 # XDCC-simple
 
-# What this xdcc list can do?
+## What this xdcc list can do?
 You can see what this website do by watching the features wiki page:
 - [Feature page on the wiki](https://github.com/Kcchouette/XDCC-simple/wiki/Features)
 
 - and the current developp branch is listed in the [TODO](https://github.com/Kcchouette/XDCC-simple/blob/master/TODO.md)
+
 
 ## Why another XDCC Parser?
 
  - Because [XDCCParser-global](https://github.com/nitmir/XDCCParser-global) is bugged
  - Because [my fork](https://github.com/Kcchouette/XDCCParser) is less bugged; but isn't **responsive** (mobile) and use Text File from Iroffer
  - Because [iroffer-state](https://github.com/dinoex/iroffer-state) use the `.state` file of the bot
+
 
 This project uses:
  - **XML file** from Iroffer
@@ -33,6 +35,7 @@ This project uses:
  3. Connect to the admin page: `admin.php`
  4. Add your bot (the `name` of your bot must be UNIQUE!)
  5. Finish :)
+
 
 ## Thanks
 

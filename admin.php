@@ -16,35 +16,42 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 
 			<title>' . $title . ' - ' . $lang[$language]["Admin_page"] . '</title>
 
-			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.9/wing.min.css">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre.min.css">
+			<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre-exp.min.css">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre-icons.min.css"> -->
 
 			<link href="css/main.css" rel="stylesheet">
-			<link href="css/admin.css" rel="stylesheet">
+			<!--<link href="css/admin.css" rel="stylesheet">-->
 
 		</head>
 
-		<body class="container">';
+		<body class="container grid-lg">';
 
 		echo '<header>
-					<h1 class="text-center">' . $lang[$language]["Admin_page"] . '</h1>
-					<nav class="row">
-						<div class="col-8 hidden"></div>
-						<div class="col-4"><a class="btn btn-outline-inverted hidden" href="index.php">' . $lang[$language]["Home_but"] . '</a>
-						<a class="btn btn-outline-inverted" href="logout.php">' . $lang[$language]["Disconnect_but"] . '</a></div>
-					</nav>
-				</header>';
+				<nav class="navbar">
+					<section class="navbar-section">
+					</section>
+					<section class="navbar-section navbar-center">
+						<h1 class="text-center">' . $lang[$language]["Admin_page"] . '</h1>
+					</section>
+					<section class="navbar-section">
+						<a class="btn btn-outline-inverted hidden" href="index.php">' . $lang[$language]["Home_but"] . '</a>
+						<a class="btn btn-outline-inverted" href="logout.php">' . $lang[$language]["Disconnect_but"] . '</a>
+					</section>
+				</nav>
+			</header>';
 
 		if (isset($_SESSION['message'])) {
-			echo '<div class="row">
-					<div class="col-4 hidden"></div>
-					<div class="col-4">' . $_SESSION["message"] . '</div>
+			echo '<div class="columns">
+					<div class="column col-4 hidden"></div>
+					<div class="column col-4">' . $_SESSION["message"] . '</div>
 				  </div>';
 			//header("refresh: 3;");
 			unset($_SESSION['message']);
 		}
 		echo '<div>';
-			echo '<section class="row">
-					<div class="col-4">
+			echo '<section class="columns">
+					<div class="column col-4">
 						<div class="border_1">';
 					echo '<h2>' . $lang[$language]["Modify_Remove_Bot_h2"] . '</h2>';
 							require_once 'xdcc.php';
@@ -82,24 +89,24 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 						echo '</table>';
 					echo '</div>';
 				echo '</div>';
-				echo '<div class="col-8">';
+				echo '<div class="column col-8">';
 					echo '<form method="post" action="adding_admin.php">
 							<fieldset>
 								<input type="hidden" name="addBot" value="true">
-								<input type="submit" class="button_add" value="' . $lang[$language]["Add_bot_but"] . '" >
+								<input type="submit" class="btn" value="' . $lang[$language]["Add_bot_but"] . '" >
 							</fieldset>
 						</form>';
 					echo '<form method="post" action="update.php" enctype="multipart/form-data">
 							<fieldset class="import_fieldset">
 								<input type="hidden" name="upload_bot_json" value="true">
-								<input type="file" accept=".json" id="uploadedfile" name="uploadedfile">
-								<input type="submit" class="button_import" value="' . $lang[$language]["Import_botJSON"] . '" >
+								<input type="file" class="form-input" accept=".json" id="uploadedfile" name="uploadedfile">
+								<input type="submit" class="btn" value="' . $lang[$language]["Import_botJSON"] . '" >
 							</fieldset>
 						</form>';
 					echo '<form method="post" action="update.php">
 							<fieldset>
 								<input type="hidden" name="exp_bot_json" value="true">
-								<input type="submit" class="button_export" value="' . $lang[$language]["Export_botJSON"] . '" >
+								<input type="submit" class="btn" value="' . $lang[$language]["Export_botJSON"] . '" >
 							</fieldset>
 						</form>';
 				echo '</div>';
@@ -108,8 +115,8 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 			echo '<hr>';
 
 			//BEGIN BOOKMARKS HERE
-			echo '<section class="row">
-					<div class="col-4">
+			echo '<section class="columns">
+					<div class="column col-4">
 						<div class="border_1">';
 					echo '<h2>' . $lang[$language]["Modify_Remove_Bookmark_h2"] . '</h2>';
 							require_once 'xdcc.php';
@@ -139,24 +146,24 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 						echo '</table>';
 					echo '</div>';
 				echo '</div>';
-				echo '<div class="col-8">';
+				echo '<div class="column col-8">';
 					echo '<form method="post" action="adding_admin.php">
 							<fieldset>
 								<input type="hidden" name="addBookmark" value="true">
-								<input type="submit" class="button_add" value="' . $lang[$language]["Add_bookmark_but"] . '" >
+								<input type="submit" class="btn" value="' . $lang[$language]["Add_bookmark_but"] . '" >
 							</fieldset>
 						</form>';
 					echo '<form method="post" action="update.php" enctype="multipart/form-data">
 							<fieldset class="import_fieldset">
 								<input type="hidden" name="upload_bookmark_json" value="true">
-								<input type="file" accept=".json" id="uploadedfile" name="uploadedfile">
-								<input type="submit" class="button_import" value="' . $lang[$language]["Import_bookJSON"] . '" >
+								<input type="file" class="form-input" accept=".json" id="uploadedfile" name="uploadedfile">
+								<input type="submit" class="btn" value="' . $lang[$language]["Import_bookJSON"] . '" >
 							</fieldset>
 						</form>';
 					echo '<form method="post" action="update.php">
 							<fieldset>
 								<input type="hidden" name="exp_bookmark_json" value="true">
-								<input type="submit" class="button_export" value="' . $lang[$language]["Export_bookJSON"] . '" >
+								<input type="submit" class="btn" value="' . $lang[$language]["Export_bookJSON"] . '" >
 							</fieldset>
 						</form>';
 				echo '</div>';

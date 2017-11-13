@@ -53,10 +53,10 @@ class XDCC_File {
 
 
 /*
- ____              _                         _    
+ ____              _                         _
 | __ )  ___   ___ | | ___ __ ___   __ _ _ __| | __
 |  _ \ / _ \ / _ \| |/ / '_ ` _ \ / _` | '__| |/ /
-| |_) | (_) | (_) |   <| | | | | | (_| | |  |   < 
+| |_) | (_) | (_) |   <| | | | | | (_| | |  |   <
 |____/ \___/ \___/|_|\_\_| |_| |_|\__,_|_|  |_|\_\
 */
 
@@ -91,10 +91,10 @@ function removeBookmark($bname) {
 
 
 /*
- ____        _   
-| __ )  ___ | |_ 
+ ____        _
+| __ )  ___ | |_
 |  _ \ / _ \| __|
-| |_) | (_) | |_ 
+| |_) | (_) | |_
 |____/ \___/ \__|
 */
 
@@ -139,13 +139,13 @@ function searchBotList($xml, $bot, $search = null, $onBot = true) {
 	$dom = '';
 	foreach($xml->packlist->pack as $p) {
 		if ($search === null || stripos($p->packname, $search) !== false) {
-			$dom .= '<tr class="mouse_pointer" title="' . $bot . ' &#x2014; ' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
+			$dom .= '<tbody><tr class="mouse_pointer" title="' . $bot . ' &#x2014; ' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
 			if (!$onBot)
 				$dom .= '<td class="text-center">' . $bot . '</td>';
 			$dom .= '<td class="text-center">' . $p->packnr . '</td>';
 			$dom .= '<td class="text-center">' . $p->packsize . '</td>';
 			$dom .= '<td>' . $p->packname . '</td>';
-			$dom .= '</tr>';
+			$dom .= '</tr></tbody>';
 		}
 	}
 	return $dom;

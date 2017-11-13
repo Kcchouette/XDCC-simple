@@ -17,19 +17,19 @@
 
 	<title><?php require_once 'config.php'; echo $title; ?></title>
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.9/wing.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre.min.css">
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre-exp.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre-icons.min.css"> -->
 
-	<link href="css/main.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
 
 </head>
 
-<body class="container">
-
-	<h1 class="text-center"><?php require_once 'config.php'; echo $title; ?></h1>
+<body class="container grid-xl">
 
 	<header>
-		<nav class="row">
-			<div class="col-6">
+		<nav class="navbar">
+			<section class="navbar-section">
 			<?php require_once 'config.php';
 				  require_once 'xdcc.php';
 			//test if bot is get + if website else show main
@@ -42,27 +42,34 @@
 				$b = returnObject(getBotList(), $_GET["bot"]);
 				if ($b !== null) {
 					if (!empty($b->getWebsite())) {
-						echo '<a href="' . $b->getWebsite() . '" class="btn btn-outline-inverted" title="' . $lang[$language]["Bot_website"] . ' ' . $b->getName() . '">' . $lang[$language]["website"] . '</a>';
+						echo '<a href="' . $b->getWebsite() . '" class="btn btn-primary" title="' . $lang[$language]["Bot_website"] . ' ' . $b->getName() . '">' . $lang[$language]["website"] . '</a>';
 					}
+					echo "<br>";
 					if (!empty($b->getIRC())) {
-						echo '<a href="' . $b->getIRC() . '" class="btn btn-outline-inverted" title="' . $lang[$language]["Bot_irc"] . ' ' . $b->getName() . '">' . $lang[$language]["IRC"] . '</a>';
+						echo '<a href="' . $b->getIRC() . '" class="btn btn-primary" title="' . $lang[$language]["Bot_irc"] . ' ' . $b->getName() . '">' . $lang[$language]["IRC"] . '</a>';
 					}
 				}
 			}
 			else {
 				if (!empty($website_link)) {
-					echo '<a href="' . $website_link . '" title="' . $lang[$language]["website"] . '" class="btn btn-outline-inverted">' . $website_label . '</a>';
+					echo '<a href="' . $website_link . '" class="btn btn-primary" title="' . $lang[$language]["website"] . '">' . $website_label . '</a>';
 				}
 				if (!empty($irc_link)) {
-					echo '<a href="' . $irc_link . '" title="' . $lang[$language]["IRC"] . '" class="btn btn-outline-inverted">'. $irc_label . '</a>';
+					echo '<a href="' . $irc_link . '" class="btn btn-primary" title="' . $lang[$language]["IRC"] . '">'. $irc_label . '</a>';
 				}
 			}
 			?>
-			</div>
-			<form name="searchform" class="col-6">
-				<fieldset class="row">
-					<input type="text" name="search" class="col-4" placeholder="<?php require_once 'config.php'; echo $lang[$language]["Search_on"]; ?>"  <?php if(!empty($_GET["search"])) echo 'value="' . $_GET["search"] . '"';?> required/>
-					<select name="bot" class="col-4">
+		</section>
+
+		<section class="navbar-center">
+			<h1><?php require_once 'config.php'; echo $title; ?></h1>
+		</section>
+
+		<section class="navbar-section">
+			<form name="searchform">
+				<fieldset class="input-group input-inline">
+					<input type="text" name="search" class="form-input"  placeholder="<?php require_once 'config.php'; echo $lang[$language]["Search_on"]; ?>"  <?php if(!empty($_GET["search"])) echo 'value="' . $_GET["search"] . '"';?> required/>
+					<select name="bot" class="form-select">
 						<option value=""><?php require_once 'config.php'; echo $lang[$language]["ALL_BOTS"]; ?></option>
 						<?php require_once 'xdcc.php';
 						$bots = getBotList();
@@ -74,45 +81,49 @@
 						}
 						?>
 					</select>
-					<div class="col-4"><input type="submit" value="Search"/></div>
+					<input type="submit" class="btn btn-primary input-group-btn" value="Search"/>
 				</fieldset>
 			</form>
+		</section>
 		</nav>
 	</header>
 
-	<section class="row">
-		<div class="col-3">
-			<div class="border_1">
-				<h2><?php require_once 'config.php'; echo $lang[$language]["Bots"]; ?></h2>
-				<?php require_once 'xdcc.php';
-				$bots = getBotList();
-				echo '<ul>';
-				foreach($bots as &$bot) {
-					echo '<li><a class="chbot" href="?bot=' . $bot->getName() . '" title="' . $bot->getName() . '">' . $bot->getName() . '</a></li>';
-				}
-				echo '</ul>'
-				?>
-				<?php require_once 'config.php';
-				if ($bookmark) {
-					echo '<hr>
-						<h2>' . $lang[$language]["Bookmarks"] . '</h2>';
-						require_once 'xdcc.php';
-						$bookmarks = getBookmarkList();
-						echo '<ul>';
-						foreach($bookmarks as &$b) {
-							echo '<li><a class="chbot" href="?search=' . $b->getStringSearch() . '&amp;bot=' . $b->getBotSearch() . '" title="' . $b->getName() . '">' . $b->getName() . '</a></li>';
-						}
-
-						echo '</ul>';
-				}
-				?>
+	<section class="columns">
+		<div class="column col-2 col-sm-12">
+			<div class="panel">
+				<div class="panel-header">
+					<h2 class="panel-title"><?php require_once 'config.php'; echo $lang[$language]["Bots"]; ?></h2>
+					<?php require_once 'xdcc.php';
+					$bots = getBotList();
+					echo '<ul class="panel-body">';
+					foreach($bots as &$bot) {
+						echo '<li class="tile tile-centered"><a class="tile-content" href="?bot=' . $bot->getName() . '" title="' . $bot->getName() . '"><div class="tile-title">' . $bot->getName() . '</div></a></li>';
+					}
+					echo '</ul>'
+					?>
+				</div>
 			</div>
-			
+			<?php require_once 'config.php';
+			if ($bookmark) {
+				echo '<div class="panel">
+					<div class="panel-header">
+					<h2 class="panel-title">' . $lang[$language]["Bookmarks"] . '</h2>';
+					require_once 'xdcc.php';
+					$bookmarks = getBookmarkList();
+					echo '<ul class="panel-body">';
+					foreach($bookmarks as &$b) {
+						echo '<li class="tile tile-centered"><a class="tile-content" href="?search=' . $b->getStringSearch() . '&amp;bot=' . $b->getBotSearch() . '" title="' . $b->getName() . '"><div class="tile-title">' . $b->getName() . '</div></a></li>';
+					}
+						echo '</ul>
+						</div>
+						</div>';
+				}
+				?>
 		</div>
 
-		<div class="col-1"></div>
-		<div class="col-8">
-		<h2><?php require_once 'config.php'; if(!empty($_GET["bot"])) echo ' &#8212; ' . $lang[$language]["Bot:"] . ' <code>' . htmlspecialchars($_GET["bot"]) . '</code>' . ' <a href="syndication.php?bot=' . $_GET["bot"] . '"> <img class="icon" src="img/Feed_icon.svg"></a> '; if(isset($_GET["search"])) echo ' &#8212; ' . $lang[$language]["Search:"] . ' <code>' . htmlspecialchars($_GET["search"]) . '</code>'; ?></h2>
+		<div class="column col-2"></div>
+		<div class="column col-8 col-sm-12 col-ml-auto">
+		<h2><?php require_once 'config.php'; if(!empty($_GET["bot"])) echo ' &#8212; ' . $lang[$language]["Bot:"] . ' <code>' . htmlspecialchars($_GET["bot"]) . '</code>';// . ' <a href="syndication.php?bot=' . $_GET["bot"] . '"> <img class="icon" src="img/Feed_icon.svg"></a> '; if(isset($_GET["search"])) echo ' &#8212; ' . $lang[$language]["Search:"] . ' <code>' . htmlspecialchars($_GET["search"]) . '</code>'; ?></h2>
 			<div><?php
 
 			require_once 'config.php';
@@ -126,19 +137,19 @@
 			else { //if bot, show all the list OR show the search on a bot
 				require_once 'xdcc.php';
 
-				echo '<table class="" id="filelist">';
+				echo '<table class="table" id="filelist">';
 
-				
+
 				$xml = haveXMLfile(searchBotXMLFile(getBotList(), $_GET["bot"]));
 
 				if (!$xml || !$xml->packlist->pack)
-					echo '<tr id="trmain"><th>' . $lang[$language]["Fail_load_XML"] . '</th></tr>';
+					echo '<thead><tr id="trmain"><th>' . $lang[$language]["Fail_load_XML"] . '</th></tr><thead>';
 				else {
-					echo '<tr id="trmain">';
+					echo '<thead><tr id="trmain">';
 					echo '<th class="text-center">' . $lang[$language]["Pack"] . '</th>';
 					echo '<th class="text-center">' . $lang[$language]["Size"] . '</th>';
-					echo '<th >' . $lang[$language]["File"] . '</th>';
-					echo '</tr>';
+					echo '<th class="text-center">' . $lang[$language]["File"] . '</th>';
+					echo '</tr><thead>';
 
 					echo searchBotList($xml, $_GET["bot"], empty($_GET["search"]) ? null : $_GET["search"]);
 

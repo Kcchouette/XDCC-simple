@@ -3,82 +3,17 @@ html, #trmain:hover {
 	background-color: #FFF;
 }
 
-tr:hover, .chbot:hover {
+tr:hover {
 	/* change that if you want to change the color of when the mouse hover the text*/
 	background-color: #FFFF99;
-}
-
-/* h2 is like h5 of milligram */
-h2 {
-	font-size: 1.8rem;
-	letter-spacing: -.05rem;
-	line-height: 1.5;
-}
-
-.menubtn {
-	cursor: pointer;
 }
 
 .mouse_pointer {
 	cursor: pointer;
 }
 
-table {
-	width: 100%;
-}
-
-th {
-	width: 50px;
-}
-
 .icon, input.icon {
 	width: 20px;
-}
-
-/* remove the border of the fieldset */
-/*fieldset {
-	border: 0;
-}*/
-
-/* omgborder from OMGCSS */
-.border_1 {
-	border: 1px solid #aaa;
-	padding: 0.5em;
-	min-height:6em;
-}
-
-.border_1 > ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
-
-
-.border_1 a {
-	text-decoration: none;
-}
-
-form {
-	display: inline;
-}
-
-/* input file; input url; from wing CSS
- but no 100% for input file */
-input[type=file], input[type=url] {
-	padding: 12px 20px;
-	margin: 8px 0;
-	display: inline-block;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-sizing: border-box;
-	-webkit-transition: 0.5s;
-	transition: 0.5s;
-	outline: none;
-	font-family: 'Open Sans';
-}
-
-input[type=url] {
-	width: 100%;
 }
 
 /* footer from OMGCSS */
@@ -88,10 +23,4 @@ footer {
 	padding-top: 2em;
 	border-top: 1px solid #ccc;
 	padding-bottom: 2em;
-}
-
-@media screen and (max-width: 768px) {
-	.hidden {
-		display: none;
-	}
 }
