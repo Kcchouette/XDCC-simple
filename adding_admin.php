@@ -16,86 +16,127 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 
 			<title>' . $title . ' - ' . $lang[$language]["Admin_page"] . '</title>
 
-			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.9/wing.min.css">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.1/spectre.min.css">
+			<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.1/spectre-exp.min.css">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.1/spectre-icons.min.css"> -->
 
 			<link href="css/main.css" rel="stylesheet">
-			<link href="css/admin.css" rel="stylesheet">
+			<!--<link href="css/admin.css" rel="stylesheet">-->
 
 		</head>
 
-		<body class="container">';
+		<body class="container grid-lg">';
 
 		echo '<header>
-					<h1 class="text-center">' . $lang[$language]["Admin_page"] . '</h1>
-					<nav class="row">
-						<div class="col-8 hidden"></div>
-						<a href="admin.php" class="btn btn-outline-inverted">' . $lang[$language]["Return_admin"] . '</a>
-					</nav>
-				</header>';
+				<nav class="navbar">
+					<section class="navbar-section">
+					</section>
+					<section class="navbar-section navbar-center">
+						<h1 class="text-center">' . $lang[$language]["Admin_page"] . '</h1>
+					</section>
+					<section class="navbar-section">
+						<a class="btn" href="admin.php">' . $lang[$language]["Return_admin"] . '</a>
+					</section>
+				</nav>
+			</header>';
 
 		if (isset($_POST["modifBot"])){
 			require_once 'xdcc.php';
 			$b = returnObject(getBotList(), $_POST["modifBot"]);
 
-			echo '<h2>' . $lang[$language]["Modify_bot_h2"] . '</h2>';
-			echo '<div class="text-center">
-					<form method="post" action="update.php">
-						<fieldset class="row">
-							<div class="col-2"><input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" value="' . $b->getName() . '" required ></div>
-							<div class="col-2"><input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" value="' . $b->getXmlFile() . '" required ></div>
-							<div class="col-3"><input type="url" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" value="' . $b->getWebsite() . '" ></div>
-							<div class="col-3"><input type="url" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" value="' . $b->getIRC() . '" ></div>
-							<div class="col-1"><input type="hidden" name="isModifBot" value="' . $b->getName() . '"></div>
-							<div class="col-1"><input type="submit" value="' . $lang[$language]["Modify_but"] . '"></div>
-						</fieldset>
-					</form>
-				</div>';
+			echo '<h2>' . $lang[$language]["Modify_bot"] . '</h2>';
+			echo '<form method="post" action="update.php">
+					<fieldset class="">
+						<div class="form-group">
+							<label class="form-label" for="nameBot">' . $lang[$language]["Bot_name"] . '</label>
+							<input type="text" class="form-input" id="nameBot" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" value="' . $b->getName() . '" required >
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="xmlBot">' . $lang[$language]["Bot_xml"] . '</label>
+							<input type="text" class="form-input" id="xmlBot" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" value="' . $b->getXmlFile() . '" required >
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="websiteBot">' . $lang[$language]["Bot_website"] . '</label>
+							<input type="url" class="form-input" id="websiteBot" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" value="' . $b->getWebsite() . '" >
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="ircBot">' . $lang[$language]["Bot_irc"] . '</label>
+							<input type="url" class="form-input" id="ircBot" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" value="' . $b->getIRC() . '" >
+						</div>
+						<input type="hidden" name="isModifBot" value="' . $b->getName() . '">
+						<input type="submit" class="btn btn-primary" value="' . $lang[$language]["Modify_but"] . '">
+					</fieldset>
+				</form>';
 		}
 		else if (isset($_POST["addBot"])) {
 			echo '<h2>' . $lang[$language]["Add_bot_but"] . '</h2>';
-			echo '<div class="text-center">
-					<form method="post" action="update.php">
-						<fieldset class="row">
-							<div class="col-2"><input type="text" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" required ></div>
-							<div class="col-2"><input type="text" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" required ></div>
-							<div class="col-3"><input type="url" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" ></div>
-							<div class="col-3"><input type="url" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" ></div>
-							<div class="col-1"><input type="hidden" name="isCreateBot" value="true"></div>
-							<div class="col-1"><input type="submit" value="' . $lang[$language]["Add_but"] . '"></div>
-						</fieldset>
-					</form>
-				</div>';
+			echo '<form method="post" action="update.php">
+					<fieldset class="">
+						<div class="form-group">
+							<label class="form-label" for="nameBot">' . $lang[$language]["Bot_name"] . '</label>
+							<input type="text" class="form-input" id="nameBot" name="nameBot" placeholder="' . $lang[$language]["Bot_name"] . '" required >
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="xmlBot">' . $lang[$language]["Bot_xml"] . '</label>
+							<input type="text" class="form-input" id="xmlBot" name="xmlBot" placeholder="' . $lang[$language]["Bot_xml"] . '" required >
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="websiteBot">' . $lang[$language]["Bot_website"] . '</label>
+							<input type="url" class="form-input" id="websiteBot" name="websiteBot" placeholder="' . $lang[$language]["Bot_website"] . '" >
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="ircBot">' . $lang[$language]["Bot_irc"] . '</label>
+							<input type="url" class="form-input" id="ircBot" name="ircBot" placeholder="' . $lang[$language]["Bot_irc"] . '" >
+						</div>
+						<input type="hidden" name="isCreateBot" value="true">
+						<input type="submit" class="btn btn-primary" value="' . $lang[$language]["Add_but"] . '">
+					</fieldset>
+				</form>';
 		}
 		else if (isset($_POST["modifBookmark"])){
 			require_once 'xdcc.php';
 			$b = returnObject(getBookmarkList(), $_POST["modifBookmark"]);
 
-			echo '<h2>' . $lang[$language]["Modify_bookmark_h2"] . '</h2>';
-			echo '<div class="text-center">
-					<form method="post" action="update.php">
-						<fieldset class="row">
-							<div class="col-3"><input type="text" name="nameBookmark" placeholder="' . $lang[$language]["Bookmark_name"] . '" value="' . $b->getName() . '" required ></div>
-							<div class="col-3"><input type="text" name="searchBookmark" placeholder="' . $lang[$language]["Bookmark_search"] . '" value="' . $b->getStringSearch() . '" required ></div>
-							<div class="col-3"><input type="text" name="botBookmark" placeholder="' . $lang[$language]["Bookmark_bot"] . '" value="' . $b->getBotSearch() . '" ></div>
-							<input type="hidden" name="isModifBookmark" value="' . $b->getName() . '">
-							<div class="col-3"><input type="submit" value="' . $lang[$language]["Modify_but"] . '"></div>
-						</fieldset>
-					</form>
-				</div>';
+			echo '<h2>' . $lang[$language]["Modify_bookmark"] . '</h2>';
+			echo '<form method="post" action="update.php">
+					<fieldset class="">
+						<div class="form-group">
+							<label class="form-label" for="nameBookmark">' . $lang[$language]["Bookmark_name"] . '</label>
+							<input type="text" id="nameBookmark" name="nameBookmark" placeholder="' . $lang[$language]["Bookmark_name"] . '" value="' . $b->getName() . '" required >
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="searchBookmark">' . $lang[$language]["Bookmark_search"] . '</label>
+							<input type="text" id="searchBookmark" name="searchBookmark" placeholder="' . $lang[$language]["Bookmark_search"] . '" value="' . $b->getStringSearch() . '" required >
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="botBookmark">' . $lang[$language]["Bookmark_bot"] . '</label>
+							<input type="text" id="botBookmark" name="botBookmark" placeholder="' . $lang[$language]["Bookmark_bot"] . '" value="' . $b->getBotSearch() . '" >
+						</div>
+						<input type="hidden" name="isModifBookmark" value="' . $b->getName() . '">
+						<input type="submit" class="btn btn-primary" value="' . $lang[$language]["Modify_but"] . '"></div>
+					</fieldset>
+				</form>';
 		}
 		else if (isset($_POST["addBookmark"])) {
 			echo '<h2>' . $lang[$language]["Add_bookmark_but"] . '</h2>';
-			echo '<div class="text-center">
-					<form method="post" action="update.php">
-						<fieldset class="row">
-							<div class="col-3"><input type="text" name="nameBookmark" placeholder="' . $lang[$language]["Bookmark_name"] . '" required ></div>
-							<div class="col-3"><input type="text" name="searchBookmark" placeholder="' . $lang[$language]["Bookmark_search"] . '" required ></div>
-							<div class="col-3"><input type="text" name="botBookmark" placeholder="' . $lang[$language]["Bookmark_bot"] . '" ></div>
-							<input type="hidden" name="isCreateBookmark" value="true">
-							<div class="col-3"><input type="submit" value="' . $lang[$language]["Add_but"] . '"></div>
-						</fieldset>
-					</form>
-				</div>';
+			echo '<form method="post" action="update.php">
+					<fieldset class="">
+						<div class="form-group">
+							<label class="form-label" for="nameBookmark">' . $lang[$language]["Bookmark_name"] . '</label>
+							<input type="text" name="nameBookmark" placeholder="' . $lang[$language]["Bookmark_name"] . '" required >
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="searchBookmark">' . $lang[$language]["Bookmark_search"] . '</label>
+							<input type="text" name="searchBookmark" placeholder="' . $lang[$language]["Bookmark_search"] . '" required >
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="botBookmark">' . $lang[$language]["Bookmark_bot"] . '</label>
+							<input type="text" name="botBookmark" placeholder="' . $lang[$language]["Bookmark_bot"] . '" >
+						</div>
+						<input type="hidden" name="isCreateBookmark" value="true">
+						<input type="submit" value="' . $lang[$language]["Add_but"] . '">
+					</fieldset>
+				</form>';
 		}
 		else { //if no action
 			header ('location: admin.php');

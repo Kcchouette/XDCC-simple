@@ -1,6 +1,7 @@
 # XDCC-simple
 
 ## What this xdcc list can do?
+
 You can see what this website do by watching the features wiki page:
 - [Feature page on the wiki](https://github.com/Kcchouette/XDCC-simple/wiki/Features)
 
@@ -18,8 +19,8 @@ This project uses:
  - **XML file** from Iroffer
  - No Database
  - No Composer or other things
- - Minimalist CSS (using [Wing CSS](https://github.com/KingPixil/wing))
- - Very Light: for `index.php` -> 2 CSS (5,83Ko) + 0 JS (0Ko) + 1 image (1,11Ko) + 1 HTML (~10 Ko; depends of content) = ~**17 Ko**!
+ - Light CSS (using [Spectre.css](https://github.com/picturepan2/spectre))
+ - Light: for `index.php` -> 2 CSS (50Ko) + 0 JS (0Ko) + 1 image (2Ko) + 1 HTML (~10 Ko; depends of content) = ~**62 Ko**!
 
 
 ## Requirements:
@@ -40,6 +41,3 @@ This project uses:
 ## Thanks
 
  - For the Feed icon: <a href="https://en.wikipedia.org/w/index.php?curid=33285359">https://en.wikipedia.org/w/index.php?curid=33285359</a>
- - For the edit icon: By Simple Icons (https://www.thenounproject.com/term/edit/31085/) [<a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>], <a href="https://commons.wikimedia.org/wiki/File%3AEdit_Notepad_Icon.svg">via Wikimedia Commons</a>
- - For the Remove icon: By VisualEditor team - <a class="external free" href="https://git.wikimedia.org/summary/mediawiki%2Fextensions%2FVisualEditor.git">https://git.wikimedia.org/summary/mediawiki%2Fextensions%2FVisualEditor.git</a>, <a href="http://opensource.org/licenses/mit-license.php" title="MIT license">MIT</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=26927469">https://commons.wikimedia.org/w/index.php?curid=26927469</a>
- - For the CSV icon: By RRZEicons (Own work) [<a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>], <a href="https://commons.wikimedia.org/wiki/File%3AText-csv-text.svg">via Wikimedia Commons</a>

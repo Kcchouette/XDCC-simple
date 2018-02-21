@@ -17,9 +17,9 @@
 
 	<title><?php require_once 'config.php'; echo $title; ?></title>
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre.min.css">
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre-exp.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre-icons.min.css"> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.1/spectre.min.css">
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.1/spectre-exp.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.1/spectre-icons.min.css"> -->
 
 	<link rel="stylesheet" href="css/main.css">
 
@@ -38,26 +38,31 @@
 				* if its value equals FALSE
 				* else the var exists AND has a non-empty, non-zero value.
 			*/
+
+			echo '<p>';
 			if (isset($_GET["bot"])) {
 				$b = returnObject(getBotList(), $_GET["bot"]);
 				if ($b !== null) {
 					if (!empty($b->getWebsite())) {
-						echo '<a href="' . $b->getWebsite() . '" class="btn btn-primary" title="' . $lang[$language]["Bot_website"] . ' ' . $b->getName() . '">' . $lang[$language]["website"] . '</a>';
+						echo '<a href="' . $b->getWebsite() . '" class="btn" title="' . $lang[$language]["Bot_website"] . ' ' . $b->getName() . '">' . $lang[$language]["website"] . '</a>';
 					}
-					echo "<br>";
+					echo '                  ';
 					if (!empty($b->getIRC())) {
-						echo '<a href="' . $b->getIRC() . '" class="btn btn-primary" title="' . $lang[$language]["Bot_irc"] . ' ' . $b->getName() . '">' . $lang[$language]["IRC"] . '</a>';
+						echo '<a href="' . $b->getIRC() . '" class="btn" title="' . $lang[$language]["Bot_irc"] . ' ' . $b->getName() . '">' . $lang[$language]["IRC"] . '</a>';
 					}
 				}
 			}
 			else {
 				if (!empty($website_link)) {
-					echo '<a href="' . $website_link . '" class="btn btn-primary" title="' . $lang[$language]["website"] . '">' . $website_label . '</a>';
+					echo '<a href="' . $website_link . '" class="btn" title="' . $lang[$language]["website"] . '">' . $website_label . '</a>';
 				}
 				if (!empty($irc_link)) {
-					echo '<a href="' . $irc_link . '" class="btn btn-primary" title="' . $lang[$language]["IRC"] . '">'. $irc_label . '</a>';
+					echo '<a href="' . $irc_link . '" class="btn" title="' . $lang[$language]["IRC"] . '">'. $irc_label . '</a>';
 				}
 			}
+
+			echo '</p>';
+
 			?>
 		</section>
 
@@ -89,7 +94,7 @@
 	</header>
 
 	<section class="columns">
-		<div class="column col-2 col-sm-12">
+		<div class="column col-3 col-md-12">
 			<div class="panel">
 				<div class="panel-header">
 					<h2 class="panel-title"><?php require_once 'config.php'; echo $lang[$language]["Bots"]; ?></h2>
@@ -121,8 +126,7 @@
 				?>
 		</div>
 
-		<div class="column col-2"></div>
-		<div class="column col-8 col-sm-12 col-ml-auto">
+		<div class="column col-8 col-md-12 col-ml-auto">
 		<h2><?php require_once 'config.php'; if(!empty($_GET["bot"])) echo ' &#8212; ' . $lang[$language]["Bot:"] . ' <code>' . htmlspecialchars($_GET["bot"]) . '</code>';// . ' <a href="syndication.php?bot=' . $_GET["bot"] . '"> <img class="icon" src="img/Feed_icon.svg"></a> '; if(isset($_GET["search"])) echo ' &#8212; ' . $lang[$language]["Search:"] . ' <code>' . htmlspecialchars($_GET["search"]) . '</code>'; ?></h2>
 			<div><?php
 
