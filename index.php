@@ -17,9 +17,9 @@
 
 	<title><?php require_once 'config.php'; echo $title; ?></title>
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.1/spectre.min.css">
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.1/spectre-exp.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.1/spectre-icons.min.css"> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.8/spectre.min.css">
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.8/spectre-exp.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.8/spectre-icons.min.css"> -->
 
 	<link rel="stylesheet" href="css/main.css">
 
@@ -46,7 +46,6 @@
 					if (!empty($b->getWebsite())) {
 						echo '<a href="' . $b->getWebsite() . '" class="btn" title="' . $lang[$language]["Bot_website"] . ' ' . $b->getName() . '">' . $lang[$language]["website"] . '</a>';
 					}
-					echo '                  ';
 					if (!empty($b->getIRC())) {
 						echo '<a href="' . $b->getIRC() . '" class="btn" title="' . $lang[$language]["Bot_irc"] . ' ' . $b->getName() . '">' . $lang[$language]["IRC"] . '</a>';
 					}

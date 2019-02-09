@@ -14,9 +14,9 @@ session_start();
 		<title><?php require_once 'config.php'; echo $title . ' - ' . $lang[$language]["Login_page"]; ?></title>
 
 
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.1/spectre.min.css">
-		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.1/spectre-exp.min.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.1/spectre-icons.min.css"> -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.8/spectre.min.css">
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.8/spectre-exp.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.8/spectre-icons.min.css"> -->
 
 		<link href="css/main.css" rel="stylesheet">
 
@@ -24,7 +24,7 @@ session_start();
 
 	</head>
 
-	<body class="container grid-lg text-center">
+	<body class="container grid-md text-center">
 
 		<header>
 			<nav class="navbar">
@@ -104,8 +104,6 @@ session_start();
 		<?php require_once 'config.php';
 			echo $lang[$language]["Powered"]; ?> <a href="https://github.com/Kcchouette/XDCC-simple">XDCC Simple</a>
 	</footer>
-
-	<!--<script type='text/javascript' src='js/script.js'></script> -->
 
 	</body>
 
