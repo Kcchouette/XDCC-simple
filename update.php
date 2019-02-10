@@ -1,4 +1,4 @@
-<?php //start before HTML code
+<?php // start before HTML code
 session_start();
 
 require_once 'config.php';
@@ -7,9 +7,9 @@ require_once 'xdcc.php';
 
 // BOT
 if (isset($_POST['isCreateBot'])) {
-	insertBot(new Bot($_POST['nameBot'], $_POST['xmlBot'], $_POST['websiteBot'], $_POST['ircBot']));
+	insertBot(new Bot(htmlspecialchars($_POST['nameBot'], ENT_COMPAT), $_POST['xmlBot'], $_POST['websiteBot'], $_POST['ircBot']));
 
-	$_SESSION['message'] = "<div class=\"msg\">
+	$_SESSION['message'] = "<div class=\"text-success\">
 								<p>{$_POST['nameBot']} {$lang[$language]['msg_add']}</p>
 							</div>";
 
@@ -22,10 +22,10 @@ if (isset($_POST['isCreateBot'])) {
 }
 else if (isset($_POST['isModifBot'])) {
 
-	removeBot($_POST['isModifBot']);
-	insertBot(new Bot($_POST['nameBot'], $_POST['xmlBot'], $_POST['websiteBot'], $_POST['ircBot']));
+	removeBot(htmlspecialchars($_POST['isModifBot'], ENT_COMPAT));
+	insertBot(new Bot(htmlspecialchars($_POST['nameBot'], ENT_COMPAT), $_POST['xmlBot'], $_POST['websiteBot'], $_POST['ircBot']));
 
-	$_SESSION['message'] = "<div class=\"msg\">
+	$_SESSION['message'] = "<div class=\"text-success\">
 								<p>{$_POST['isModifBot']} {$lang[$language]['msg_modify']}</p>
 							</div>";
 
@@ -37,8 +37,8 @@ else if (isset($_POST['isModifBot'])) {
 	header ('location: admin.php');
 }
 else if (isset($_POST['rmBot'])) {
-	removeBot($_POST['rmBot']);
-	$_SESSION['message'] = "<div class=\"msg\">
+	removeBot(htmlspecialchars($_POST['rmBot'], ENT_COMPAT));
+	$_SESSION['message'] = "<div class=\"text-success\">
 								<p>{$_POST['rmBot']} {$lang[$language]['msg_remove']}</p>
 							</div>";
 
@@ -47,9 +47,9 @@ else if (isset($_POST['rmBot'])) {
 }
 // BOOKMARK
 else if (isset($_POST['isCreateBookmark'])) {
-	insertBookmark(new Bookmark($_POST['nameBookmark'], $_POST['searchBookmark'], $_POST['botBookmark']));
+	insertBookmark(new Bookmark(htmlspecialchars($_POST['nameBookmark'], ENT_COMPAT), htmlspecialchars($_POST['searchBookmark'], ENT_COMPAT), htmlspecialchars($_POST['botBookmark'], ENT_COMPAT)));
 
-	$_SESSION['message'] = "<div class=\"msg\">
+	$_SESSION['message'] = "<div class=\"text-success\">
 								<p>{$_POST['nameBookmark']} {$lang[$language]['msg_add']}</p>
 							</div>";
 
@@ -61,10 +61,10 @@ else if (isset($_POST['isCreateBookmark'])) {
 }
 else if (isset($_POST['isModifBookmark'])) {
 
-	removeBookmark($_POST['isModifBookmark']);
-	insertBookmark(new Bookmark($_POST['nameBookmark'], $_POST['searchBookmark'], $_POST['botBookmark']));
+	removeBookmark(htmlspecialchars($_POST['isModifBookmark'], ENT_COMPAT));
+	insertBookmark(new Bookmark(htmlspecialchars($_POST['nameBookmark'], ENT_COMPAT), htmlspecialchars($_POST['searchBookmark'], ENT_COMPAT), htmlspecialchars($_POST['botBookmark'], ENT_COMPAT)));
 
-	$_SESSION['message'] = "<div class=\"msg\">
+	$_SESSION['message'] = "<div class=\"text-success\">
 								<p>{$_POST['isModifBookmark']} {$lang[$language]['msg_modify']}</p>
 							</div>";
 
@@ -75,8 +75,8 @@ else if (isset($_POST['isModifBookmark'])) {
 	header ('location: admin.php');
 }
 else if (isset($_POST['rmBookmark'])) {
-	removeBookmark($_POST['rmBookmark']);
-	$_SESSION['message'] = "<div class=\"msg\">
+	removeBookmark(htmlspecialchars($_POST['rmBookmark'], ENT_COMPAT));
+	$_SESSION['message'] = "<div class=\"text-success\">
 								<p>{$_POST['rmBookmark']} {$lang[$language]['msg_remove']}</p>
 							</div>";
 
@@ -85,10 +85,10 @@ else if (isset($_POST['rmBookmark'])) {
 }
 // OTHER
 else if (isset($_POST['export_ddl'])) {
-	$xml = haveXMLfile(searchBotXMLFile(getBotList(), $_POST['export_ddl']));
+	$xml = haveXMLfile(searchBotXMLFile(getBotList(), htmlspecialchars($_POST['export_ddl'], ENT_COMPAT)));
 
 	header('Content-Type: text/csv');
-	header('Content-Disposition: attachment; filename="' . $_POST['export_ddl'] . '.csv"');
+	header('Content-Disposition: attachment; filename="' . htmlspecialchars($_POST['export_ddl'], ENT_COMPAT) . '.csv"');
 	echo "\xEF\xBB\xBF"; // UTF-8 BOM
 
 	$line = 0;
@@ -150,15 +150,15 @@ else if (isset($_POST['upload_bot_json'])) {
 
 	if ($target_file === databaseBotNameFile() && pathinfo($target_file, PATHINFO_EXTENSION) === 'json') {
 		if(file_exists(databaseBotFullFile())) {
-			unlink(databaseBotFullFile()); //remove the file
+			unlink(databaseBotFullFile()); // remove the file
 		}
 		if (move_uploaded_file($_FILES['uploadedfile']['tmp_name'], databaseBotFullFile())) {
-			$_SESSION['message'] = "<div class=\"msg\">
+			$_SESSION['message'] = "<div class=\"text-success\">
 								<p>{$lang[$language]['Upload_file']}</p>
 							</div>";
 		 }
 		 else {
-		 	$_SESSION['message'] = "<div class=\"msg msg-error\">
+		 	$_SESSION['message'] = "<div class=\"text-error\">
 								<p>{$lang[$language]['Upload_file_fail']}</p>
 							</div>";
 		 }
@@ -166,7 +166,7 @@ else if (isset($_POST['upload_bot_json'])) {
 		
 	}
 	else {
-		$_SESSION['message'] = "<div class=\"msg msg-warning\">
+		$_SESSION['message'] = "<div class=\"text-warning\">
 								<p>{$lang[$language]['Upload_file_fail_name']}</p>
 							</div>";
 	}
@@ -181,15 +181,15 @@ else if (isset($_POST['upload_bookmark_json'])) {
 
 	if ($target_file === databaseBookmarkNameFile() && pathinfo($target_file, PATHINFO_EXTENSION) === 'json') {
 		if(file_exists(databaseBookmarkFullFile())) {
-			unlink(databaseBookmarkFullFile()); //remove the file
+			unlink(databaseBookmarkFullFile()); // remove the file
 		}
 		if (move_uploaded_file($_FILES['uploadedfile']['tmp_name'], databaseBookmarkFullFile())) {
-			$_SESSION['message'] = "<div class=\"msg\">
+			$_SESSION['message'] = "<div class=\"text-success\">
 								<p>{$lang[$language]['Upload_file']}</p>
 							</div>";
 		 }
 		 else {
-		 	$_SESSION['message'] = "<div class=\"msg msg-error\">
+		 	$_SESSION['message'] = "<div class=\"text-error\">
 								<div>{$lang[$language]['Upload_file_fail']}</div>
 							</div>";
 		 }
@@ -197,7 +197,7 @@ else if (isset($_POST['upload_bookmark_json'])) {
 		
 	}
 	else {
-		$_SESSION['message'] = "<div class=\"msg msg-warning\">
+		$_SESSION['message'] = "<div class=\"text-warning\">
 								<p>$target_file</p>
 							</div>";
 	}

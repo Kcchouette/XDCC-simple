@@ -118,7 +118,7 @@
 					$bookmarks = getBookmarkList();
 					echo "<ul class=\"panel-body\">";
 					foreach($bookmarks as &$b) {
-						echo "<li class=\"tile tile-centered\"><a class=\"tile-content\" href=\"?search={$b->getStringSearch()}&amp;bot=" . urlencode($b->getBotSearch()) . "\" title=\"{$b->getName()}\"><div class=\"tile-title\">{$b->getName()}</div></a></li>";
+						echo "<li class=\"tile tile-centered\"><a class=\"tile-content\" href=\"?search=" . urlencode($b->getStringSearch()) . "&amp;bot=" . urlencode($b->getBotSearch()) . "\" title=\"{$b->getName()}\"><div class=\"tile-title\">{$b->getName()}</div></a></li>";
 					}
 						echo "</ul>
 						</div>
@@ -128,7 +128,7 @@
 		</div>
 
 		<div class="column col-8 col-md-12 col-ml-auto">
-		<h2><?php require_once 'config.php'; if(!empty($_GET['bot'])) echo " &#8212; {$lang[$language]['Bot:']} <code>" . htmlspecialchars($_GET['bot']) . "</code>" . " <a href=\"syndication.php?bot=" . urldecode($_GET['bot']) . "\"> <img class=\"icon\" src=\"img/Feed_icon.svg\"></a>"; if(isset($_GET['search'])) echo " &#8212; {$lang[$language]['Search:']} <code>" . htmlspecialchars($_GET['search']) . "</code>"; ?></h2>
+		<h2><?php require_once 'config.php'; if(!empty($_GET['bot'])) echo " &#8212; {$lang[$language]['Bot:']} <code>" . htmlspecialchars($_GET['bot']) . "</code>" . " <a href=\"syndication.php?bot=" . urlencode($_GET['bot']) . "\"> <img class=\"icon\" src=\"img/Feed_icon.svg\"></a>"; if(isset($_GET['search'])) echo " &#8212; {$lang[$language]['Search:']} <code>" . htmlspecialchars($_GET['search']) . "</code>"; ?></h2>
 			<div><?php
 
 			require_once 'config.php';

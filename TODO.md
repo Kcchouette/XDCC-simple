@@ -12,6 +12,11 @@
  - [ ] **Try** to use the text file listing from iroffer
  - [ ] When adding bot, ask if Website/IRC are the same than the main in the ADMIN page
 
+## Possible improvements
+
+ - [ ] Simplify `admin_action.php` and `update.php`
+ - [ ] Create a select for when creating/modifying bookmark search (for the bot selection)
+
 ## Idea
 
  - [ ] Display for example 50 number of file, else use a pagination? (cf datatables)

@@ -139,7 +139,7 @@ function searchBotList($xml, $bot, $search = null, $onBot = true) {
 	$dom = "";
 	foreach($xml->packlist->pack as $p) {
 		if ($search === null || stripos($p->packname, $search) !== false) {
-			$dom .= "<tbody><tr title=\"$bot &#x2014; {$p->packname}\" onclick=\"javascript:paste(\'$bot\', {$p->packnr});\">";
+			$dom .= "<tbody><tr title=\"$bot &#x2014; {$p->packname}\" onclick=\"javascript:paste('$bot', {$p->packnr});\">";
 			if (!$onBot)
 				$dom .= "<td class=\"text-center\">$bot</td>";
 			$dom .= "<td class=\"text-center\">{$p->packnr}</td>";

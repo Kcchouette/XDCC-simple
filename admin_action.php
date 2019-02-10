@@ -42,7 +42,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 
 		if (isset($_POST['modifBot'])){
 			require_once 'xdcc.php';
-			$b = returnObject(getBotList(), $_POST['modifBot']);
+			$b = returnObject(getBotList(), htmlspecialchars($_POST['modifBot'], ENT_COMPAT));
 
 			echo "<h2>{$lang[$language]['Modify_bot']}</h2>";
 			echo "<form method=\"post\" action=\"update.php\">
@@ -74,7 +74,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 					<fieldset class=\"\">
 						<div class=\"form-group\">
 							<label class=\"form-label\" for=\"nameBot\">{$lang[$language]['Bot_name']}</label>
-							<input type=\"text\" class=\"form-input\" id=\"nameBot\" name=\"nameBot\" placeholder=\"{$lang[$language]['Bot_name']}\" required >
+							<input type=\"text\" class=\"form-input\" id=\"nameBot\" name=\"nameBot\" placeholder=\"{$lang[$language]['Bot_name']}\" required autofocus >
 						</div>
 						<div class=\"form-group\">
 							<label class=\"form-label\" for=\"xmlBot\">{$lang[$language]['Bot_xml']}</label>
@@ -95,7 +95,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 		}
 		else if (isset($_POST['modifBookmark'])){
 			require_once 'xdcc.php';
-			$b = returnObject(getBookmarkList(), $_POST['modifBookmark']);
+			$b = returnObject(getBookmarkList(), htmlspecialchars($_POST['modifBookmark'], ENT_COMPAT));
 
 			echo "<h2>{$lang[$language]['Modify_bookmark']}</h2>";
 			echo "<form method=\"post\" action=\"update.php\">
@@ -123,7 +123,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 					<fieldset class=\"\">
 						<div class=\"form-group\">
 							<label class=\"form-label\" for=\"nameBookmark\">{$lang[$language]['Bookmark_name']}</label>
-							<input type=\"text\" name=\"nameBookmark\" placeholder=\"{$lang[$language]['Bookmark_name']}\" required >
+							<input type=\"text\" name=\"nameBookmark\" placeholder=\"{$lang[$language]['Bookmark_name']}\" required autofocus >
 						</div>
 						<div class=\"form-group\">
 							<label class=\"form-label\" for=\"searchBookmark\">{$lang[$language]['Bookmark_search']}</label>

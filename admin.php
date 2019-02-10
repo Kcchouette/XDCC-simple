@@ -50,7 +50,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 			echo "<div class=\"columns\">
 					<div class=\"column col-4 col-mx-auto\">{$_SESSION['message']}</div>
 				  </div>";
-			//header('refresh: 3;');
+			// header('refresh: 3;'); // refresh to remove the message quickly
 			unset($_SESSION['message']);
 		}
 		echo "<div>";
