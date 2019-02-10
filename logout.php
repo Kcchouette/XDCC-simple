@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-echo '<!DOCTYPE html>
+echo "<!DOCTYPE html>
 <html>
-	<body>';
+	<body>";
 
 	// remove all session variables
 	session_unset();
@@ -13,7 +13,7 @@ echo '<!DOCTYPE html>
 
 	header ('location: index.php');
 
-	echo'</body>
-</html>';
+	echo "</body>
+</html>";
 
 ?>

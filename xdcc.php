@@ -64,7 +64,7 @@ function getBookmarkList() {
 	$jsonRS = readBookmarkFile();
 	$bookmarks = array();
 	foreach ($jsonRS as $rs) {
-		array_push($bookmarks, new Bookmark(stripslashes($rs["name"]), stripslashes($rs["search"]), stripslashes($rs["bot"])));
+		array_push($bookmarks, new Bookmark(stripslashes($rs['name']), stripslashes($rs['search']), stripslashes($rs['bot'])));
 	}
 	return $bookmarks;
 }
@@ -72,19 +72,19 @@ function getBookmarkList() {
 function insertBookmark($b) {
 	$bookmarks = getBookmarkList();
 	array_push($bookmarks, $b);
-	//save database
+	// save database
 	saveBookmarkList($bookmarks);
 }
 
-//http://stackoverflow.com/q/21559760
+// http://stackoverflow.com/q/21559760
 function removeBookmark($bname) {
 	$bookmarks = getBookmarkList();
 
 	$id = searchId($bookmarks, $bname);
 
-	unset($bookmarks[$id]); //removes the array at given index
-	$reindex = array_values($bookmarks); //normalize index
-	$bookmarks = $reindex; //update variable
+	unset($bookmarks[$id]); // removes the array at given index
+	$reindex = array_values($bookmarks); // normalize index
+	$bookmarks = $reindex; // update variable
 
 	saveBookmarkList($bookmarks);
 }
@@ -102,7 +102,7 @@ function getBotList() {
 	$jsonRS = readBotFile();
 	$bots = array();
 	foreach ($jsonRS as $rs) {
-		array_push($bots, new Bot(stripslashes($rs["name"]), stripslashes($rs["xml"]), stripslashes($rs["website"]), stripslashes($rs["irc"])));
+		array_push($bots, new Bot(stripslashes($rs['name']), stripslashes($rs['xml']), stripslashes($rs['website']), stripslashes($rs['irc'])));
 	}
 	return $bots;
 }
@@ -110,19 +110,19 @@ function getBotList() {
 function insertBot($b) {
 	$bots = getBotList();
 	array_push($bots, $b);
-	//save database
+	// save database
 	saveBotList($bots);
 }
 
-//http://stackoverflow.com/q/21559760
+// http://stackoverflow.com/q/21559760
 function removeBot($bname) {
 	$bots = getBotList();
 
 	$id = searchId($bots, $bname);
 
-	unset($bots[$id]); //removes the array at given index
-	$reindex = array_values($bots); //normalize index
-	$bots = $reindex; //update variable
+	unset($bots[$id]); // removes the array at given index
+	$reindex = array_values($bots); // normalize index
+	$bots = $reindex; // update variable
 
 	saveBotList($bots);
 }
@@ -136,33 +136,33 @@ function searchBotXMLFile($b, $n) {
 }
 
 function searchBotList($xml, $bot, $search = null, $onBot = true) {
-	$dom = '';
+	$dom = "";
 	foreach($xml->packlist->pack as $p) {
 		if ($search === null || stripos($p->packname, $search) !== false) {
-			$dom .= '<tbody><tr title="' . $bot . ' &#x2014; ' . $p->packname . '" onclick="javascript:paste(\'' . $bot . '\', ' . $p->packnr . ');">';
+			$dom .= "<tbody><tr title=\"$bot &#x2014; {$p->packname}\" onclick=\"javascript:paste(\'$bot\', {$p->packnr});\">";
 			if (!$onBot)
-				$dom .= '<td class="text-center">' . $bot . '</td>';
-			$dom .= '<td class="text-center">' . $p->packnr . '</td>';
-			$dom .= '<td class="text-center">' . $p->packsize . '</td>';
-			$dom .= '<td>' . $p->packname . '</td>';
-			$dom .= '</tr></tbody>';
+				$dom .= "<td class=\"text-center\">$bot</td>";
+			$dom .= "<td class=\"text-center\">{$p->packnr}</td>";
+			$dom .= "<td class=\"text-center\">{$p->packsize}</td>";
+			$dom .= "<td>{$p->packname}</td>";
+			$dom .= "</tr></tbody>";
 		}
 	}
 	return $dom;
 }
 
 function searchBotsList($search) {
-	require 'config.php'; //with require_once, it does nothing
+	require 'config.php'; // with require_once, it does nothing
 
-	$dom = '';
+	$dom = "";
 	$bots = getBotList();
-	$dom .= '<table id="filelist">';
-	$dom .= '<tr id="trmain">';
-	$dom .= '<th>' . $lang[$language]["Bot:"] . '</th>';
-	$dom .= '<th>' . $lang[$language]["Pack"] . '</th>';
-	$dom .= '<th>' . $lang[$language]["Size"] . '</th>';
-	$dom .= '<th>' . $lang[$language]["File"] . '</th>';
-	$dom .= '</tr>';
+	$dom .= "<table id=\"filelist\">";
+	$dom .= "<tr id=\"trmain\">";
+	$dom .= "<th>{$lang[$language]['Bot:']}</th>";
+	$dom .= "<th>{$lang[$language]['Pack']}</th>";
+	$dom .= "<th>{$lang[$language]['Size']}</th>";
+	$dom .= "<th>{$lang[$language]['File']}</th>";
+	$dom .= "</tr>";
 	foreach($bots as $bot) {
 		$xml = haveXMLfile(searchBotXMLFile(getBotList(), $bot->getName()));
 		if (!$xml || !$xml->packlist->pack)
@@ -170,7 +170,7 @@ function searchBotsList($search) {
 		else
 			$dom .= searchBotList($xml, $bot->getName(), $search, false);
 	}
-	$dom .= '</table>';
+	$dom .= "</table>";
 	return $dom;
 }
 

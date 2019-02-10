@@ -20,7 +20,7 @@ This project uses:
  - No Database
  - No Composer or other things
  - Light CSS (using [Spectre.css](https://github.com/picturepan2/spectre))
- - Light: for `index.php` -> 2 CSS (50Ko) + 0 JS (0Ko) + 1 image (2Ko) + 1 HTML (~10 Ko; depends of content) = ~**62 Ko**!
+ - Light: for `index.php` → 2 CSS (50Ko) + 0 JS (0Ko) + 1 image (2Ko) + 1 HTML (~10 Ko; depends of content) = ~**62 Ko**!
 
 
 ## Requirements:

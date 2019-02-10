@@ -1,15 +1,15 @@
 <?php
 
 /* Title + description of the page */
-$title = 'XDCC';
-$description = 'My XDCC!';
+$title = "XDCC";
+$description = "My XDCC!";
 
 /*
 language available:
 - en
 - fr
 */
-$language = 'en';
+$language = "en";
 
 /*
 Do you want to show the Bookmark block:
@@ -23,7 +23,7 @@ Can Search engines track this website?
 - true (yes)
 - false (no)
 */
-$can_track = 'true';
+$can_track = true;
 
 
 /*
@@ -65,9 +65,9 @@ $csv_separator = ",";
  	* bookmarks.json for bookmarks
  		in the folder cache/
  */
-$folder_json_files = 'json/';
-$bot_file = 'data.json';
-$bookmarks_file = 'bookmarks.json';
+$folder_json_files = "json/";
+$bot_file = "data.json";
+$bookmarks_file = "bookmarks.json";
 
 
 /**********************************************************\
@@ -171,7 +171,7 @@ $lang = array (
 	"Bookmark_name" => "Nom du signet",
 	"Bookmark_search" => "Recherche du signet",
 	"Bookmark_bot" => "Bot du signet",
-	"Add_but" => "L'ajouter !",
+	"Add_but" => "L’ajouter !",
 	"Modify_but" => "Modifier le bot",
 	"Remove_but" => "Supprimer le bot",
 	"Connect_but" => "Se connecter",
@@ -185,7 +185,7 @@ $lang = array (
 	"Managing_Bookmark" => "Gestion des signets",
 	"Add_bookmark_but" => "Ajouter un signet",
 	"Login_page" => "Page de connexion",
-	"Admin_page" => "Page d'administration",
+	"Admin_page" => "Page d’administration",
 	"Disconnect_but" => "Se déconnecter",
 	"Home_but" => "Accueil",
 	"website" => "site internet",
@@ -197,7 +197,7 @@ $lang = array (
 	"Transfered_monthly" => "Transferé par mois",
 	"Transfered_total" => "Transferé au total",
 	"Last_update" => "Dernière mise à jour :",
-	"Other_sysinfo" => "D'autres informations systèmes",
+	"Other_sysinfo" => "D’autres informations systèmes",
 	"Slots_max" => "Nombres de slots maximum :",
 	"Main_queue_max" => "Nombres de transferts parallèle maximum :",
 	"Idle_queue_max" => "Nombres de transferts en pause maximum :",
@@ -207,12 +207,12 @@ $lang = array (
 	"Export_botJSON" => "Exporter " . $bot_file,
 	"Import_bookJSON" => "Importer " . $bookmarks_file,
 	"Export_bookJSON" => "Exporter " . $bookmarks_file,
-	"Return_admin" => "Retourner sur la page d'administration",
+	"Return_admin" => "Retourner sur la page d’administration",
 	"Search_on" => "Rechercher sur",
 	"ALL_BOTS" => "TOUS LES BOTS",
 	"Upload_file" => "Le fichier a correctement été importé.",
-	"Upload_file_fail" => "Echec de l'import.",
-	"Upload_file_fail_name" => "Le nom du fichier n'est pas <code>" . $bot_file . "</code>",
+	"Upload_file_fail" => "Échec de l’import.",
+	"Upload_file_fail_name" => "Le nom du fichier n’est pas <code>" . $bot_file . "</code>",
 	"Fail_connect" => "Connexion non réussie",
 ),
 );
