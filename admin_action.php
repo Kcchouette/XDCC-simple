@@ -53,7 +53,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 						</div>
 						<div class=\"form-group\">
 							<label class=\"form-label\" for=\"xmlBot\">{$lang[$language]['Bot_xml']}</label>
-							<input type=\"text\" class=\"form-input\" id=\"xmlBot\" name=\"xmlBot\" placeholder=\"{$lang[$language]['Bot_xml']}\" value=\"{$b->getXmlFile()}\" required >
+							<input type=\"text\" class=\"form-input\" id=\"xmlBot\" name=\"xmlBot\" placeholder=\"{$lang[$language]['Bot_xml']}\" value=\"{$b->getXmlContent()}\" required >
 						</div>
 						<div class=\"form-group\">
 							<label class=\"form-label\" for=\"websiteBot\">{$lang[$language]['Bot_website']}</label>

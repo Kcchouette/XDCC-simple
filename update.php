@@ -85,7 +85,7 @@ else if (isset($_POST['rmBookmark'])) {
 }
 // OTHER
 else if (isset($_POST['export_ddl'])) {
-	$xml = haveXMLfile(searchBotXMLFile(getBotList(), htmlspecialchars($_POST['export_ddl'], ENT_COMPAT)));
+	$xml = haveXMLContent(searchBotXMLContent(getBotList(), htmlspecialchars($_POST['export_ddl'], ENT_COMPAT)));
 
 	header('Content-Type: text/csv');
 	header('Content-Disposition: attachment; filename="' . htmlspecialchars($_POST['export_ddl'], ENT_COMPAT) . '.csv"');

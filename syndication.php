@@ -21,7 +21,7 @@ echo "<id>tag:{$_SERVER['HTTP_HOST']},2016:" . htmlspecialchars($url) . "</id>";
 echo "<link href=\"$url\" rel=\"self\"/>";
 
 if (isset($_GET['bot'])) {
-	$xml = haveXMLfile(searchBotXMLFile(getBotList(), $_GET['bot']));
+	$xml = haveXMLContent(searchBotXMLContent(getBotList(), $_GET['bot']));
 	if ($xml && $xml->packlist->pack) {
 
 		echo "<updated>" . date('c', (int)$xml->sysinfo->stats->lastupdate) . "</updated>";

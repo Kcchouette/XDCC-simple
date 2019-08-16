@@ -2,8 +2,7 @@
 
 ## For v0.3
 
- - [ ] Download the XML file (from URL)? into cache (use the `lastupdate` tag; an epoch time)
- - [ ] Upload the XML file into cache (serialize it? download it?)
+ - [ ] Save the XML content into cache (use the `lastupdate` tag; an epoch time)
  - [ ] Possibility of reordering bots/bookmarks in the ADMIN page
  - [ ] Cache can be refreshed (automatic check?)
 

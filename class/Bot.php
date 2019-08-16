@@ -19,7 +19,7 @@ class Bot implements JsonSerializable {
 		return $this->name;
 	}
 
-	public function getXmlFile() {
+	public function getXmlContent() {
 		return $this->xml;
 	}
 

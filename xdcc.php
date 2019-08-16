@@ -7,11 +7,9 @@ require_once 'class/Bookmark.php';
 require_once 'class/Bot.php';
 
 
-function haveXMLfile($xmlFile) {
-	if (file_exists($xmlFile))
-		return simplexml_load_file($xmlFile);
-	else
-		return false;
+function haveXMLContent($xmlFile) {
+	$filecontent = file_get_contents($xmlFile);
+	return simplexml_load_string($filecontent);
 }
 
 // return bookmark or bot object
@@ -127,10 +125,10 @@ function removeBot($bname) {
 	saveBotList($bots);
 }
 
-function searchBotXMLFile($b, $n) {
+function searchBotXMLContent($b, $n) {
 	for($i = 0; $i < count($b); $i++) {
 			if($b[$i]->getName() == $n) {
-				return $b[$i]->getXmlFile();
+				return $b[$i]->getXmlContent();
 			}
 	}
 }
@@ -164,7 +162,7 @@ function searchBotsList($search) {
 	$dom .= "<th>{$lang[$language]['File']}</th>";
 	$dom .= "</tr>";
 	foreach($bots as $bot) {
-		$xml = haveXMLfile(searchBotXMLFile(getBotList(), $bot->getName()));
+		$xml = haveXMLContent(searchBotXMLContent(getBotList(), $bot->getName()));
 		if (!$xml || !$xml->packlist->pack)
 			;
 		else

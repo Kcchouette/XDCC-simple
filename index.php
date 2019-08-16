@@ -145,7 +145,7 @@
 				echo '<table class="table" id="filelist">';
 
 
-				$xml = haveXMLfile(searchBotXMLFile(getBotList(), urldecode($_GET['bot'])));
+				$xml = haveXMLContent(searchBotXMLContent(getBotList(), urldecode($_GET['bot'])));
 
 				if (!$xml || !$xml->packlist->pack)
 					echo "<thead><tr id=\"trmain\"><th>{$lang[$language]['Fail_load_XML']}</th></tr><thead>";

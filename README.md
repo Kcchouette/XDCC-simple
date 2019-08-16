@@ -35,8 +35,17 @@ This project uses:
  2. Change others values you want from `config.php`
  3. Connect to the admin page: `admin.php`
  4. Add your bot (the `name` of your bot must be UNIQUE!)
- 5. Finish :)
+ 5. Indicate the location of the XML-generated file (it can be an URL, or a file path - eg `/home/user/bot.xml` or `../bot.xml`) 
+ 6. Finish :)
 
+## Problems?
+
+Try to see if:
+
+ 1. There is no error in the PHP folder (per default `/var/log/php_errors.log`)
+ 2. When you save your bot, the file `json/data.json` is modified with the values you've set
+
+Thanks in advance!
 
 ## Thanks
 
